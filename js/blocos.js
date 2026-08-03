@@ -7,18 +7,23 @@ export function normalizarListaAberta(valores, quantidadeCampos) {
   return normalizados;
 }
 
-export function resolverOpcoesSelecao(campo, respostasDoBlocoReferenciado) {
-  if (campo.opcoes_de_bloco) {
-    const valores = Array.isArray(respostasDoBlocoReferenciado) ? respostasDoBlocoReferenciado : [];
-    return valores
-      .map((v) => (typeof v === 'string' ? v.trim() : ''))
-      .filter((v) => v.length > 0);
-  }
-  return Array.isArray(campo.opcoes) ? campo.opcoes : [];
+export function minimoPreenchidoAtingido(valores, minimo) {
+  const preenchidos = valores.filter((v) => typeof v === 'string' && v.trim().length > 0).length;
+  return preenchidos >= minimo;
+}
+
+export function resolverOpcoesSelecao(valoresResolvidos) {
+  return (Array.isArray(valoresResolvidos) ? valoresResolvidos : [])
+    .map((v) => (typeof v === 'string' ? v.trim() : String(v)))
+    .filter((v) => v.length > 0);
 }
 
 export function avaliarRespostaCorreta(bloco, indiceEscolhido) {
   return indiceEscolhido === bloco.correta;
+}
+
+export function determinarNivelFeedback(numeroDaTentativaErrada) {
+  return numeroDaTentativaErrada <= 1 ? 'dica' : 'dica_e_explicacao';
 }
 
 export function todosCamposPreenchidos(campos, valores) {
@@ -38,12 +43,13 @@ function formatarNumero(valor) {
 
 export function interpolarTexto(modelo, valores) {
   return modelo.replace(/\{(\w+)\}/g, (correspondencia, nome) => {
+    if (!(nome in valores)) return correspondencia;
     const valor = valores[nome];
-    return valor === undefined ? correspondencia : formatarNumero(valor);
+    return valor === undefined ? 'indisponível' : formatarNumero(valor);
   });
 }
 
-export function montarResumo(blocosDaAula, respostasDaAula) {
+export function montarArtefatoDaAula(blocosDaAula, respostasDaAula) {
   const itens = [];
   for (const bloco of blocosDaAula) {
     if (bloco.tipo === 'lista_aberta') {
@@ -61,4 +67,27 @@ export function montarResumo(blocosDaAula, respostasDaAula) {
     }
   }
   return itens;
+}
+
+export function blocoEstaCompleto(bloco, resposta) {
+  if (bloco.tipo === 'cenario') {
+    return !!resposta && resposta.indiceEscolhido === bloco.correta;
+  }
+  if (bloco.tipo === 'lista_aberta') {
+    return Array.isArray(resposta) && minimoPreenchidoAtingido(resposta, bloco.minimo_preenchido ?? 1);
+  }
+  if (bloco.tipo === 'calculo') {
+    return !!resposta && typeof resposta.resultadoTexto === 'string';
+  }
+  if (bloco.tipo === 'escolha_simples') {
+    return resposta !== undefined;
+  }
+  return false;
+}
+
+export function calcularProgresso(blocos, respostas) {
+  for (let i = 0; i < blocos.length; i++) {
+    if (!blocoEstaCompleto(blocos[i], respostas[blocos[i].id])) return i;
+  }
+  return blocos.length;
 }
