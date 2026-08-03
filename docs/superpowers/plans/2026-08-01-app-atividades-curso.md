@@ -45,7 +45,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test js/"
+    "test": "node --test js/*.test.js"
   }
 }
 ```
@@ -1884,7 +1884,7 @@ Não é preciso instalar nada para ver o aplicativo funcionando: basta publicá-
 Se quiser rodar os testes automáticos das partes internas do aplicativo (não é necessário para criar aulas), é preciso ter o Node.js instalado e rodar, na pasta do projeto:
 
 ```
-node --test js/
+node --test js/*.test.js
 ```
 
 ## Publicando no GitHub Pages
@@ -1915,8 +1915,8 @@ git commit -m "Adiciona README explicando como criar uma aula nova"
 
 - [ ] **Step 1: Run the full automated test suite**
 
-Run: `node --test js/`
-Expected: all tests from Tasks 2–4 pass (23 tests total: 9 in `formula.test.js`, 6 in `armazenamento.test.js`, 8 in `blocos.test.js`).
+Run: `node --test js/*.test.js`
+Expected: all tests from Tasks 2–4 pass (23 tests total: 9 in `formula.test.js`, 6 in `armazenamento.test.js`, 8 in `blocos.test.js`). Note: a bare `node --test js/` (directory argument, no glob) fails on some Node/Windows setups with `MODULE_NOT_FOUND` — always use the explicit glob form.
 
 - [ ] **Step 2: 360px viewport check across every screen**
 
