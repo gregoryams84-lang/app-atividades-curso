@@ -142,7 +142,8 @@ Qualquer opção é aceita como resposta válida; não há feedback de certo/err
 - Salvamento automático a cada alteração de campo — sem botão salvar.
 - Ao reabrir uma atividade, os campos são pré-preenchidos a partir do que estiver salvo.
 - Função pública `obterResposta(trilha, aula, blocoId)`: retorna a resposta salva de qualquer combinação trilha/aula/bloco, para uso por aulas futuras (ex.: Aula 2 lê o que o aluno escreveu no bloco `b3` da Aula 1). É a função que o JSON de uma aula futura usa para exibir ou retomar respostas de aulas anteriores.
-- `opcoes_de_bloco` (usado dentro de um bloco `calculo`, ver abaixo) é um mecanismo diferente e mais restrito: só lê blocos `lista_aberta` já renderizados **dentro da mesma aula**, ao vivo, enquanto o aluno digita — não usa `obterResposta` nem cruza aulas. Retomar respostas de aulas anteriores é sempre explícito, feito pelo JSON da aula futura chamando `obterResposta`.
+- `opcoes_de_bloco` (usado dentro de um bloco `calculo`, ver abaixo) é um mecanismo diferente e mais restrito: só lê blocos `lista_aberta` que estejam **mecanicamente presentes na mesma página**, ao vivo, enquanto o aluno digita — não usa `obterResposta` nem cruza aulas. Retomar respostas de aulas anteriores é sempre explícito, feito pelo JSON da aula futura chamando `obterResposta`.
+- Chave reservada `_progresso` (índice numérico, dentro do mesmo objeto da aula): controla quantos blocos já foram liberados nesta aula. Não é um bloco de conteúdo — `id`s de bloco começando com `_` são reservados para uso interno do motor; o `README.md` orienta os autores de aula a nunca usar esse prefixo.
 
 ### Exportar / Importar
 
@@ -152,12 +153,16 @@ Qualquer opção é aceita como resposta válida; não há feedback de certo/err
 
 ## Fluxo de renderização (`app.js`)
 
+Correção importante em relação a uma versão anterior deste documento: os blocos **não** são telas separadas que se substituem. Eles ficam todos na mesma página (`atividade.html`), revelados progressivamente, um abaixo do outro, e os blocos já respondidos permanecem visíveis e presentes no HTML — é assim que um bloco `calculo` consegue ler ao vivo o que o aluno acabou de digitar num bloco `lista_aberta` anterior, como pedido para os blocos 3 e 4 da Aula 1.
+
 1. `atividade.html` lê `trilha` e `aula` da querystring, busca `dados/indice.json`, confirma que a combinação existe.
 2. Busca o JSON da aula referenciado no índice.
-3. Renderiza os blocos em ordem, um de cada vez (uma "tela" por bloco), com barra de progresso (bloco atual / total de blocos).
-4. Antes de exibir um bloco, pré-carrega do `localStorage` a resposta já salva e preenche os campos.
-5. A cada alteração de campo: salva automaticamente, recalcula se for bloco `calculo`, e re-renderiza as opções de qualquer bloco `calculo` (já renderizado ou atual) cujo `opcoes_de_bloco` aponte para o bloco alterado.
-6. Após o último bloco, exibe a tela de resultado: resumo construído a partir dos dados salvos daquela aula (para a Aula 1: lista do bloco `b3` + resultado do bloco `b4`), botão de imprimir/PDF (usa `impressao.css` via `window.print()`), e os botões de exportar/importar.
+3. Lê `_progresso` salvo (quantos blocos já foram concluídos; 0 se a aula é nova) e renderiza, na página, todos os blocos de índice `0` até `_progresso` (inclusive) — os concluídos com a resposta salva pré-preenchida, e o último (o atual) pronto para interação. Cada bloco tem seu próprio "Continuar" (ou, no caso de `multipla_escolha`, o "Continuar" só aparece após acertar).
+4. Barra de progresso mostra "Passo `_progresso + 1` de `total de blocos`".
+5. A cada alteração de campo, o bloco salva automaticamente sua resposta. Todo bloco `lista_aberta` também notifica, de forma genérica, qualquer bloco `calculo` já presente na página cujo `opcoes_de_bloco` aponte para ele, para que o `<select>` correspondente se atualize na hora — sem exceção para a Aula 1.
+6. Quando o bloco atual é concluído (resposta correta, ou clique em "Continuar"), `_progresso` avança, é salvo, e o próximo bloco é revelado e recebe rolagem automática (`scrollIntoView`) para manter a leitura confortável no celular.
+7. Quando `_progresso` alcança o total de blocos, a tela de resultado é anexada ao final da página: resumo construído genericamente a partir dos blocos `lista_aberta` (a lista de itens preenchidos) e `calculo` (o texto do resultado, já calculado e salvo) daquela aula — não é lógica específica da Aula 1 —, botão de imprimir/PDF (usa `impressao.css` via `window.print()`), e os botões de exportar/importar.
+8. Se o aluno reabre uma aula já 100% concluída, o mesmo fluxo se repete: todos os blocos aparecem preenchidos e a tela de resultado já vem anexada ao final.
 
 ### Tratamento de erro
 
