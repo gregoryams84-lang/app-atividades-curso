@@ -45,7 +45,7 @@ URL de uma atividade: `atividade.html?trilha=trilha-ia&aula=aula-01#bloco-1`.
 
 - `js/formula.js`: reaproveitado quase sem mudança — o avaliador seguro (sem `eval`/`Function`) já implementado atende ao requisito do v2. Único ajuste: ao invés de dividir por zero silenciosamente virar `0`, o valor calculado passa a carregar um sinalizador de "indisponível" que a camada de renderização usa para mostrar texto de resultado indisponível em vez de um número.
 - `dados/trilha-ia/aula-01.json`: o conteúdo pedagógico (perguntas, alternativas, textos de feedback) é o mesmo da Aula 1 já escrita no v1; o JSON é reestruturado para o novo schema (`schema_version`, `tipo: "cenario"` em vez de `multipla_escolha`, `dica_erro`/`explicacao_erro` separados, `depende_de` em vez de `opcoes_de_bloco`).
-- `css/estilo.css`: paleta, tipografia, botões e campos são reaproveitados; a navegação de página única contínua é substituída por layout de tela-por-bloco mais o painel do artefato.
+- `css/estilo.css`: paleta, botões e campos são reaproveitados; a navegação de página única contínua é substituída por layout de tela-por-bloco mais o painel do artefato. **Correção em relação à v1:** a v1 usava fonte do sistema (nenhuma dependência externa). A v2 permite explicitamente uma exceção — uma única fonte do Google Fonts — e usa essa exceção: tipografia passa a ser **Inter** (boa legibilidade em telas pequenas, suporte completo a acentuação em português), carregada via `<link>` no `<head>` das três páginas, com `system-ui` como alternativa caso a fonte não carregue.
 - `js/armazenamento.js` e `js/app.js`: reescritos — mudança de modelo de navegação, de chave de armazenamento, e de API (assíncrona, com debounce e tratamento de quota).
 
 ## Modelo de dados
