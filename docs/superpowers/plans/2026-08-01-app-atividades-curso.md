@@ -13,6 +13,7 @@
 - No framework, no build step — plain HTML/CSS/JS only.
 - No external CDN dependencies.
 - Must work when served by GitHub Pages (the only way the student ever reaches it). Opening the raw file from disk (`file://`) is not a supported path: `app.js` loads lesson content via `fetch`, which Chrome and most modern browsers block for local files regardless of implementation — this was confirmed as an acceptable, resolved trade-off, not an open defect. Local testing during development requires serving the folder with any static file server.
+- **Local server choice matters:** `atividade.html` relies on a query string (`?trilha=...&aula=...`) to know which lesson to load. The popular `npx serve` tool 301-redirects `/atividade.html?trilha=X&aula=Y` to `/atividade` and **drops the query string entirely** (its default "clean URLs" behavior) — confirmed by direct testing. GitHub Pages does no such rewriting, so this never affects the real deployed app, but it silently breaks every local manual test in this plan that opens `atividade.html?...`. Use `python3 -m http.server <port>` for local testing instead (confirmed to preserve query strings, no redirect) — or, if `npx serve` must be used, pass a `serve.json` with `"cleanUrls": false`.
 - Mobile-first; no horizontal scroll at 360px viewport width.
 - No emoji anywhere in the UI or in any JSON content.
 - Body text minimum 16px; buttons/inputs minimum 44px touch target.
@@ -1122,7 +1123,7 @@ iniciarPaginaInicial();
 
 - [ ] **Step 2: Manual test**
 
-Serve the project with a static server (from the project root: `npx --yes serve .` or any static server — see Global Constraints on why `file://` is not a supported way to run this app). Open `index.html`. Expected: a heading "IA no Negócio" and one button-styled link "Você já usa IA. O problema é como.", pointing to `atividade.html?trilha=trilha-ia&aula=aula-01`.
+Serve the project with a static server (from the project root: `python3 -m http.server 8000` or any static server that does not rewrite URLs — see Global Constraints on why `file://` is not supported and why `npx serve`'s default clean-URLs behavior breaks query-string lessons). Open `index.html`. Expected: a heading "IA no Negócio" and one button-styled link "Você já usa IA. O problema é como.", pointing to `atividade.html?trilha=trilha-ia&aula=aula-01`.
 
 - [ ] **Step 3: Commit**
 
