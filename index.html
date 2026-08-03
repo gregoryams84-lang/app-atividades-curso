@@ -4,13 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atividades do curso</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/icone-180.png">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
   <main class="pagina">
+    <header class="cabecalho">
+      <img src="img/logo-completo-verde.svg" alt="Toca o Negócio" width="150" height="62" class="logo">
+    </header>
     <h1>Atividades do curso</h1>
-    <p class="texto-apoio">Escolha a aula para continuar de onde parou.</p>
     <div id="lista-trilhas" class="lista-trilhas" aria-live="polite"></div>
+    <div class="acoes-globais">
+      <button type="button" id="botao-exportar" class="botao-grande">Salvar uma cópia das minhas respostas</button>
+      <button type="button" id="botao-importar" class="botao-grande">Recuperar minhas respostas de outro celular</button>
+      <input type="file" id="entrada-importar" accept="application/json" hidden>
+      <div id="confirmacao-importar" class="confirmacao-importar" hidden></div>
+    </div>
   </main>
   <script type="module" src="js/app.js"></script>
 </body>
