@@ -207,7 +207,11 @@ async function iniciarAtividade() {
     };
   }
 
+  let progressoAtual = respostasAtuais()[CHAVE_PROGRESSO] ?? 0;
+
   function avancarProgresso(proximoIndice) {
+    if (proximoIndice <= progressoAtual) return;
+    progressoAtual = proximoIndice;
     armazenamento.salvarResposta(trilha, aula, CHAVE_PROGRESSO, proximoIndice);
     atualizarBarraProgresso(Math.min(proximoIndice + 1, dadosAula.blocos.length), dadosAula.blocos.length);
     if (proximoIndice >= dadosAula.blocos.length) return;
@@ -216,9 +220,8 @@ async function iniciarAtividade() {
     novoBloco.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  const progressoSalvo = respostasAtuais()[CHAVE_PROGRESSO] ?? 0;
-  atualizarBarraProgresso(Math.min(progressoSalvo + 1, dadosAula.blocos.length), dadosAula.blocos.length);
-  const ultimoIndiceARenderizar = Math.min(progressoSalvo, dadosAula.blocos.length - 1);
+  atualizarBarraProgresso(Math.min(progressoAtual + 1, dadosAula.blocos.length), dadosAula.blocos.length);
+  const ultimoIndiceARenderizar = Math.min(progressoAtual, dadosAula.blocos.length - 1);
   for (let i = 0; i <= ultimoIndiceARenderizar; i++) {
     conteudo.appendChild(renderizarBloco(dadosAula.blocos[i], contextoDoBloco(i)));
   }
