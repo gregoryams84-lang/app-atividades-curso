@@ -1,0 +1,15 @@
+{
+  "trilhas": [
+    {
+      "id": "trilha-ia",
+      "titulo": "IA no Negócio",
+      "aulas": [
+        {
+          "id": "aula-01",
+          "titulo": "Você já usa IA. O problema é como.",
+          "arquivo": "dados/trilha-ia/aula-01.json"
+        }
+      ]
+    }
+  ]
+}

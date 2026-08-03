@@ -1,0 +1,72 @@
+{
+  "trilha": "trilha-ia",
+  "aula": "aula-01",
+  "titulo": "Você já usa IA. O problema é como.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "multipla_escolha",
+      "enunciado": "Um dono de pizzaria gasta cerca de 15 minutos por dia respondendo a mesma pergunta, \"vocês entregam no meu bairro?\". Pelas três perguntas da aula, essa tarefa é:",
+      "opcoes": [
+        "Não é candidata, é tempo demais para automatizar",
+        "Candidata forte, porque repete, custa tempo e a resposta segue um padrão",
+        "Não é candidata, porque atendimento nunca deve ser automatizado",
+        "Falta informação para decidir"
+      ],
+      "correta": 1,
+      "feedback_acerto": "Exato. Repete, soma tempo, e a resposta depende só do endereço — é padrão.",
+      "feedback_erro": "Reveja o trecho dos 3:30 do vídeo. As três perguntas são: repete, custa tempo, a resposta segue padrão."
+    },
+    {
+      "id": "b2",
+      "tipo": "multipla_escolha",
+      "enunciado": "A mesma pizzaria recebe uma reclamação de um cliente que pediu para um aniversário e a pizza chegou fria. Pelas três perguntas, essa tarefa é:",
+      "opcoes": [
+        "Candidata forte, porque reclamação sempre tem resposta pronta",
+        "Não é candidata, porque depende de julgamento e do histórico daquele cliente",
+        "Candidata, desde que a resposta seja revisada depois",
+        "Falta informação para decidir"
+      ],
+      "correta": 1,
+      "feedback_acerto": "Isso. É rara e depende do seu julgamento. Automatizar aqui custa cliente.",
+      "feedback_erro": "Reveja o trecho dos 3:30 do vídeo. Uma reclamação de aniversário não se repete do mesmo jeito e exige julgamento — não é padrão."
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste 5 tarefas que você repete no seu negócio toda semana. Escreva do jeito que você falaria, não precisa ser formal.",
+      "quantidade_campos": 5,
+      "exemplos": [
+        "responder quanto custa no WhatsApp",
+        "montar o post da promoção",
+        "lembrar de cobrar quem ficou devendo"
+      ]
+    },
+    {
+      "id": "b4",
+      "tipo": "calculo",
+      "enunciado": "Agora escolha UMA dessas cinco tarefas e responda.",
+      "campos": [
+        { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das cinco?", "opcoes_de_bloco": "b3" },
+        { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz" },
+        { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos" },
+        { "id": "resposta_padrao", "tipo": "selecao", "rotulo": "A resposta certa é quase sempre a mesma?", "opcoes": ["Sim", "Não", "Às vezes"] }
+      ],
+      "calculos": {
+        "total": "vezes_semana * minutos_vez",
+        "horas": "total * 4.345 / 60"
+      },
+      "resultado_texto": "Você gasta cerca de {total} minutos por semana, o que dá {horas} horas por mês."
+    },
+    {
+      "id": "b5",
+      "tipo": "escolha_simples",
+      "enunciado": "Olhando o número que apareceu acima, essa tarefa vale ser atacada primeiro?",
+      "opcoes": [
+        "Sim, é a que mais me consome",
+        "Não, tem outra da lista que é pior",
+        "Ainda não sei"
+      ]
+    }
+  ]
+}

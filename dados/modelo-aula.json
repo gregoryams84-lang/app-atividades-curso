@@ -1,0 +1,74 @@
+{
+  "_leiame": [
+    "Este arquivo é um modelo. Copie-o, renomeie e preencha para criar uma aula nova.",
+    "Os campos que começam com _ (como este) são apenas explicação e são ignorados pelo aplicativo.",
+    "Cada bloco tem um 'id' único dentro da aula (b1, b2, b3...) e um 'tipo'.",
+    "Nunca use um id que comece com underline (_) — esses são reservados para uso interno.",
+    "Tipos disponíveis: multipla_escolha, lista_aberta, calculo, escolha_simples.",
+    "Veja dados/trilha-ia/aula-01.json para um exemplo real e completo."
+  ],
+  "trilha": "id-da-trilha",
+  "aula": "id-da-aula",
+  "titulo": "Título que aparece para o aluno",
+  "blocos": [
+    {
+      "_leiame": "Bloco de múltipla escolha: uma pergunta com uma resposta certa.",
+      "id": "b1",
+      "tipo": "multipla_escolha",
+      "enunciado": "Escreva aqui a pergunta.",
+      "opcoes": ["Primeira opção", "Segunda opção", "Terceira opção"],
+      "correta": 0,
+      "feedback_acerto": "Texto mostrado quando o aluno acerta.",
+      "feedback_erro": "Texto mostrado quando o aluno erra. Ele pode tentar de novo."
+    },
+    {
+      "_leiame": "Bloco de lista aberta: o aluno escreve respostas livres, um texto por campo.",
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva aqui a instrução.",
+      "ajuda": "Texto de apoio opcional. Pode remover esta linha se não precisar.",
+      "quantidade_campos": 3,
+      "exemplos": ["exemplo do primeiro campo", "exemplo do segundo campo"]
+    },
+    {
+      "_leiame": "Bloco de cálculo: o aluno preenche números (ou escolhe opções) e vê um resultado calculado na hora.",
+      "id": "b3",
+      "tipo": "calculo",
+      "enunciado": "Escreva aqui a instrução.",
+      "campos": [
+        {
+          "_leiame": "Seleção alimentada pelas respostas de um bloco lista_aberta anterior. Troque 'opcoes_de_bloco' pelo id daquele bloco.",
+          "id": "escolha",
+          "tipo": "selecao",
+          "rotulo": "Texto da pergunta deste campo",
+          "opcoes_de_bloco": "b2"
+        },
+        {
+          "_leiame": "Seleção com opções fixas, escritas à mão.",
+          "id": "frequencia",
+          "tipo": "selecao",
+          "rotulo": "Texto da pergunta deste campo",
+          "opcoes": ["Sim", "Não", "Às vezes"]
+        },
+        {
+          "_leiame": "Campo numérico simples.",
+          "id": "quantidade",
+          "tipo": "numero",
+          "rotulo": "Texto da pergunta deste campo"
+        }
+      ],
+      "_leiame_calculos": "Cada linha calcula um número novo a partir dos campos numéricos acima (tipo 'numero') ou de cálculos anteriores. Campos de seleção não entram na fórmula. Use apenas + - * / e parênteses.",
+      "calculos": {
+        "total": "quantidade * 1"
+      },
+      "resultado_texto": "Frase final mostrada ao aluno. Use {total} para encaixar o número calculado."
+    },
+    {
+      "_leiame": "Bloco de escolha simples: uma pergunta de autoavaliação, sem certo ou errado.",
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Escreva aqui a pergunta.",
+      "opcoes": ["Primeira opção", "Segunda opção", "Terceira opção"]
+    }
+  ]
+}
