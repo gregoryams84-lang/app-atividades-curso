@@ -1,1 +1,19 @@
-@media print { body { color: #000; } }
+@media print {
+  #barra-progresso,
+  #barra-progresso-texto,
+  .bloco,
+  .nao-imprimir {
+    display: none !important;
+  }
+
+  body {
+    color: #000000;
+    background: #FFFFFF;
+  }
+
+  .resultado {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
