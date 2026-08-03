@@ -561,7 +561,7 @@ export function calcularProgresso(blocos, respostas) {
 - [ ] **Step 4: Run tests to verify they pass**
 
 Run: `node --test js/blocos.test.js`
-Expected: PASS, all 13 tests green.
+Expected: PASS, all 12 tests green.
 
 - [ ] **Step 5: Commit**
 
@@ -2446,7 +2446,7 @@ git commit -m "Adiciona exportar e importar com confirmacao antes de sobrescreve
 - [ ] **Step 1: Run the full automated test suite**
 
 Run: `node --test js/*.test.js`
-Expected: all tests from Tasks 1–4 pass (9 in `formula.test.js`, 13 in `blocos.test.js`, 13 in `armazenamento.test.js`, 6 in `dependencias.test.js` — 41 total).
+Expected: all tests from Tasks 1–4 pass (11 in `formula.test.js`, 12 in `blocos.test.js`, 13 in `armazenamento.test.js`, 6 in `dependencias.test.js` — 42 total).
 
 - [ ] **Step 2: Write `TESTES-MANUAIS.md`**
 
