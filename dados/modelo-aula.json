@@ -2,33 +2,36 @@
   "_leiame": [
     "Este arquivo é um modelo. Copie-o, renomeie e preencha para criar uma aula nova.",
     "Os campos que começam com _ (como este) são apenas explicação e são ignorados pelo aplicativo.",
-    "Cada bloco tem um 'id' único dentro da aula (b1, b2, b3...) e um 'tipo'.",
-    "Nunca use um id que comece com underline (_) — esses são reservados para uso interno.",
-    "Tipos disponíveis: multipla_escolha, lista_aberta, calculo, escolha_simples.",
+    "schema_version é obrigatório: identifica a versão do formato deste arquivo. Deixe 1.",
+    "Cada bloco tem um 'id' único e estável dentro da aula (b1, b2, b3...) — nunca renomeie ou reordene um id depois de publicado, as respostas dos alunos ficam guardadas por ele.",
+    "Tipos disponíveis: cenario, lista_aberta, calculo, escolha_simples.",
     "Veja dados/trilha-ia/aula-01.json para um exemplo real e completo."
   ],
+  "schema_version": 1,
   "trilha": "id-da-trilha",
   "aula": "id-da-aula",
   "titulo": "Título que aparece para o aluno",
+  "habilidade": "Uma frase: o que o aluno passa a saber fazer depois desta aula.",
   "blocos": [
     {
-      "_leiame": "Bloco de múltipla escolha: uma pergunta com uma resposta certa.",
+      "_leiame": "Bloco de cenário: uma situação com uma resposta certa. Dica curta no primeiro erro; explicação completa a partir do segundo erro.",
       "id": "b1",
-      "tipo": "multipla_escolha",
-      "enunciado": "Escreva aqui a pergunta.",
+      "tipo": "cenario",
+      "enunciado": "Descreva aqui a situação.",
       "opcoes": ["Primeira opção", "Segunda opção", "Terceira opção"],
       "correta": 0,
-      "feedback_acerto": "Texto mostrado quando o aluno acerta.",
-      "feedback_erro": "Texto mostrado quando o aluno erra. Ele pode tentar de novo."
+      "dica_erro": "Uma pista curta, com a referência de tempo do vídeo se fizer sentido.",
+      "explicacao_erro": "A explicação completa, mostrada junto da dica a partir da segunda tentativa errada.",
+      "feedback_acerto": "Texto mostrado quando o aluno acerta."
     },
     {
-      "_leiame": "Bloco de lista aberta: o aluno escreve respostas livres, um texto por campo.",
+      "_leiame": "Bloco de lista aberta: respostas livres, um texto por campo.",
       "id": "b2",
       "tipo": "lista_aberta",
       "enunciado": "Escreva aqui a instrução.",
-      "ajuda": "Texto de apoio opcional. Pode remover esta linha se não precisar.",
       "quantidade_campos": 3,
-      "exemplos": ["exemplo do primeiro campo", "exemplo do segundo campo"]
+      "minimo_preenchido": 1,
+      "placeholders": ["exemplo do primeiro campo", "exemplo do segundo campo"]
     },
     {
       "_leiame": "Bloco de cálculo: o aluno preenche números (ou escolhe opções) e vê um resultado calculado na hora.",
@@ -37,11 +40,11 @@
       "enunciado": "Escreva aqui a instrução.",
       "campos": [
         {
-          "_leiame": "Seleção alimentada pelas respostas de um bloco lista_aberta anterior. Troque 'opcoes_de_bloco' pelo id daquele bloco.",
+          "_leiame": "Seleção alimentada pela resposta de um bloco lista_aberta anterior — pode ser desta mesma aula ou de uma aula anterior.",
           "id": "escolha",
           "tipo": "selecao",
           "rotulo": "Texto da pergunta deste campo",
-          "opcoes_de_bloco": "b2"
+          "depende_de": { "trilha": "id-da-trilha", "aula": "id-da-aula", "bloco": "b2" }
         },
         {
           "_leiame": "Seleção com opções fixas, escritas à mão.",
@@ -51,13 +54,16 @@
           "opcoes": ["Sim", "Não", "Às vezes"]
         },
         {
-          "_leiame": "Campo numérico simples.",
+          "_leiame": "Campo numérico. minimo/maximo são opcionais.",
           "id": "quantidade",
           "tipo": "numero",
-          "rotulo": "Texto da pergunta deste campo"
+          "rotulo": "Texto da pergunta deste campo",
+          "unidade": "vezes",
+          "minimo": 0,
+          "maximo": 999
         }
       ],
-      "_leiame_calculos": "Cada linha calcula um número novo a partir dos campos numéricos acima (tipo 'numero') ou de cálculos anteriores. Campos de seleção não entram na fórmula. Use apenas + - * / e parênteses.",
+      "_leiame_calculos": "Cada linha calcula um número novo a partir dos campos numéricos acima (tipo 'numero') ou de cálculos anteriores. Campos de seleção não entram na fórmula. Use apenas + - * / e parênteses. Se a conta não puder ser feita (por exemplo, dividir por zero), o resultado aparece como indisponível para o aluno, nunca um número inventado.",
       "calculos": {
         "total": "quantidade * 1"
       },

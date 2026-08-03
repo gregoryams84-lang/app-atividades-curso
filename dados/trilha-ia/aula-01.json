@@ -1,11 +1,13 @@
 {
+  "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-01",
   "titulo": "Você já usa IA. O problema é como.",
+  "habilidade": "Reconhecer, pelas três perguntas, se uma tarefa do seu negócio vale a pena automatizar.",
   "blocos": [
     {
       "id": "b1",
-      "tipo": "multipla_escolha",
+      "tipo": "cenario",
       "enunciado": "Um dono de pizzaria gasta cerca de 15 minutos por dia respondendo a mesma pergunta, \"vocês entregam no meu bairro?\". Pelas três perguntas da aula, essa tarefa é:",
       "opcoes": [
         "Não é candidata, é tempo demais para automatizar",
@@ -14,12 +16,13 @@
         "Falta informação para decidir"
       ],
       "correta": 1,
-      "feedback_acerto": "Exato. Repete, soma tempo, e a resposta depende só do endereço — é padrão.",
-      "feedback_erro": "Reveja o trecho dos 3:30 do vídeo. As três perguntas são: repete, custa tempo, a resposta segue padrão."
+      "dica_erro": "Reveja o trecho dos 3:30 do vídeo.",
+      "explicacao_erro": "As três perguntas são: repete, custa tempo, a resposta segue padrão.",
+      "feedback_acerto": "Exato. Repete, soma tempo, e a resposta depende só do endereço — é padrão."
     },
     {
       "id": "b2",
-      "tipo": "multipla_escolha",
+      "tipo": "cenario",
       "enunciado": "A mesma pizzaria recebe uma reclamação de um cliente que pediu para um aniversário e a pizza chegou fria. Pelas três perguntas, essa tarefa é:",
       "opcoes": [
         "Candidata forte, porque reclamação sempre tem resposta pronta",
@@ -28,15 +31,17 @@
         "Falta informação para decidir"
       ],
       "correta": 1,
-      "feedback_acerto": "Isso. É rara e depende do seu julgamento. Automatizar aqui custa cliente.",
-      "feedback_erro": "Reveja o trecho dos 3:30 do vídeo. Uma reclamação de aniversário não se repete do mesmo jeito e exige julgamento — não é padrão."
+      "dica_erro": "Reveja o trecho dos 3:30 do vídeo.",
+      "explicacao_erro": "Uma reclamação de aniversário não se repete do mesmo jeito e exige julgamento — não é padrão.",
+      "feedback_acerto": "Isso. É rara e depende do seu julgamento. Automatizar aqui custa cliente."
     },
     {
       "id": "b3",
       "tipo": "lista_aberta",
       "enunciado": "Liste 5 tarefas que você repete no seu negócio toda semana. Escreva do jeito que você falaria, não precisa ser formal.",
       "quantidade_campos": 5,
-      "exemplos": [
+      "minimo_preenchido": 1,
+      "placeholders": [
         "responder quanto custa no WhatsApp",
         "montar o post da promoção",
         "lembrar de cobrar quem ficou devendo"
@@ -47,9 +52,9 @@
       "tipo": "calculo",
       "enunciado": "Agora escolha UMA dessas cinco tarefas e responda.",
       "campos": [
-        { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das cinco?", "opcoes_de_bloco": "b3" },
-        { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz" },
-        { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos" },
+        { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das cinco?", "depende_de": { "trilha": "trilha-ia", "aula": "aula-01", "bloco": "b3" } },
+        { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz", "unidade": "vezes", "minimo": 0, "maximo": 999 },
+        { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos", "unidade": "minutos", "minimo": 0, "maximo": 999 },
         { "id": "resposta_padrao", "tipo": "selecao", "rotulo": "A resposta certa é quase sempre a mesma?", "opcoes": ["Sim", "Não", "Às vezes"] }
       ],
       "calculos": {

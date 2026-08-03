@@ -7,6 +7,7 @@
         {
           "id": "aula-01",
           "titulo": "Você já usa IA. O problema é como.",
+          "ordem": 1,
           "arquivo": "dados/trilha-ia/aula-01.json"
         }
       ]
