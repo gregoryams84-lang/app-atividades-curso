@@ -11,11 +11,13 @@
 ## Global Constraints
 
 - No framework, no build step — plain HTML/CSS/JS only.
-- Exactly one external dependency allowed: a Google Fonts stylesheet link for **Inter**. No other CDN dependency of any kind.
+- Exactly one external dependency allowed: a single Google Fonts stylesheet link loading two families — **Fraunces** (variable) and **Inter**. No other CDN dependency of any kind.
+- Visual identity matches the company's existing institutional site, not a fresh choice for this app. **Fraunces only in headings** (`h1`, `h2`) — never in text the student must read carefully (block prompts, fields, feedback, labels). **Inter everywhere else.**
+- Color palette, declared as CSS custom properties on `:root` and always referenced by variable, never hardcoded: `--verde: #14513C` (buttons, headings, progress bar), `--tinta: #16191C` (body text), `--papel: #F5F6F3` (background), `--neutro: #5B6560` (secondary text and error feedback), `--ambar: #8A5A12` (system warnings only — rare use). **Error feedback never uses red** — it uses `--neutro` at a heavier font weight (600) instead, since red signals failure/rejection and this product never fails a student.
 - Must work when served by GitHub Pages. Opening the raw file from disk (`file://`) is not supported: `fetch` is blocked for local files by modern browsers — accepted trade-off, not a defect. Local testing requires a static server that preserves query strings and hash (`python3 -m http.server`; `npx serve` is unsuitable — it 301-redirects and drops query strings).
 - Mobile-first; no horizontal scroll at 360px viewport width.
 - No emoji, no mascot, no celebratory animation, no score/percentage/pass-fail message, anywhere.
-- Body text minimum 17px; buttons/inputs minimum 44px touch target.
+- Body text minimum 17px, nothing below 13px anywhere (including fine print); buttons/inputs minimum 44px touch target.
 - WCAG AA contrast; every field has an associated `<label for>`; full keyboard navigation; focus moves to the new block's content on every step change; `prefers-reduced-motion` disables the progress-bar width transition.
 - All lesson content lives in versioned JSON under `dados/`; adding a lesson must never require writing JavaScript. No function in `js/` may contain logic specific to one lesson's content (a check like "if this is aula-01" is an architecture defect).
 - No interface text shown to the student may use a technical term (`localStorage`, `JSON`, `sessão`, `cache`, etc.).
@@ -1087,7 +1089,7 @@ git commit -m "Reestrutura conteudo da Aula 1 e o modelo de aula para o schema v
 
 ---
 
-### Task 6: Visual design — `css/estilo.css`, `css/impressao.css`, Google Font
+### Task 6: Visual design — `css/estilo.css`, `css/impressao.css`, Google Fonts (Fraunces + Inter)
 
 **Files:**
 - Modify: `css/estilo.css` (full rewrite)
@@ -1095,22 +1097,24 @@ git commit -m "Reestrutura conteudo da Aula 1 e o modelo de aula para o schema v
 
 **Interfaces:**
 - Produces: the class/id names Tasks 7–14 rely on: `.pagina`, `.lista-trilhas`, `.trilha`, `.lista-aulas`, `.aula`, `.aula-estado`, `.aula-concluida`, `.aula-titulo`, `.botao-grande`, `.botao-secundario`, `.acoes-globais`, `.confirmacao-importar`, `.layout-atividade`, `.pagina-atividade`, `.habilidade`, `.aviso-armazenamento`, `#barra-progresso`, `#barra-progresso-preenchida`, `#barra-progresso-texto`, `.link-voltar`, `.bloco`, `.enunciado`, `.texto-apoio`, `.opcoes`, `.opcao`, `.opcao-selecionada`, `.feedback`, `.feedback-acerto`, `.feedback-erro`, `.rotulo-campo`, `.campo-texto`, `.campo-numero`, `.campo-selecao`, `.resultado-calculo`, `.painel-artefato`, `#botao-alternar-artefato`, `#conteudo-artefato`, `.artefato-item`, `.artefato-enunciado`, `.resultado-item`, `.resultado-enunciado`, `.mensagem-erro`, `.mensagem-carregando`, `.nao-imprimir`.
+- **Identity note:** this palette and type system are not a new choice — they match the company's existing institutional site. Fraunces goes on `h1`/`h2` only; every other selector inherits the Inter body font. Error feedback (`.feedback-erro`) never uses red — it uses `--neutro` at font-weight 600.
 
 - [ ] **Step 1: Replace `css/estilo.css`**
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600&display=swap');
 
 :root {
-  --cor-destaque: #1B4B5A;
-  --cor-destaque-escura: #123845;
-  --cor-texto: #1A1A1A;
-  --cor-fundo: #FFFFFF;
-  --cor-acerto: #2E6B4F;
-  --cor-acerto-fundo: #E6F2EC;
-  --cor-erro: #8A4A2F;
-  --cor-erro-fundo: #F5E9E2;
-  --cor-borda: #C9C9C9;
+  --verde: #14513C;
+  --verde-escuro: #0F3A2B;
+  --verde-claro: #E4EDE8;
+  --tinta: #16191C;
+  --papel: #F5F6F3;
+  --neutro: #5B6560;
+  --neutro-claro: #E9EBE8;
+  --ambar: #8A5A12;
+  --ambar-claro: #F3E7D6;
+  --borda: #D9DCD8;
   --espaco-toque-minimo: 44px;
 }
 
@@ -1119,8 +1123,8 @@ git commit -m "Reestrutura conteudo da Aula 1 e o modelo de aula para o schema v
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--cor-fundo);
-  color: var(--cor-texto);
+  background: var(--papel);
+  color: var(--tinta);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 17px;
   line-height: 1.6;
@@ -1129,20 +1133,21 @@ html, body {
 
 .pagina { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
 
-h1 { font-size: 24px; margin: 0 0 8px; }
-h2 { font-size: 20px; margin: 0 0 12px; }
+h1, h2 { font-family: "Fraunces", serif; font-weight: 600; }
+h1 { font-size: 26px; margin: 0 0 8px; }
+h2 { font-size: 21px; margin: 0 0 12px; }
 
-.texto-apoio { color: #444444; margin: 0 0 16px; }
-.mensagem-erro { background: var(--cor-erro-fundo); color: var(--cor-erro); border-radius: 8px; padding: 16px; font-size: 18px; }
-.mensagem-carregando { color: #444444; padding: 16px 0; }
+.texto-apoio { color: var(--neutro); margin: 0 0 16px; }
+.mensagem-erro { background: var(--neutro-claro); color: var(--tinta); border-radius: 8px; padding: 16px; font-size: 18px; }
+.mensagem-carregando { color: var(--neutro); padding: 16px 0; }
 
 .lista-trilhas { display: flex; flex-direction: column; gap: 32px; }
 .trilha { display: flex; flex-direction: column; gap: 12px; }
 .lista-aulas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.aula { display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid var(--cor-borda); border-radius: 8px; }
-.aula-estado { font-size: 14px; font-weight: 600; color: #444444; }
-.aula-concluida .aula-estado { color: var(--cor-acerto); }
-.aula-titulo { color: var(--cor-destaque); font-size: 17px; font-weight: 600; text-decoration: none; }
+.aula { display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid var(--borda); border-radius: 8px; }
+.aula-estado { font-size: 14px; font-weight: 600; color: var(--neutro); }
+.aula-concluida .aula-estado { color: var(--verde); }
+.aula-titulo { color: var(--verde); font-size: 17px; font-weight: 600; text-decoration: none; }
 .aula-titulo:hover { text-decoration: underline; }
 
 .botao-grande {
@@ -1154,79 +1159,79 @@ h2 { font-size: 20px; margin: 0 0 12px; }
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  color: #FFFFFF;
-  background: var(--cor-destaque);
+  color: var(--papel);
+  background: var(--verde);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
 }
-.botao-grande:hover { background: var(--cor-destaque-escura); }
-.botao-grande:focus-visible { outline: 3px solid #000000; outline-offset: 2px; }
+.botao-grande:hover { background: var(--verde-escuro); }
+.botao-grande:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 .botao-grande[hidden] { display: none; }
 
-.botao-secundario { display: inline-block; color: var(--cor-destaque); font-weight: 600; text-decoration: none; margin-top: 4px; }
+.botao-secundario { display: inline-block; color: var(--verde); font-weight: 600; text-decoration: none; margin-top: 4px; }
 .botao-secundario:hover { text-decoration: underline; }
 
-.acoes-globais { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--cor-borda); display: flex; flex-direction: column; gap: 12px; }
-.confirmacao-importar { padding: 16px; border: 1px solid var(--cor-borda); border-radius: 8px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; }
+.acoes-globais { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--borda); display: flex; flex-direction: column; gap: 12px; }
+.confirmacao-importar { padding: 16px; border: 1px solid var(--borda); border-radius: 8px; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; }
 .confirmacao-importar[hidden] { display: none; }
 
 .layout-atividade { display: flex; flex-direction: column; }
 .pagina-atividade { flex: 1; }
 
-.habilidade { font-size: 15px; color: #444444; margin: 0 auto 16px; padding: 0 16px; max-width: 640px; }
+.habilidade { font-size: 15px; color: var(--neutro); margin: 0 auto 16px; padding: 0 16px; max-width: 640px; }
 
-.aviso-armazenamento { background: var(--cor-erro-fundo); color: var(--cor-erro); border-radius: 8px; padding: 12px 16px; font-size: 15px; max-width: 640px; margin: 0 auto 16px; }
+.aviso-armazenamento { background: var(--ambar-claro); color: var(--ambar); border-radius: 8px; padding: 12px 16px; font-size: 15px; max-width: 640px; margin: 0 auto 16px; }
 
-.barra-progresso { max-width: 640px; margin: 0 auto; background: #EAEAEA; border-radius: 999px; height: 10px; overflow: hidden; }
-.barra-progresso-preenchida { background: var(--cor-destaque); height: 100%; transition: width 0.3s ease; }
-.barra-progresso-texto { max-width: 640px; margin: 6px auto 24px; padding: 0 16px; font-size: 14px; color: #444444; }
+.barra-progresso { max-width: 640px; margin: 0 auto; background: var(--neutro-claro); border-radius: 999px; height: 10px; overflow: hidden; }
+.barra-progresso-preenchida { background: var(--verde); height: 100%; transition: width 0.3s ease; }
+.barra-progresso-texto { max-width: 640px; margin: 6px auto 24px; padding: 0 16px; font-size: 14px; color: var(--neutro); }
 
-.link-voltar { display: inline-block; color: var(--cor-destaque); font-weight: 600; text-decoration: none; margin-bottom: 16px; }
+.link-voltar { display: inline-block; color: var(--verde); font-weight: 600; text-decoration: none; margin-bottom: 16px; }
 .link-voltar:hover { text-decoration: underline; }
 
 .bloco { padding: 0 0 20px; }
-.enunciado { font-size: 20px; font-weight: 600; margin: 0 0 16px; }
+.enunciado { font-size: 20px; font-weight: 600; margin: 0 0 16px; font-family: inherit; }
 
 .opcoes { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 .opcao {
   min-height: var(--espaco-toque-minimo); padding: 12px 16px; font-size: 17px; text-align: left;
-  background: #FFFFFF; color: var(--cor-texto); border: 2px solid var(--cor-borda); border-radius: 8px; cursor: pointer;
+  background: var(--papel); color: var(--tinta); border: 2px solid var(--borda); border-radius: 8px; cursor: pointer;
   font-family: inherit;
 }
-.opcao:focus-visible { outline: 3px solid #000000; outline-offset: 2px; }
-.opcao-selecionada { border-color: var(--cor-destaque); background: #EAF1F3; }
+.opcao:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
+.opcao-selecionada { border-color: var(--verde); background: var(--verde-claro); }
 
 .feedback { padding: 14px 16px; border-radius: 8px; font-size: 17px; margin-bottom: 16px; }
 .feedback[hidden] { display: none; }
-.feedback-acerto { background: var(--cor-acerto-fundo); color: var(--cor-acerto); }
-.feedback-erro { background: var(--cor-erro-fundo); color: var(--cor-erro); }
+.feedback-acerto { background: var(--verde-claro); color: var(--verde); }
+.feedback-erro { background: var(--neutro-claro); color: var(--neutro); font-weight: 600; }
 
 .rotulo-campo { display: block; font-size: 16px; font-weight: 600; margin: 12px 0 6px; }
 .campo-texto, .campo-numero, .campo-selecao {
   display: block; width: 100%; min-height: var(--espaco-toque-minimo); padding: 10px 12px; font-size: 17px;
-  border: 2px solid var(--cor-borda); border-radius: 8px; margin-bottom: 8px; font-family: inherit; color: var(--cor-texto); background: #FFFFFF;
+  border: 2px solid var(--borda); border-radius: 8px; margin-bottom: 8px; font-family: inherit; color: var(--tinta); background: var(--papel);
 }
-.campo-texto:focus-visible, .campo-numero:focus-visible, .campo-selecao:focus-visible { outline: 3px solid var(--cor-destaque); outline-offset: 1px; }
+.campo-texto:focus-visible, .campo-numero:focus-visible, .campo-selecao:focus-visible { outline: 3px solid var(--verde); outline-offset: 1px; }
 
-.resultado-calculo { font-size: 18px; font-weight: 600; background: #EAF1F3; border-radius: 8px; padding: 14px 16px; margin: 12px 0 16px; }
+.resultado-calculo { font-size: 18px; font-weight: 600; background: var(--verde-claro); color: var(--verde); border-radius: 8px; padding: 14px 16px; margin: 12px 0 16px; }
 .resultado-calculo[hidden] { display: none; }
 
 .painel-artefato { max-width: 640px; margin: 24px auto 0; padding: 0 16px; }
 .painel-artefato[hidden] { display: none; }
 .botao-alternar-artefato {
   width: 100%; min-height: var(--espaco-toque-minimo); padding: 12px 16px; font-size: 16px; font-weight: 600;
-  background: #F2F2F2; color: var(--cor-texto); border: 1px solid var(--cor-borda); border-radius: 8px; cursor: pointer; text-align: left;
+  background: var(--neutro-claro); color: var(--tinta); border: 1px solid var(--borda); border-radius: 8px; cursor: pointer; text-align: left;
   font-family: inherit;
 }
-.conteudo-artefato { padding: 16px; border: 1px solid var(--cor-borda); border-top: none; border-radius: 0 0 8px 8px; }
+.conteudo-artefato { padding: 16px; border: 1px solid var(--borda); border-top: none; border-radius: 0 0 8px 8px; }
 .conteudo-artefato[hidden] { display: none; }
 .artefato-item { margin-bottom: 16px; }
 .artefato-item:last-child { margin-bottom: 0; }
 .artefato-enunciado { font-weight: 600; margin-bottom: 6px; font-size: 15px; }
 
-.resultado-item { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--cor-borda); }
+.resultado-item { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--borda); }
 .resultado-item:last-child { border-bottom: none; }
 .resultado-enunciado { font-weight: 600; margin-bottom: 8px; }
 
@@ -1263,7 +1268,7 @@ h2 { font-size: 20px; margin: 0 0 12px; }
     display: none !important;
   }
 
-  body { color: #000000; background: #FFFFFF; }
+  body { color: var(--tinta); background: #FFFFFF; }
 
   .resultado-item { border-top: none; padding-top: 0; }
 }
@@ -1271,13 +1276,13 @@ h2 { font-size: 20px; margin: 0 0 12px; }
 
 - [ ] **Step 3: Manual check at 360px**
 
-Serve the project (`python3 -m http.server 8000`), open `index.html` in a browser with devtools set to 360×640. Expected: no horizontal scrollbar, "Inter" font loads (confirm in devtools Network tab — a request to `fonts.googleapis.com`/`fonts.gstatic.com` succeeds), generous margins, no visual regressions from the (still content-empty) page.
+Serve the project (`python3 -m http.server 8000`), open `index.html` in a browser with devtools set to 360×640. Expected: no horizontal scrollbar, both fonts load (confirm in devtools Network tab — a request to `fonts.googleapis.com`/`fonts.gstatic.com` succeeds; the page's own `h1` renders visibly serif/Fraunces-styled, distinct from the sans-serif Inter body text), generous margins, no visual regressions from the (still content-empty) page.
 
 - [ ] **Step 4: Commit**
 
 ```bash
 git add css/estilo.css css/impressao.css
-git commit -m "Reescreve estilo para layout de tela-por-bloco, painel do artefato, e fonte Inter"
+git commit -m "Reescreve estilo para layout de tela-por-bloco: identidade Fraunces+Inter e paleta verde/tinta/papel/neutro/ambar"
 ```
 
 ---
@@ -2487,7 +2492,7 @@ Comece a preencher o bloco `b3` (lista aberta), preencha 2 de 5 campos, recarreg
 
 - 360px sem rolagem horizontal, em toda tela (inicial, cada tipo de bloco, diagnóstico).
 - Navegação completa só por teclado (Tab, Enter, Espaço) em todos os tipos de bloco.
-- Contraste das cores fixas (`#1A1A1A` sobre `#FFFFFF`, `#FFFFFF` sobre `#1B4B5A`, os dois pares de feedback) — WCAG AA para texto normal.
+- Contraste das cores fixas (`--tinta` sobre `--papel`, `--papel` sobre `--verde` nos botões, `--verde` sobre `--verde-claro` no acerto, `--neutro` (600) sobre `--neutro-claro` no erro) — todas já conferidas em ~5,4:1 ou mais, acima do mínimo de 4,5:1 do WCAG AA para texto normal.
 - Teclado numérico no iOS: abrir um campo `type="number"` num iPhone real ou simulador e confirmar que o teclado virtual não quebra o layout (nenhum elemento fica coberto ou cortado).
 - `prefers-reduced-motion`: ativar essa preferência no sistema operacional e confirmar que a barra de progresso não anima a largura.
 ```
