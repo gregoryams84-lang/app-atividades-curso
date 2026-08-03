@@ -82,6 +82,7 @@ function atualizarBarraProgresso(passoAtual, total) {
 function renderizarBloco(bloco, ctx) {
   if (bloco.tipo === 'multipla_escolha') return renderizarMultiplaEscolha(bloco, ctx);
   if (bloco.tipo === 'lista_aberta') return renderizarListaAberta(bloco, ctx);
+  if (bloco.tipo === 'calculo') return renderizarCalculo(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
 }
 
@@ -189,6 +190,124 @@ function renderizarListaAberta(bloco, ctx) {
   botaoContinuar.classList.add('nao-imprimir');
   container.appendChild(botaoContinuar);
   return container;
+}
+
+function renderizarCalculo(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+  container.id = bloco.id;
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  const respostaSalva = ctx.respostaSalva || {};
+  const valoresAtuais = {};
+
+  const resultadoTexto = document.createElement('p');
+  resultadoTexto.className = 'resultado-calculo';
+  resultadoTexto.hidden = true;
+
+  const botaoContinuar = criarBotaoGrande('Continuar', ctx.aoAvancar);
+  botaoContinuar.classList.add('nao-imprimir');
+  botaoContinuar.hidden = true;
+
+  function recalcular() {
+    if (!todosCamposPreenchidos(bloco.campos, valoresAtuais)) {
+      resultadoTexto.hidden = true;
+      botaoContinuar.hidden = true;
+      return;
+    }
+    const valoresNumericos = {};
+    for (const campo of bloco.campos) {
+      if (campo.tipo === 'numero') valoresNumericos[campo.id] = parseFloat(valoresAtuais[campo.id]);
+    }
+    const calculado = avaliarCalculos(bloco.calculos || {}, valoresNumericos);
+    const texto = interpolarTexto(bloco.resultado_texto, calculado);
+    resultadoTexto.hidden = false;
+    resultadoTexto.textContent = texto;
+    botaoContinuar.hidden = false;
+    armazenamento.salvarResposta(ctx.trilha, ctx.aula, bloco.id, { ...valoresAtuais, resultadoTexto: texto });
+  }
+
+  for (const campo of bloco.campos) {
+    const rotulo = document.createElement('label');
+    rotulo.className = 'rotulo-campo';
+    rotulo.setAttribute('for', `${bloco.id}-${campo.id}`);
+    rotulo.textContent = campo.rotulo;
+    container.appendChild(rotulo);
+
+    if (campo.tipo === 'selecao') {
+      const elemento = document.createElement('select');
+      elemento.id = `${bloco.id}-${campo.id}`;
+      elemento.className = 'campo-selecao';
+
+      function preencherOpcoes() {
+        const valorAnterior = elemento.value;
+        elemento.innerHTML = '';
+        const opcaoVazia = document.createElement('option');
+        opcaoVazia.value = '';
+        opcaoVazia.textContent = 'Escolha uma opção';
+        elemento.appendChild(opcaoVazia);
+        const respostasReferenciadas = campo.opcoes_de_bloco
+          ? ctx.obterRespostasDaAula()[campo.opcoes_de_bloco]
+          : undefined;
+        const opcoes = resolverOpcoesSelecao(campo, respostasReferenciadas);
+        for (const opcao of opcoes) {
+          const item = document.createElement('option');
+          item.value = opcao;
+          item.textContent = opcao;
+          elemento.appendChild(item);
+        }
+        elemento.value = opcoes.includes(valorAnterior) ? valorAnterior : '';
+        valoresAtuais[campo.id] = elemento.value;
+      }
+
+      preencherOpcoes();
+      if (opcoesContemValor(elemento, respostaSalva[campo.id])) {
+        elemento.value = respostaSalva[campo.id];
+      }
+      valoresAtuais[campo.id] = elemento.value;
+
+      if (campo.opcoes_de_bloco) {
+        ctx.registrarDependente(campo.opcoes_de_bloco, () => {
+          preencherOpcoes();
+          recalcular();
+        });
+      }
+
+      elemento.addEventListener('change', () => {
+        valoresAtuais[campo.id] = elemento.value;
+        recalcular();
+      });
+
+      container.appendChild(elemento);
+    } else {
+      const elemento = document.createElement('input');
+      elemento.type = 'number';
+      elemento.inputMode = 'numeric';
+      elemento.id = `${bloco.id}-${campo.id}`;
+      elemento.className = 'campo-numero';
+      elemento.value = respostaSalva[campo.id] ?? '';
+      valoresAtuais[campo.id] = elemento.value;
+      elemento.addEventListener('input', () => {
+        valoresAtuais[campo.id] = elemento.value;
+        recalcular();
+      });
+      container.appendChild(elemento);
+    }
+  }
+
+  container.appendChild(resultadoTexto);
+  container.appendChild(botaoContinuar);
+
+  recalcular();
+  return container;
+}
+
+function opcoesContemValor(elementoSelect, valor) {
+  return Array.from(elementoSelect.options).some((opcao) => opcao.value === valor);
 }
 
 function pegarParametrosDaUrl() {
