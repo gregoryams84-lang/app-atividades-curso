@@ -1096,7 +1096,7 @@ git commit -m "Reestrutura conteudo da Aula 1 e o modelo de aula para o schema v
 - Modify: `css/impressao.css` (full rewrite)
 
 **Interfaces:**
-- Produces: the class/id names Tasks 7–14 rely on: `.pagina`, `.lista-trilhas`, `.trilha`, `.lista-aulas`, `.aula`, `.aula-estado`, `.aula-concluida`, `.aula-titulo`, `.botao-grande`, `.botao-secundario`, `.acoes-globais`, `.confirmacao-importar`, `.layout-atividade`, `.pagina-atividade`, `.habilidade`, `.aviso-armazenamento`, `#barra-progresso`, `#barra-progresso-preenchida`, `#barra-progresso-texto`, `.link-voltar`, `.bloco`, `.enunciado`, `.texto-apoio`, `.opcoes`, `.opcao`, `.opcao-selecionada`, `.feedback`, `.feedback-acerto`, `.feedback-erro`, `.rotulo-campo`, `.campo-texto`, `.campo-numero`, `.campo-selecao`, `.resultado-calculo`, `.painel-artefato`, `#botao-alternar-artefato`, `#conteudo-artefato`, `.artefato-item`, `.artefato-enunciado`, `.resultado-item`, `.resultado-enunciado`, `.mensagem-erro`, `.mensagem-carregando`, `.nao-imprimir`.
+- Produces: the class/id names Tasks 7–14 rely on: `.pagina`, `.cabecalho`, `.logo`, `.lista-trilhas`, `.trilha`, `.lista-aulas`, `.aula`, `.aula-estado`, `.aula-concluida`, `.aula-titulo`, `.botao-grande`, `.botao-secundario`, `.acoes-globais`, `.confirmacao-importar`, `.layout-atividade`, `.pagina-atividade`, `.habilidade`, `.aviso-armazenamento`, `#barra-progresso`, `#barra-progresso-preenchida`, `#barra-progresso-texto`, `.link-voltar`, `.bloco`, `.enunciado`, `.texto-apoio`, `.opcoes`, `.opcao`, `.opcao-selecionada`, `.feedback`, `.feedback-acerto`, `.feedback-erro`, `.rotulo-campo`, `.campo-texto`, `.campo-numero`, `.campo-selecao`, `.resultado-calculo`, `.painel-artefato`, `#botao-alternar-artefato`, `#conteudo-artefato`, `.artefato-item`, `.artefato-enunciado`, `.resultado-item`, `.resultado-enunciado`, `.mensagem-erro`, `.mensagem-carregando`, `.nao-imprimir`.
 - **Identity note:** this palette and type system are not a new choice — they match the company's existing institutional site. Fraunces goes on `h1`/`h2` only; every other selector inherits the Inter body font. Error feedback (`.feedback-erro`) never uses red — it uses `--neutro` at font-weight 600.
 
 - [ ] **Step 1: Replace `css/estilo.css`**
@@ -1132,6 +1132,9 @@ html, body {
 }
 
 .pagina { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
+
+.cabecalho { margin-bottom: 24px; }
+.logo { display: block; height: auto; }
 
 h1, h2 { font-family: "Fraunces", serif; font-weight: 600; }
 h1 { font-size: 26px; margin: 0 0 8px; }
@@ -1306,10 +1309,15 @@ git commit -m "Reescreve estilo para layout de tela-por-bloco: identidade Fraunc
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atividades do curso</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/icone-180.png">
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
   <main class="pagina">
+    <header class="cabecalho">
+      <img src="img/logo-completo-verde.svg" alt="Toca o Negócio" width="150" height="62" class="logo">
+    </header>
     <h1>Atividades do curso</h1>
     <div id="lista-trilhas" class="lista-trilhas" aria-live="polite"></div>
     <div class="acoes-globais">
@@ -1418,7 +1426,7 @@ iniciarPaginaInicial();
 
 - [ ] **Step 3: Manual test**
 
-Serve the project (`python3 -m http.server 8000`), open `index.html` with cleared `localStorage`. Expected: heading "IA no Negócio", one row "Não iniciada — Você já usa IA. O problema é como.", and a button "Continuar: Você já usa IA. O problema é como." pointing at `atividade.html?trilha=trilha-ia&aula=aula-01`, plus a "Ver o que você já construiu" link to `diagnostico.html?trilha=trilha-ia`.
+Serve the project (`python3 -m http.server 8000`), open `index.html` with cleared `localStorage`. Expected: the "Toca o Negócio" logo (`img/logo-completo-verde.svg`) renders above the heading, the browser tab shows the favicon (`img/favicon-32.png`), heading "IA no Negócio", one row "Não iniciada — Você já usa IA. O problema é como.", and a button "Continuar: Você já usa IA. O problema é como." pointing at `atividade.html?trilha=trilha-ia&aula=aula-01`, plus a "Ver o que você já construiu" link to `diagnostico.html?trilha=trilha-ia`.
 
 - [ ] **Step 4: Commit**
 
@@ -1448,6 +1456,8 @@ git commit -m "Reescreve pagina inicial: painel da trilha com estado por aula e 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atividade</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/icone-180.png">
   <link rel="stylesheet" href="css/estilo.css">
   <link rel="stylesheet" href="css/impressao.css" media="print">
 </head>
@@ -2231,6 +2241,8 @@ git commit -m "Adiciona renderizacao de escolha simples, completando os quatro t
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>O que você construiu</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/icone-180.png">
   <link rel="stylesheet" href="css/estilo.css">
   <link rel="stylesheet" href="css/impressao.css" media="print">
 </head>
