@@ -81,6 +81,7 @@ function atualizarBarraProgresso(passoAtual, total) {
 
 function renderizarBloco(bloco, ctx) {
   if (bloco.tipo === 'multipla_escolha') return renderizarMultiplaEscolha(bloco, ctx);
+  if (bloco.tipo === 'lista_aberta') return renderizarListaAberta(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
 }
 
@@ -138,6 +139,55 @@ function renderizarMultiplaEscolha(bloco, ctx) {
 
   if (ctx.respostaSalva !== undefined) responder(ctx.respostaSalva);
 
+  return container;
+}
+
+function renderizarListaAberta(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+  container.id = bloco.id;
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  if (bloco.ajuda) {
+    const ajuda = document.createElement('p');
+    ajuda.className = 'texto-apoio';
+    ajuda.textContent = bloco.ajuda;
+    container.appendChild(ajuda);
+  }
+
+  const valoresSalvos = normalizarListaAberta(ctx.respostaSalva || [], bloco.quantidade_campos);
+  const valoresAtuais = [...valoresSalvos];
+
+  for (let i = 0; i < bloco.quantidade_campos; i++) {
+    const rotulo = document.createElement('label');
+    rotulo.className = 'rotulo-campo';
+    rotulo.setAttribute('for', `${bloco.id}-campo-${i}`);
+    rotulo.textContent = `Item ${i + 1}`;
+
+    const campo = document.createElement('input');
+    campo.type = 'text';
+    campo.id = `${bloco.id}-campo-${i}`;
+    campo.className = 'campo-texto';
+    campo.value = valoresSalvos[i] || '';
+    campo.placeholder = (bloco.exemplos && bloco.exemplos[i]) || 'escreva aqui';
+
+    campo.addEventListener('input', () => {
+      valoresAtuais[i] = campo.value;
+      armazenamento.salvarResposta(ctx.trilha, ctx.aula, bloco.id, normalizarListaAberta(valoresAtuais, bloco.quantidade_campos));
+      ctx.notificarDependentes(bloco.id);
+    });
+
+    container.appendChild(rotulo);
+    container.appendChild(campo);
+  }
+
+  const botaoContinuar = criarBotaoGrande('Continuar', ctx.aoAvancar);
+  botaoContinuar.classList.add('nao-imprimir');
+  container.appendChild(botaoContinuar);
   return container;
 }
 
