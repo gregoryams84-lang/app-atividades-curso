@@ -18,12 +18,14 @@ test('substitui identificadores pelo contexto', () => {
   assert.equal(avaliarExpressao('vezes_semana * minutos_vez', { vezes_semana: 3, minutos_vez: 10 }), 30);
 });
 
-test('identificador ausente vira zero', () => {
-  assert.equal(avaliarExpressao('a + b', { a: 5 }), 5);
+test('identificador ausente produz um valor nao finito, nunca um numero inventado', () => {
+  const resultado = avaliarExpressao('a + b', { a: 5 });
+  assert.equal(Number.isNaN(resultado), true);
 });
 
-test('divisão por zero retorna zero em vez de Infinity', () => {
-  assert.equal(avaliarExpressao('10 / x', { x: 0 }), 0);
+test('divisao por zero produz um valor nao finito, nunca um numero inventado', () => {
+  const resultado = avaliarExpressao('10 / x', { x: 0 });
+  assert.equal(Number.isFinite(resultado), false);
 });
 
 test('suporta menos unário', () => {
@@ -41,4 +43,15 @@ test('avaliarCalculos resolve na ordem e reaproveita resultado anterior', () => 
   );
   assert.equal(resultado.total, 105);
   assert.ok(Math.abs(resultado.horas - 7.60375) < 0.0001);
+});
+
+test('avaliarCalculos marca como indisponivel (undefined) quando o resultado nao e finito', () => {
+  const resultado = avaliarCalculos({ total: '10 / x' }, { x: 0 });
+  assert.equal(resultado.total, undefined);
+});
+
+test('avaliarCalculos propaga indisponibilidade para calculos seguintes que dependem do anterior', () => {
+  const resultado = avaliarCalculos({ total: '10 / x', horas: 'total / 2' }, { x: 0 });
+  assert.equal(resultado.total, undefined);
+  assert.equal(resultado.horas, undefined);
 });

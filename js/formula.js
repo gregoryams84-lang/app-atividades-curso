@@ -45,7 +45,7 @@ function criarParser(tokens, contexto) {
     if (token.tipo === 'identificador') {
       pos++;
       const valor = contexto[token.nome];
-      return typeof valor === 'number' && !Number.isNaN(valor) ? valor : 0;
+      return typeof valor === 'number' ? valor : NaN;
     }
     if (token.tipo === '(') {
       pos++;
@@ -66,7 +66,7 @@ function criarParser(tokens, contexto) {
       const operador = tokens[pos].tipo;
       pos++;
       const proximo = fator();
-      valor = operador === '*' ? valor * proximo : (proximo === 0 ? 0 : valor / proximo);
+      valor = operador === '*' ? valor * proximo : valor / proximo;
     }
     return valor;
   }
@@ -98,7 +98,8 @@ export function avaliarExpressao(expressao, contexto) {
 export function avaliarCalculos(calculos, valoresIniciais) {
   const contexto = { ...valoresIniciais };
   for (const nome of Object.keys(calculos)) {
-    contexto[nome] = avaliarExpressao(calculos[nome], contexto);
+    const valor = avaliarExpressao(calculos[nome], contexto);
+    contexto[nome] = Number.isFinite(valor) ? valor : undefined;
   }
   return contexto;
 }
