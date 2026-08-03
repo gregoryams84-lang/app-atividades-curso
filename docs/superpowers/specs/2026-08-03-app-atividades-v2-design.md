@@ -45,7 +45,25 @@ URL de uma atividade: `atividade.html?trilha=trilha-ia&aula=aula-01#bloco-1`.
 
 - `js/formula.js`: reaproveitado quase sem mudança — o avaliador seguro (sem `eval`/`Function`) já implementado atende ao requisito do v2. Único ajuste: ao invés de dividir por zero silenciosamente virar `0`, o valor calculado passa a carregar um sinalizador de "indisponível" que a camada de renderização usa para mostrar texto de resultado indisponível em vez de um número.
 - `dados/trilha-ia/aula-01.json`: o conteúdo pedagógico (perguntas, alternativas, textos de feedback) é o mesmo da Aula 1 já escrita no v1; o JSON é reestruturado para o novo schema (`schema_version`, `tipo: "cenario"` em vez de `multipla_escolha`, `dica_erro`/`explicacao_erro` separados, `depende_de` em vez de `opcoes_de_bloco`).
-- `css/estilo.css`: paleta, botões e campos são reaproveitados; a navegação de página única contínua é substituída por layout de tela-por-bloco mais o painel do artefato. **Correção em relação à v1:** a v1 usava fonte do sistema (nenhuma dependência externa). A v2 permite explicitamente uma exceção — uma única fonte do Google Fonts — e usa essa exceção: tipografia passa a ser **Inter** (boa legibilidade em telas pequenas, suporte completo a acentuação em português), carregada via `<link>` no `<head>` das três páginas, com `system-ui` como alternativa caso a fonte não carregue.
+- `css/estilo.css`: botões e campos são reaproveitados em espírito (área de toque, bordas, estrutura); a navegação de página única contínua é substituída por layout de tela-por-bloco mais o painel do artefato. **Identidade visual: substitui a paleta e tipografia da v1**, para seguir a mesma identidade já definida no site institucional da empresa. Ver seção "Identidade visual" abaixo.
+
+## Identidade visual
+
+Mesma identidade do site institucional (Toca o Negócio), não uma escolha nova feita para este aplicativo.
+
+- **Tipografia:** duas fontes do Google Fonts, carregadas por um único `<link>` (uma dependência externa, como permitido). **Fraunces** (variável) só em títulos — nunca em texto que o aluno precise ler com atenção (enunciados, campos, feedback). **Inter** em todo o resto: enunciados, rótulos, campos, botões, feedback, texto de apoio.
+- **Paleta**, declarada como variáveis CSS no `:root` e usada sempre por variável, nunca hardcoded:
+  ```css
+  --verde:  #14513C;  /* botões, títulos, barra de progresso */
+  --tinta:  #16191C;  /* texto */
+  --papel:  #F5F6F3;  /* fundo */
+  --neutro: #5B6560;  /* apoio, textos secundários */
+  --ambar:  #8A5A12;  /* apenas avisos, uso raro */
+  ```
+- Feedback de acerto usa `--verde`. **Feedback de erro não usa vermelho** — usa `--neutro` com peso de fonte maior (600) para se destacar sem parecer reprovação. Vermelho em atividade educacional sinaliza erro/reprovação, e este produto nunca reprova ninguém.
+- Avisos do sistema (armazenamento indisponível, por exemplo) usam `--ambar` — a única cor de alerta, reservada para esse uso raro.
+- Corpo com no mínimo 17px, nada abaixo de 13px em lugar nenhum (nem rodapés/notas).
+- Barra de progresso em `--verde`, sem comemoração.
 - `js/armazenamento.js` e `js/app.js`: reescritos — mudança de modelo de navegação, de chave de armazenamento, e de API (assíncrona, com debounce e tratamento de quota).
 
 ## Modelo de dados
