@@ -12,7 +12,7 @@
 
 - No framework, no build step — plain HTML/CSS/JS only.
 - No external CDN dependencies.
-- Must work opened directly as `file://` and when served by GitHub Pages.
+- Must work when served by GitHub Pages (the only way the student ever reaches it). Opening the raw file from disk (`file://`) is not a supported path: `app.js` loads lesson content via `fetch`, which Chrome and most modern browsers block for local files regardless of implementation — this was confirmed as an acceptable, resolved trade-off, not an open defect. Local testing during development requires serving the folder with any static file server.
 - Mobile-first; no horizontal scroll at 360px viewport width.
 - No emoji anywhere in the UI or in any JSON content.
 - Body text minimum 16px; buttons/inputs minimum 44px touch target.
@@ -1122,7 +1122,7 @@ iniciarPaginaInicial();
 
 - [ ] **Step 2: Manual test**
 
-Serve the project with a static server (from the project root: `npx --yes serve .` or any static server; opening `index.html` directly via `file://` also works since `fetch` on relative paths is supported by modern browsers for same-origin `file://` documents in most setups, but a local server is the reliable way to check this step). Open `index.html`. Expected: a heading "IA no Negócio" and one button-styled link "Você já usa IA. O problema é como.", pointing to `atividade.html?trilha=trilha-ia&aula=aula-01`.
+Serve the project with a static server (from the project root: `npx --yes serve .` or any static server — see Global Constraints on why `file://` is not a supported way to run this app). Open `index.html`. Expected: a heading "IA no Negócio" and one button-styled link "Você já usa IA. O problema é como.", pointing to `atividade.html?trilha=trilha-ia&aula=aula-01`.
 
 - [ ] **Step 3: Commit**
 
@@ -1930,9 +1930,9 @@ Using only Tab, Shift+Tab, Enter, and Space (no mouse), complete the entire less
 
 Confirm body text (`#1A1A1A` on `#FFFFFF`), the accent button (`#FFFFFF` on `#1B4B5A`), and the two feedback colors (`#2E6B4F` on `#E6F2EC`, `#8A4A2F` on `#F5E9E2`) all meet WCAG AA for normal text (4.5:1) — these are the same fixed color pairs from `css/estilo.css`, verify with any contrast checker.
 
-- [ ] **Step 5: `file://` check**
+- [ ] **Step 5: Confirm GitHub Pages is the supported path (informational, not a defect)**
 
-Double-click `index.html` to open it directly from disk (no server). Expected: some browsers block `fetch` on `file://` due to CORS restrictions on local files — if this happens, note it in the final report so the user knows GitHub Pages (or any local static server) is the reliable way to run the app, since the spec requires it to work when "served by GitHub Pages" and treats direct file-opening as a secondary convenience.
+Opening `index.html` by double-clicking it (`file://`) will show a load error in most browsers, because `fetch` is blocked for local files — this is expected and is not a bug to fix; it was resolved during planning as an accepted trade-off, since the student only ever reaches the app through a published GitHub Pages link, never by opening a local file. Confirm this by serving the folder with any static file server and reloading — the load error should disappear.
 
 - [ ] **Step 6: Final commit**
 

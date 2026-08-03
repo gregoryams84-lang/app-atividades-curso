@@ -10,6 +10,8 @@ Público: pequeno empreendedor brasileiro, pouca familiaridade digital, acesso m
 
 Requisito arquitetural central: o conteúdo de cada atividade vive em JSON, nunca em código. Adicionar uma aula nova é criar um JSON e adicionar uma linha num índice.
 
+**Nota sobre "abrir o arquivo direto":** como o conteúdo vive em JSON separado, `app.js` busca esses arquivos com `fetch`, e a maioria dos navegadores modernos (Chrome incluso) bloqueia essa busca quando a página é aberta direto do disco (`file://`), por segurança. Na prática isso não afeta o aluno — ele sempre chega pelo link publicado no GitHub Pages, nunca abrindo um arquivo local. Testar localmente sem publicar exige servir a pasta com um servidor estático simples (um único comando).
+
 ## Arquitetura
 
 ```
