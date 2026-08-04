@@ -67,10 +67,23 @@ export function criarArmazenamento(storage, atrasoMs = ATRASO_PADRAO_MS) {
         existente.timer = agendarGravacao(trilha, aula, chave);
         return;
       }
-      const entrada = { ultimoValor: respostas, resolvers: [resolve], timer: null };
+      const entrada = { trilha, aula, ultimoValor: respostas, resolvers: [resolve], timer: null };
       pendencias.set(chave, entrada);
       entrada.timer = agendarGravacao(trilha, aula, chave);
     });
+  }
+
+  async function descarregarPendencias() {
+    const chaves = Array.from(pendencias.keys());
+    await Promise.all(chaves.map((chave) => new Promise((resolve) => {
+      const entrada = pendencias.get(chave);
+      if (!entrada) { resolve(); return; }
+      clearTimeout(entrada.timer);
+      pendencias.delete(chave);
+      const sucesso = gravarAgora(entrada.trilha, entrada.aula, entrada.ultimoValor);
+      entrada.resolvers.forEach((resolverPendente) => resolverPendente(sucesso));
+      resolve();
+    })));
   }
 
   async function obterRespostasDaAula(trilha, aula) {
@@ -91,7 +104,11 @@ export function criarArmazenamento(storage, atrasoMs = ATRASO_PADRAO_MS) {
     for (let i = 0; i < storage.length; i++) {
       const chave = storage.key(i);
       if (chave && chave.startsWith(PREFIXO)) {
-        tudo[chave] = JSON.parse(storage.getItem(chave));
+        try {
+          tudo[chave] = JSON.parse(storage.getItem(chave));
+        } catch {
+          console.warn(`Valor invalido em ${chave}, ignorado na exportacao.`);
+        }
       }
     }
     return tudo;
@@ -113,7 +130,19 @@ export function criarArmazenamento(storage, atrasoMs = ATRASO_PADRAO_MS) {
     const validacao = validarParaImportar(dados);
     if (!validacao.valido || !confirmado) return validacao;
     for (const chave of validacao.chaves) {
+      if (chave === CHAVE_INDICE) continue;
       storage.setItem(chave, JSON.stringify(dados[chave]));
+    }
+    if (validacao.chaves.includes(CHAVE_INDICE)) {
+      const indiceAtual = lerIndiceSync();
+      const indiceImportado = Array.isArray(dados[CHAVE_INDICE]) ? dados[CHAVE_INDICE] : [];
+      const indiceUnido = [...indiceAtual];
+      for (const item of indiceImportado) {
+        if (!indiceUnido.some((existente) => existente.trilha === item.trilha && existente.aula === item.aula)) {
+          indiceUnido.push(item);
+        }
+      }
+      storage.setItem(CHAVE_INDICE, JSON.stringify(indiceUnido));
     }
     return { ...validacao, importado: true };
   }
@@ -129,6 +158,7 @@ export function criarArmazenamento(storage, atrasoMs = ATRASO_PADRAO_MS) {
     listarAulasConcluidas,
     exportarTudo,
     importarTudo,
-    estaIndisponivel
+    estaIndisponivel,
+    descarregarPendencias
   };
 }

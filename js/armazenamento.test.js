@@ -136,3 +136,46 @@ test('obterRespostasDaAula reflete o valor mais recente mesmo antes do debounce 
   assert.deepEqual(respostasAntesDeSalvarTerminar, { b3: ['tarefa nova'] });
   await promessaGravar;
 });
+
+test('descarregarPendencias grava imediatamente uma escrita pendente, sem esperar o debounce', async () => {
+  const storage = criarStorageFalso();
+  const armazenamento = criarArmazenamento(storage, 5000);
+  const promessaGravar = armazenamento.salvarRespostasDaAula('trilha-ia', 'aula-01', { b1: 1 });
+  await armazenamento.descarregarPendencias();
+  assert.equal(storage.getItem('toca:v1:trilha-ia:aula-01'), JSON.stringify({ b1: 1 }));
+  const sucesso = await promessaGravar;
+  assert.equal(sucesso, true);
+});
+
+test('descarregarPendencias sem nenhuma escrita pendente nao lanca erro', async () => {
+  const armazenamento = criarArmazenamento(criarStorageFalso(), 5000);
+  await assert.doesNotReject(() => armazenamento.descarregarPendencias());
+});
+
+test('exportarTudo ignora uma chave com JSON invalido e mantem as demais chaves validas', async () => {
+  const storage = criarStorageFalso();
+  storage.setItem('toca:v1:trilha-ia:aula-corrompida', 'isto nao e json valido {');
+  const armazenamento = criarArmazenamento(storage, 5);
+  await armazenamento.salvarRespostasDaAula('trilha-ia', 'aula-01', { b1: 1 });
+  const exportado = await armazenamento.exportarTudo();
+  assert.equal('toca:v1:trilha-ia:aula-corrompida' in exportado, false);
+  assert.deepEqual(exportado['toca:v1:trilha-ia:aula-01'], { b1: 1 });
+});
+
+test('importarTudo confirmado mescla o indice do destino com o indice importado, em vez de sobrescrever', async () => {
+  const destinoStorage = criarStorageFalso();
+  const destino = criarArmazenamento(destinoStorage, 5);
+  await destino.salvarRespostasDaAula('trilha-ia', 'aula-01', { b1: 1 });
+
+  const origem = criarArmazenamento(criarStorageFalso(), 5);
+  await origem.salvarRespostasDaAula('trilha-ia', 'aula-02', { b1: 2 });
+  const exportadoOrigem = await origem.exportarTudo();
+
+  await destino.importarTudo(exportadoOrigem, true);
+  const indiceFinal = JSON.parse(destinoStorage.getItem('toca:v1:indice'));
+  const ordenado = [...indiceFinal].sort((a, b) => a.aula.localeCompare(b.aula));
+  assert.deepEqual(ordenado, [
+    { trilha: 'trilha-ia', aula: 'aula-01' },
+    { trilha: 'trilha-ia', aula: 'aula-02' }
+  ]);
+});
