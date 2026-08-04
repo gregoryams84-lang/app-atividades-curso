@@ -83,7 +83,7 @@ async function renderizarCenario(bloco, ctx) {
   const respostaSalva = ctx.respostaSalva || { indiceEscolhido: undefined, tentativas: 0 };
   let tentativas = respostaSalva.tentativas || 0;
 
-  function responder(indiceEscolhido) {
+  function exibirFeedback(indiceEscolhido, correta, tentativasParaNivel) {
     Array.from(opcoesContainer.children).forEach((b) => {
       b.classList.remove('opcao-selecionada');
       b.setAttribute('aria-pressed', 'false');
@@ -91,20 +91,23 @@ async function renderizarCenario(bloco, ctx) {
     opcoesContainer.children[indiceEscolhido].classList.add('opcao-selecionada');
     opcoesContainer.children[indiceEscolhido].setAttribute('aria-pressed', 'true');
 
-    const correta = avaliarRespostaCorreta(bloco, indiceEscolhido);
     feedback.hidden = false;
     if (correta) {
       feedback.textContent = bloco.feedback_acerto;
       feedback.className = 'feedback feedback-acerto';
       botaoContinuar.hidden = false;
     } else {
-      tentativas += 1;
-      const nivel = determinarNivelFeedback(tentativas);
+      const nivel = determinarNivelFeedback(tentativasParaNivel);
       feedback.textContent = nivel === 'dica' ? bloco.dica_erro : `${bloco.dica_erro} ${bloco.explicacao_erro}`;
       feedback.className = 'feedback feedback-erro';
       botaoContinuar.hidden = true;
     }
+  }
 
+  function responder(indiceEscolhido) {
+    const correta = avaliarRespostaCorreta(bloco, indiceEscolhido);
+    if (!correta) tentativas += 1;
+    exibirFeedback(indiceEscolhido, correta, tentativas);
     ctx.salvarResposta(bloco.id, { indiceEscolhido, tentativas });
   }
 
@@ -123,7 +126,8 @@ async function renderizarCenario(bloco, ctx) {
   container.appendChild(botaoContinuar);
 
   if (respostaSalva.indiceEscolhido !== undefined) {
-    responder(respostaSalva.indiceEscolhido);
+    const correta = avaliarRespostaCorreta(bloco, respostaSalva.indiceEscolhido);
+    exibirFeedback(respostaSalva.indiceEscolhido, correta, tentativas);
   }
 
   return container;
