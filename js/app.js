@@ -15,6 +15,10 @@ import { criarResolvedorDependencias } from './dependencias.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
 
+window.addEventListener('pagehide', () => {
+  armazenamento.descarregarPendencias();
+});
+
 async function buscarJson(caminho) {
   const resposta = await fetch(caminho);
   if (!resposta.ok) throw new Error(`Falha ao buscar ${caminho}`);
@@ -224,6 +228,7 @@ async function renderizarCalculo(bloco, ctx) {
     if (!todosCamposPreenchidos(bloco.campos, valoresAtuais)) {
       resultadoTexto.hidden = true;
       botaoContinuar.hidden = true;
+      ctx.salvarResposta(bloco.id, {});
       return;
     }
     const valoresNumericos = {};
@@ -273,7 +278,7 @@ async function renderizarCalculo(bloco, ctx) {
       if (campo.depende_de.aula !== ctx.aula) {
         const origem = document.createElement('p');
         origem.className = 'texto-apoio';
-        origem.textContent = `Baseado no que você respondeu na Aula ${resultado.tituloAula}.`;
+        origem.textContent = `Baseado no que você respondeu na aula "${resultado.tituloAula}".`;
         container.appendChild(origem);
       }
 
@@ -428,6 +433,10 @@ async function iniciarAtividade() {
     mostrarAvisoArmazenamentoIndisponivel();
   }
 
+  document.title = `${dadosAula.titulo} — Atividade`;
+  const tituloAula = document.getElementById('titulo-aula');
+  if (tituloAula) tituloAula.textContent = dadosAula.titulo || '';
+
   const habilidade = document.getElementById('habilidade');
   habilidade.textContent = dadosAula.habilidade || '';
 
@@ -500,9 +509,10 @@ async function iniciarAtividade() {
     if (!sucesso) mostrarAvisoArmazenamentoIndisponivel();
   }
 
-  function avancar(indiceAtual) {
+  async function avancar(indiceAtual) {
     const proximo = indiceAtual + 1;
     if (proximo >= dadosAula.blocos.length) {
+      await armazenamento.descarregarPendencias();
       window.location.href = 'index.html';
       return;
     }
@@ -515,7 +525,10 @@ async function iniciarAtividade() {
     let indiceDesejado = pegarIndiceDoHash(dadosAula.blocos.length);
     if (indiceDesejado > progresso) {
       indiceDesejado = progresso < dadosAula.blocos.length ? progresso : dadosAula.blocos.length - 1;
-      window.location.hash = `#bloco-${indiceDesejado + 1}`;
+    }
+    const hashEsperado = `#bloco-${indiceDesejado + 1}`;
+    if (window.location.hash !== hashEsperado) {
+      window.location.hash = hashEsperado;
       return;
     }
 
@@ -534,15 +547,20 @@ async function iniciarAtividade() {
     };
 
     conteudo.innerHTML = '';
-    if (indiceDesejado > 0) {
-      const voltar = document.createElement('a');
-      voltar.className = 'link-voltar';
-      voltar.href = `#bloco-${indiceDesejado}`;
-      voltar.textContent = 'Voltar';
-      conteudo.appendChild(voltar);
+    try {
+      if (indiceDesejado > 0) {
+        const voltar = document.createElement('a');
+        voltar.className = 'link-voltar';
+        voltar.href = `#bloco-${indiceDesejado}`;
+        voltar.textContent = 'Voltar';
+        conteudo.appendChild(voltar);
+      }
+      conteudo.appendChild(await renderizarBloco(bloco, ctx));
+      conteudo.focus();
+    } catch (erro) {
+      console.error(erro);
+      mostrarErroAtividade('Uma parte desta atividade não pôde ser aberta. Tente novamente mais tarde.');
     }
-    conteudo.appendChild(await renderizarBloco(bloco, ctx));
-    conteudo.focus();
   }
 
   window.addEventListener('hashchange', renderizarPasso);
@@ -569,24 +587,29 @@ async function iniciarPaginaInicial() {
       let proximaPendente = null;
 
       for (const aula of aulasOrdenadas) {
-        const dadosAula = await buscarJson(aula.arquivo);
-        const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
-        const progresso = calcularProgresso(dadosAula.blocos, respostas);
-        const estado = progresso === 0 ? 'nao-iniciada' : progresso >= dadosAula.blocos.length ? 'concluida' : 'em-andamento';
-        if (estado !== 'concluida' && !proximaPendente) proximaPendente = aula;
+        try {
+          const dadosAula = await buscarJson(aula.arquivo);
+          const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
+          const progresso = calcularProgresso(dadosAula.blocos, respostas);
+          const estado = progresso === 0 ? 'nao-iniciada' : progresso >= dadosAula.blocos.length ? 'concluida' : 'em-andamento';
+          if (estado !== 'concluida' && !proximaPendente) proximaPendente = aula;
 
-        const item = document.createElement('li');
-        item.className = `aula aula-${estado}`;
-        const rotuloEstado = document.createElement('span');
-        rotuloEstado.className = 'aula-estado';
-        rotuloEstado.textContent = estado === 'nao-iniciada' ? 'Não iniciada' : estado === 'em-andamento' ? 'Em andamento' : 'Concluída';
-        const link = document.createElement('a');
-        link.className = 'aula-titulo';
-        link.href = `atividade.html?trilha=${trilha.id}&aula=${aula.id}`;
-        link.textContent = aula.titulo;
-        item.appendChild(rotuloEstado);
-        item.appendChild(link);
-        lista.appendChild(item);
+          const item = document.createElement('li');
+          item.className = `aula aula-${estado}`;
+          const rotuloEstado = document.createElement('span');
+          rotuloEstado.className = 'aula-estado';
+          rotuloEstado.textContent = estado === 'nao-iniciada' ? 'Não iniciada' : estado === 'em-andamento' ? 'Em andamento' : 'Concluída';
+          const link = document.createElement('a');
+          link.className = 'aula-titulo';
+          link.href = `atividade.html?trilha=${trilha.id}&aula=${aula.id}`;
+          link.textContent = aula.titulo;
+          item.appendChild(rotuloEstado);
+          item.appendChild(link);
+          lista.appendChild(item);
+        } catch (erro) {
+          console.error(erro);
+          continue;
+        }
       }
       secao.appendChild(lista);
 
@@ -638,12 +661,17 @@ async function iniciarDiagnostico() {
 
   const secoes = [];
   for (const aula of [...trilha.aulas].sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0))) {
-    const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
-    if (Object.keys(respostas).length === 0) continue;
-    const dadosAula = await buscarJson(aula.arquivo);
-    const itens = montarArtefatoDaAula(dadosAula.blocos, respostas);
-    if (itens.length === 0) continue;
-    secoes.push({ titulo: aula.titulo, itens });
+    try {
+      const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
+      if (Object.keys(respostas).length === 0) continue;
+      const dadosAula = await buscarJson(aula.arquivo);
+      const itens = montarArtefatoDaAula(dadosAula.blocos, respostas);
+      if (itens.length === 0) continue;
+      secoes.push({ titulo: aula.titulo, itens });
+    } catch (erro) {
+      console.error(erro);
+      continue;
+    }
   }
 
   conteudoDiagnostico.innerHTML = '';
@@ -693,14 +721,22 @@ function configurarExportarImportar() {
   if (!botaoExportar) return;
 
   botaoExportar.addEventListener('click', async () => {
-    const tudo = await armazenamento.exportarTudo();
-    const blob = new Blob([JSON.stringify(tudo, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'minhas-respostas.json';
-    link.click();
-    URL.revokeObjectURL(url);
+    try {
+      const tudo = await armazenamento.exportarTudo();
+      const blob = new Blob([JSON.stringify(tudo, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'minhas-respostas.json';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 0);
+    } catch (erro) {
+      console.error(erro);
+      if (confirmacao) {
+        confirmacao.hidden = false;
+        confirmacao.innerHTML = '<p class="mensagem-erro">Não foi possível salvar a cópia agora. Tente novamente mais tarde.</p>';
+      }
+    }
   });
 
   botaoImportar.addEventListener('click', () => entradaImportar.click());
@@ -708,33 +744,37 @@ function configurarExportarImportar() {
   entradaImportar.addEventListener('change', async () => {
     const arquivo = entradaImportar.files[0];
     if (!arquivo) return;
-    const texto = await arquivo.text();
-    let dados;
     try {
-      dados = JSON.parse(texto);
-    } catch {
+      const texto = await arquivo.text();
+      let dados;
+      try {
+        dados = JSON.parse(texto);
+      } catch {
+        confirmacao.hidden = false;
+        confirmacao.innerHTML = '<p class="mensagem-erro">Este arquivo não é válido.</p>';
+        return;
+      }
+      const validacao = await armazenamento.importarTudo(dados);
+      if (!validacao.valido) {
+        confirmacao.hidden = false;
+        confirmacao.innerHTML = `<p class="mensagem-erro">${validacao.motivo}</p>`;
+        return;
+      }
       confirmacao.hidden = false;
-      confirmacao.innerHTML = '<p class="mensagem-erro">Este arquivo não é válido.</p>';
-      return;
+      confirmacao.innerHTML = '';
+      const aviso = document.createElement('p');
+      aviso.textContent = validacao.jaExistentes.length > 0
+        ? `Isso vai substituir ${validacao.jaExistentes.length} aula(s) que já têm respostas salvas neste celular. Quer continuar?`
+        : 'Quer recuperar essas respostas agora?';
+      confirmacao.appendChild(aviso);
+      const botaoConfirmar = criarBotaoGrande('Sim, recuperar', async () => {
+        await armazenamento.importarTudo(dados, true);
+        window.location.reload();
+      });
+      confirmacao.appendChild(botaoConfirmar);
+    } finally {
+      entradaImportar.value = '';
     }
-    const validacao = await armazenamento.importarTudo(dados);
-    if (!validacao.valido) {
-      confirmacao.hidden = false;
-      confirmacao.innerHTML = `<p class="mensagem-erro">${validacao.motivo}</p>`;
-      return;
-    }
-    confirmacao.hidden = false;
-    confirmacao.innerHTML = '';
-    const aviso = document.createElement('p');
-    aviso.textContent = validacao.jaExistentes.length > 0
-      ? `Isso vai substituir ${validacao.jaExistentes.length} aula(s) que já têm respostas salvas neste celular. Quer continuar?`
-      : 'Quer recuperar essas respostas agora?';
-    confirmacao.appendChild(aviso);
-    const botaoConfirmar = criarBotaoGrande('Sim, recuperar', async () => {
-      await armazenamento.importarTudo(dados, true);
-      window.location.reload();
-    });
-    confirmacao.appendChild(botaoConfirmar);
   });
 }
 
