@@ -2460,7 +2460,7 @@ git commit -m "Adiciona exportar e importar com confirmacao antes de sobrescreve
 - [ ] **Step 1: Run the full automated test suite**
 
 Run: `node --test js/*.test.js`
-Expected: all tests from Tasks 1–4 pass (11 in `formula.test.js`, 12 in `blocos.test.js`, 13 in `armazenamento.test.js`, 6 in `dependencias.test.js` — 42 total).
+Expected: all tests from Tasks 1–4 pass (11 in `formula.test.js`, 12 in `blocos.test.js`, 14 in `armazenamento.test.js`, 6 in `dependencias.test.js` — 43 total).
 
 - [ ] **Step 2: Write `TESTES-MANUAIS.md`**
 
