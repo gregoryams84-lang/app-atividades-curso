@@ -1,5 +1,5 @@
 import { criarArmazenamento } from './armazenamento.js';
-import { calcularProgresso, montarArtefatoDaAula, avaliarRespostaCorreta, determinarNivelFeedback } from './blocos.js';
+import { calcularProgresso, montarArtefatoDaAula, avaliarRespostaCorreta, determinarNivelFeedback, normalizarListaAberta, minimoPreenchidoAtingido } from './blocos.js';
 import { criarResolvedorDependencias } from './dependencias.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
@@ -57,6 +57,7 @@ function pegarIndiceDoHash(totalDeBlocos) {
 
 function renderizarBloco(bloco, ctx) {
   if (bloco.tipo === 'cenario') return renderizarCenario(bloco, ctx);
+  if (bloco.tipo === 'lista_aberta') return renderizarListaAberta(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
 }
 
@@ -130,6 +131,60 @@ async function renderizarCenario(bloco, ctx) {
     exibirFeedback(respostaSalva.indiceEscolhido, correta, tentativas);
   }
 
+  return container;
+}
+
+async function renderizarListaAberta(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  if (bloco.ajuda) {
+    const ajuda = document.createElement('p');
+    ajuda.className = 'texto-apoio';
+    ajuda.textContent = bloco.ajuda;
+    container.appendChild(ajuda);
+  }
+
+  const valoresSalvos = normalizarListaAberta(ctx.respostaSalva || [], bloco.quantidade_campos);
+  const valoresAtuais = [...valoresSalvos];
+  const minimo = bloco.minimo_preenchido ?? 1;
+
+  const botaoContinuar = criarBotaoGrande(ctx.ehUltimoBloco ? 'Concluir' : 'Continuar', ctx.aoAvancar);
+
+  function atualizarBotao() {
+    botaoContinuar.hidden = !minimoPreenchidoAtingido(valoresAtuais, minimo);
+  }
+
+  for (let i = 0; i < bloco.quantidade_campos; i++) {
+    const rotulo = document.createElement('label');
+    rotulo.className = 'rotulo-campo';
+    rotulo.setAttribute('for', `${bloco.id}-campo-${i}`);
+    rotulo.textContent = `Item ${i + 1}`;
+
+    const campo = document.createElement('input');
+    campo.type = 'text';
+    campo.id = `${bloco.id}-campo-${i}`;
+    campo.className = 'campo-texto';
+    campo.value = valoresSalvos[i] || '';
+    campo.placeholder = (bloco.placeholders && bloco.placeholders[i]) || 'escreva aqui';
+
+    campo.addEventListener('input', () => {
+      valoresAtuais[i] = campo.value;
+      ctx.salvarResposta(bloco.id, normalizarListaAberta(valoresAtuais, bloco.quantidade_campos));
+      atualizarBotao();
+    });
+
+    container.appendChild(rotulo);
+    container.appendChild(campo);
+  }
+
+  atualizarBotao();
+  container.appendChild(botaoContinuar);
   return container;
 }
 
