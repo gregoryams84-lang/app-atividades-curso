@@ -611,5 +611,80 @@ async function iniciarPaginaInicial() {
   }
 }
 
+async function iniciarDiagnostico() {
+  const conteudoDiagnostico = document.getElementById('conteudo-diagnostico');
+  if (!conteudoDiagnostico) return;
+
+  const parametros = new URLSearchParams(window.location.search);
+  const trilhaId = parametros.get('trilha');
+  if (!trilhaId) {
+    conteudoDiagnostico.innerHTML = '<p class="mensagem-erro">Não encontramos essa trilha. Volte para a área de membros e clique no link novamente.</p>';
+    return;
+  }
+
+  let indice;
+  try {
+    indice = await buscarJson('dados/indice.json');
+  } catch {
+    conteudoDiagnostico.innerHTML = '<p class="mensagem-erro">Não foi possível carregar agora. Tente novamente em instantes.</p>';
+    return;
+  }
+
+  const trilha = indice.trilhas.find((t) => t.id === trilhaId);
+  if (!trilha) {
+    conteudoDiagnostico.innerHTML = '<p class="mensagem-erro">Não encontramos essa trilha. Volte para a área de membros e clique no link novamente.</p>';
+    return;
+  }
+
+  const secoes = [];
+  for (const aula of [...trilha.aulas].sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0))) {
+    const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
+    if (Object.keys(respostas).length === 0) continue;
+    const dadosAula = await buscarJson(aula.arquivo);
+    const itens = montarArtefatoDaAula(dadosAula.blocos, respostas);
+    if (itens.length === 0) continue;
+    secoes.push({ titulo: aula.titulo, itens });
+  }
+
+  conteudoDiagnostico.innerHTML = '';
+  if (secoes.length === 0) {
+    conteudoDiagnostico.innerHTML = '<p class="texto-apoio">Você ainda não construiu nada nesta trilha. Comece por uma aula na tela inicial.</p>';
+    return;
+  }
+
+  for (const secao of secoes) {
+    const bloco = document.createElement('section');
+    bloco.className = 'resultado-item';
+    const titulo = document.createElement('h2');
+    titulo.textContent = secao.titulo;
+    bloco.appendChild(titulo);
+    for (const item of secao.itens) {
+      const enunciado = document.createElement('p');
+      enunciado.className = 'resultado-enunciado';
+      enunciado.textContent = item.enunciado;
+      bloco.appendChild(enunciado);
+      if (item.tipo === 'lista') {
+        const lista = document.createElement('ul');
+        for (const valor of item.valores) {
+          const li = document.createElement('li');
+          li.textContent = valor;
+          lista.appendChild(li);
+        }
+        bloco.appendChild(lista);
+      } else {
+        const texto = document.createElement('p');
+        texto.textContent = item.texto;
+        bloco.appendChild(texto);
+      }
+    }
+    conteudoDiagnostico.appendChild(bloco);
+  }
+
+  const botaoImprimir = document.getElementById('botao-imprimir');
+  botaoImprimir.hidden = false;
+  botaoImprimir.addEventListener('click', () => window.print());
+}
+
 iniciarPaginaInicial();
 iniciarAtividade();
+iniciarDiagnostico();
