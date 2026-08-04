@@ -1,5 +1,6 @@
 import { criarArmazenamento } from './armazenamento.js';
-import { calcularProgresso } from './blocos.js';
+import { calcularProgresso, montarArtefatoDaAula } from './blocos.js';
+import { criarResolvedorDependencias } from './dependencias.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
 
@@ -16,6 +17,212 @@ function criarBotaoGrande(texto, aoClicar) {
   botao.textContent = texto;
   botao.addEventListener('click', aoClicar);
   return botao;
+}
+
+const VERSOES_SUPORTADAS = [1];
+
+function mostrarErroAtividade(mensagem) {
+  const conteudo = document.getElementById('conteudo-bloco');
+  const barra = document.getElementById('barra-progresso');
+  if (barra) barra.hidden = true;
+  conteudo.innerHTML = `<p class="mensagem-erro">${mensagem}</p>`;
+}
+
+function mostrarCarregando() {
+  const conteudo = document.getElementById('conteudo-bloco');
+  conteudo.innerHTML = '<p class="mensagem-carregando">Carregando...</p>';
+}
+
+function mostrarAvisoArmazenamentoIndisponivel() {
+  const pagina = document.querySelector('.pagina-atividade');
+  if (!pagina || pagina.querySelector('.aviso-armazenamento')) return;
+  const aviso = document.createElement('p');
+  aviso.className = 'aviso-armazenamento';
+  aviso.textContent = 'Não estamos conseguindo salvar suas respostas agora — você ainda pode continuar, mas anote suas respostas por garantia.';
+  pagina.prepend(aviso);
+}
+
+function pegarParametrosDaUrl() {
+  const parametros = new URLSearchParams(window.location.search);
+  return { trilha: parametros.get('trilha'), aula: parametros.get('aula') };
+}
+
+function pegarIndiceDoHash(totalDeBlocos) {
+  const combinacao = /^#bloco-(\d+)$/.exec(window.location.hash);
+  if (!combinacao) return 0;
+  const indice = parseInt(combinacao[1], 10) - 1;
+  if (Number.isNaN(indice) || indice < 0 || indice >= totalDeBlocos) return 0;
+  return indice;
+}
+
+function renderizarBloco(bloco, ctx) {
+  throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
+}
+
+async function iniciarAtividade() {
+  const conteudo = document.getElementById('conteudo-bloco');
+  if (!conteudo) return;
+
+  const { trilha, aula } = pegarParametrosDaUrl();
+  if (!trilha || !aula) {
+    mostrarErroAtividade('Não encontramos esta atividade. Volte para a área de membros e clique no link novamente.');
+    return;
+  }
+
+  mostrarCarregando();
+
+  let indice;
+  try {
+    indice = await buscarJson('dados/indice.json');
+  } catch {
+    mostrarErroAtividade('Não foi possível carregar as atividades agora. Tente novamente em instantes.');
+    return;
+  }
+
+  const trilhaEncontrada = indice.trilhas.find((t) => t.id === trilha);
+  const aulaEncontrada = trilhaEncontrada && trilhaEncontrada.aulas.find((a) => a.id === aula);
+  if (!aulaEncontrada) {
+    mostrarErroAtividade('Não encontramos esta atividade. Volte para a área de membros e clique no link novamente.');
+    return;
+  }
+
+  let dadosAula;
+  try {
+    dadosAula = await buscarJson(aulaEncontrada.arquivo);
+  } catch {
+    mostrarErroAtividade('Não foi possível carregar esta atividade agora. Tente novamente em instantes.');
+    return;
+  }
+
+  if (!VERSOES_SUPORTADAS.includes(dadosAula.schema_version)) {
+    console.error(`Versão de conteúdo não reconhecida: ${dadosAula.schema_version} em ${aulaEncontrada.arquivo}`);
+    mostrarErroAtividade('Esta atividade precisa de uma versão mais nova do aplicativo. Tente novamente mais tarde.');
+    return;
+  }
+
+  if (armazenamento.estaIndisponivel()) {
+    mostrarAvisoArmazenamentoIndisponivel();
+  }
+
+  const habilidade = document.getElementById('habilidade');
+  habilidade.textContent = dadosAula.habilidade || '';
+
+  const resolvedorDependencias = criarResolvedorDependencias({
+    armazenamento,
+    buscarAula: async (t, a) => {
+      const trilhaAlvo = indice.trilhas.find((tr) => tr.id === t);
+      const aulaAlvo = trilhaAlvo && trilhaAlvo.aulas.find((au) => au.id === a);
+      if (!aulaAlvo) throw new Error(`Aula não encontrada no índice: ${t}/${a}`);
+      return buscarJson(aulaAlvo.arquivo);
+    }
+  });
+
+  const painelArtefato = document.getElementById('painel-artefato');
+  const conteudoArtefato = document.getElementById('conteudo-artefato');
+  const botaoAlternarArtefato = document.getElementById('botao-alternar-artefato');
+  botaoAlternarArtefato.addEventListener('click', () => {
+    const abrindo = conteudoArtefato.hidden;
+    conteudoArtefato.hidden = !abrindo;
+    botaoAlternarArtefato.setAttribute('aria-expanded', String(abrindo));
+  });
+
+  async function atualizarArtefato(indiceAtual) {
+    const respostas = await armazenamento.obterRespostasDaAula(trilha, aula);
+    const blocosAnteriores = dadosAula.blocos.slice(0, indiceAtual);
+    const itens = montarArtefatoDaAula(blocosAnteriores, respostas);
+    conteudoArtefato.innerHTML = '';
+    if (itens.length === 0) {
+      painelArtefato.hidden = true;
+      return;
+    }
+    painelArtefato.hidden = false;
+    for (const item of itens) {
+      const bloco = document.createElement('div');
+      bloco.className = 'artefato-item';
+      const enunciado = document.createElement('p');
+      enunciado.className = 'artefato-enunciado';
+      enunciado.textContent = item.enunciado;
+      bloco.appendChild(enunciado);
+      if (item.tipo === 'lista') {
+        const lista = document.createElement('ul');
+        for (const valor of item.valores) {
+          const li = document.createElement('li');
+          li.textContent = valor;
+          lista.appendChild(li);
+        }
+        bloco.appendChild(lista);
+      } else {
+        const texto = document.createElement('p');
+        texto.textContent = item.texto;
+        bloco.appendChild(texto);
+      }
+      conteudoArtefato.appendChild(bloco);
+    }
+  }
+
+  function atualizarBarraProgresso(indiceAtual, total) {
+    const barra = document.getElementById('barra-progresso');
+    const preenchida = document.getElementById('barra-progresso-preenchida');
+    const texto = document.getElementById('barra-progresso-texto');
+    barra.hidden = false;
+    const passo = Math.min(indiceAtual + 1, total);
+    preenchida.style.width = `${Math.round((passo / total) * 100)}%`;
+    texto.textContent = `Passo ${passo} de ${total}`;
+  }
+
+  async function salvarResposta(blocoId, valor) {
+    const atuais = await armazenamento.obterRespostasDaAula(trilha, aula);
+    const sucesso = await armazenamento.salvarRespostasDaAula(trilha, aula, { ...atuais, [blocoId]: valor });
+    if (!sucesso) mostrarAvisoArmazenamentoIndisponivel();
+  }
+
+  function avancar(indiceAtual) {
+    const proximo = indiceAtual + 1;
+    if (proximo >= dadosAula.blocos.length) {
+      window.location.href = 'index.html';
+      return;
+    }
+    window.location.hash = `#bloco-${proximo + 1}`;
+  }
+
+  async function renderizarPasso() {
+    const respostas = await armazenamento.obterRespostasDaAula(trilha, aula);
+    const progresso = calcularProgresso(dadosAula.blocos, respostas);
+    let indiceDesejado = pegarIndiceDoHash(dadosAula.blocos.length);
+    if (indiceDesejado > progresso) {
+      indiceDesejado = progresso < dadosAula.blocos.length ? progresso : dadosAula.blocos.length - 1;
+      window.location.hash = `#bloco-${indiceDesejado + 1}`;
+      return;
+    }
+
+    atualizarBarraProgresso(indiceDesejado, dadosAula.blocos.length);
+    await atualizarArtefato(indiceDesejado);
+
+    const bloco = dadosAula.blocos[indiceDesejado];
+    const ctx = {
+      trilha,
+      aula,
+      respostaSalva: respostas[bloco.id],
+      salvarResposta,
+      resolvedorDependencias,
+      ehUltimoBloco: indiceDesejado === dadosAula.blocos.length - 1,
+      aoAvancar: () => avancar(indiceDesejado)
+    };
+
+    conteudo.innerHTML = '';
+    if (indiceDesejado > 0) {
+      const voltar = document.createElement('a');
+      voltar.className = 'link-voltar';
+      voltar.href = `#bloco-${indiceDesejado}`;
+      voltar.textContent = 'Voltar';
+      conteudo.appendChild(voltar);
+    }
+    conteudo.appendChild(await renderizarBloco(bloco, ctx));
+    conteudo.focus();
+  }
+
+  window.addEventListener('hashchange', renderizarPasso);
+  await renderizarPasso();
 }
 
 async function iniciarPaginaInicial() {
@@ -81,3 +288,4 @@ async function iniciarPaginaInicial() {
 }
 
 iniciarPaginaInicial();
+iniciarAtividade();
