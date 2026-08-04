@@ -1,5 +1,5 @@
 import { criarArmazenamento } from './armazenamento.js';
-import { calcularProgresso, montarArtefatoDaAula } from './blocos.js';
+import { calcularProgresso, montarArtefatoDaAula, avaliarRespostaCorreta, determinarNivelFeedback } from './blocos.js';
 import { criarResolvedorDependencias } from './dependencias.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
@@ -56,7 +56,77 @@ function pegarIndiceDoHash(totalDeBlocos) {
 }
 
 function renderizarBloco(bloco, ctx) {
+  if (bloco.tipo === 'cenario') return renderizarCenario(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
+}
+
+async function renderizarCenario(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  const opcoesContainer = document.createElement('div');
+  opcoesContainer.className = 'opcoes';
+
+  const feedback = document.createElement('p');
+  feedback.className = 'feedback';
+  feedback.hidden = true;
+  feedback.setAttribute('aria-live', 'polite');
+
+  const botaoContinuar = criarBotaoGrande(ctx.ehUltimoBloco ? 'Concluir' : 'Continuar', ctx.aoAvancar);
+  botaoContinuar.hidden = true;
+
+  const respostaSalva = ctx.respostaSalva || { indiceEscolhido: undefined, tentativas: 0 };
+  let tentativas = respostaSalva.tentativas || 0;
+
+  function responder(indiceEscolhido) {
+    Array.from(opcoesContainer.children).forEach((b) => {
+      b.classList.remove('opcao-selecionada');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    opcoesContainer.children[indiceEscolhido].classList.add('opcao-selecionada');
+    opcoesContainer.children[indiceEscolhido].setAttribute('aria-pressed', 'true');
+
+    const correta = avaliarRespostaCorreta(bloco, indiceEscolhido);
+    feedback.hidden = false;
+    if (correta) {
+      feedback.textContent = bloco.feedback_acerto;
+      feedback.className = 'feedback feedback-acerto';
+      botaoContinuar.hidden = false;
+    } else {
+      tentativas += 1;
+      const nivel = determinarNivelFeedback(tentativas);
+      feedback.textContent = nivel === 'dica' ? bloco.dica_erro : `${bloco.dica_erro} ${bloco.explicacao_erro}`;
+      feedback.className = 'feedback feedback-erro';
+      botaoContinuar.hidden = true;
+    }
+
+    ctx.salvarResposta(bloco.id, { indiceEscolhido, tentativas });
+  }
+
+  bloco.opcoes.forEach((opcao, indice) => {
+    const botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'opcao';
+    botao.setAttribute('aria-pressed', 'false');
+    botao.textContent = opcao;
+    botao.addEventListener('click', () => responder(indice));
+    opcoesContainer.appendChild(botao);
+  });
+
+  container.appendChild(opcoesContainer);
+  container.appendChild(feedback);
+  container.appendChild(botaoContinuar);
+
+  if (respostaSalva.indiceEscolhido !== undefined) {
+    responder(respostaSalva.indiceEscolhido);
+  }
+
+  return container;
 }
 
 async function iniciarAtividade() {
