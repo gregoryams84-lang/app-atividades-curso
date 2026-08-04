@@ -79,6 +79,18 @@ test('dependencia circular direta (A depende de B que depende de A) e detectada'
   assert.equal(resultado.status, 'circular');
 });
 
+test('aula alvo indisponivel (buscarAula lanca erro): retorna aula_indisponivel em vez de propagar o erro', async () => {
+  const buscarAulaQueLanca = async (trilha, aula) => {
+    throw new Error(`aula nao encontrada no indice: ${trilha}/${aula}`);
+  };
+  const resolvedor = criarResolvedorDependencias({
+    armazenamento: criarArmazenamentoFalso({}),
+    buscarAula: buscarAulaQueLanca
+  });
+  const resultado = await resolvedor.resolverDependencia({ trilha: 'trilha-ia', aula: 'aula-removida', bloco: 'b3' });
+  assert.deepEqual(resultado, { status: 'aula_indisponivel', valores: [] });
+});
+
 test('um bloco calculo sem nenhum campo dependente nao entra na checagem de ciclo', async () => {
   const aulas = { 'trilha-ia:aula-01': { titulo: 'Aula de teste', blocos: [{ id: 'b4', tipo: 'calculo', campos: [{ id: 'x' }] }] } };
   const dados = { 'trilha-ia:aula-01': { b4: { x: 5, resultadoTexto: 'ok' } } };

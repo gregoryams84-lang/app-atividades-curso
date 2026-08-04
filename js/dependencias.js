@@ -5,7 +5,12 @@ export function criarResolvedorDependencias({ armazenamento, buscarAula }) {
       return { status: 'circular', valores: [] };
     }
 
-    const dadosAula = await buscarAula(dependeDe.trilha, dependeDe.aula);
+    let dadosAula;
+    try {
+      dadosAula = await buscarAula(dependeDe.trilha, dependeDe.aula);
+    } catch {
+      return { status: 'aula_indisponivel', valores: [] };
+    }
     const blocoFonte = dadosAula.blocos.find((b) => b.id === dependeDe.bloco);
     if (!blocoFonte) {
       return { status: 'bloco_inexistente', valores: [] };
