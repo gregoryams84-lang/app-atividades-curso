@@ -2179,6 +2179,7 @@ async function renderizarEscolhaSimples(bloco, ctx) {
   opcoesContainer.className = 'opcoes';
 
   const botaoContinuar = criarBotaoGrande(ctx.ehUltimoBloco ? 'Concluir' : 'Continuar', ctx.aoAvancar);
+  botaoContinuar.hidden = ctx.respostaSalva === undefined;
 
   bloco.opcoes.forEach((opcao, indice) => {
     const botao = document.createElement('button');
@@ -2195,6 +2196,7 @@ async function renderizarEscolhaSimples(bloco, ctx) {
       botao.classList.add('opcao-selecionada');
       botao.setAttribute('aria-pressed', 'true');
       ctx.salvarResposta(bloco.id, indice);
+      botaoContinuar.hidden = false;
     });
     opcoesContainer.appendChild(botao);
   });
