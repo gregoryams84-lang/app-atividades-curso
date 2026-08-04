@@ -528,8 +528,7 @@ async function iniciarAtividade() {
     }
     const hashEsperado = `#bloco-${indiceDesejado + 1}`;
     if (window.location.hash !== hashEsperado) {
-      window.location.hash = hashEsperado;
-      return;
+      history.replaceState(null, '', hashEsperado);
     }
 
     atualizarBarraProgresso(indiceDesejado, dadosAula.blocos.length);
