@@ -1,5 +1,16 @@
 import { criarArmazenamento } from './armazenamento.js';
-import { calcularProgresso, montarArtefatoDaAula, avaliarRespostaCorreta, determinarNivelFeedback, normalizarListaAberta, minimoPreenchidoAtingido } from './blocos.js';
+import {
+  calcularProgresso,
+  montarArtefatoDaAula,
+  avaliarRespostaCorreta,
+  determinarNivelFeedback,
+  normalizarListaAberta,
+  minimoPreenchidoAtingido,
+  todosCamposPreenchidos,
+  resolverOpcoesSelecao,
+  interpolarTexto
+} from './blocos.js';
+import { avaliarCalculos } from './formula.js';
 import { criarResolvedorDependencias } from './dependencias.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
@@ -58,6 +69,7 @@ function pegarIndiceDoHash(totalDeBlocos) {
 function renderizarBloco(bloco, ctx) {
   if (bloco.tipo === 'cenario') return renderizarCenario(bloco, ctx);
   if (bloco.tipo === 'lista_aberta') return renderizarListaAberta(bloco, ctx);
+  if (bloco.tipo === 'calculo') return renderizarCalculo(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
 }
 
@@ -185,6 +197,148 @@ async function renderizarListaAberta(bloco, ctx) {
 
   atualizarBotao();
   container.appendChild(botaoContinuar);
+  return container;
+}
+
+async function renderizarCalculo(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  const respostaSalva = ctx.respostaSalva || {};
+  const valoresAtuais = {};
+
+  const resultadoTexto = document.createElement('p');
+  resultadoTexto.className = 'resultado-calculo';
+  resultadoTexto.hidden = true;
+
+  const botaoContinuar = criarBotaoGrande(ctx.ehUltimoBloco ? 'Concluir' : 'Continuar', ctx.aoAvancar);
+  botaoContinuar.hidden = true;
+
+  function recalcular() {
+    if (!todosCamposPreenchidos(bloco.campos, valoresAtuais)) {
+      resultadoTexto.hidden = true;
+      botaoContinuar.hidden = true;
+      return;
+    }
+    const valoresNumericos = {};
+    for (const campo of bloco.campos) {
+      if (campo.tipo === 'numero') valoresNumericos[campo.id] = parseFloat(valoresAtuais[campo.id]);
+    }
+    const calculado = avaliarCalculos(bloco.calculos || {}, valoresNumericos);
+    const texto = interpolarTexto(bloco.resultado_texto, calculado);
+    resultadoTexto.hidden = false;
+    resultadoTexto.textContent = texto;
+    botaoContinuar.hidden = false;
+    ctx.salvarResposta(bloco.id, { ...valoresAtuais, resultadoTexto: texto });
+  }
+
+  for (const campo of bloco.campos) {
+    const rotulo = document.createElement('label');
+    rotulo.className = 'rotulo-campo';
+    rotulo.setAttribute('for', `${bloco.id}-${campo.id}`);
+    rotulo.textContent = campo.rotulo;
+    container.appendChild(rotulo);
+
+    if (campo.tipo === 'selecao' && campo.depende_de) {
+      const resultado = await ctx.resolvedorDependencias.resolverDependencia(campo.depende_de);
+
+      if (resultado.status !== 'ok') {
+        console.warn(`Dependência não resolvida para ${bloco.id}.${campo.id}: ${resultado.status}`);
+        if (resultado.status === 'aula_nao_respondida') {
+          const nota = document.createElement('p');
+          nota.className = 'texto-apoio';
+          nota.textContent = 'Você ainda não respondeu isso — pode escrever aqui mesmo.';
+          container.appendChild(nota);
+        }
+        const campoTexto = document.createElement('input');
+        campoTexto.type = 'text';
+        campoTexto.id = `${bloco.id}-${campo.id}`;
+        campoTexto.className = 'campo-texto';
+        campoTexto.value = respostaSalva[campo.id] || '';
+        valoresAtuais[campo.id] = campoTexto.value;
+        campoTexto.addEventListener('input', () => {
+          valoresAtuais[campo.id] = campoTexto.value;
+          recalcular();
+        });
+        container.appendChild(campoTexto);
+        continue;
+      }
+
+      if (campo.depende_de.aula !== ctx.aula) {
+        const origem = document.createElement('p');
+        origem.className = 'texto-apoio';
+        origem.textContent = `Baseado no que você respondeu na Aula ${resultado.tituloAula}.`;
+        container.appendChild(origem);
+      }
+
+      const elemento = document.createElement('select');
+      elemento.id = `${bloco.id}-${campo.id}`;
+      elemento.className = 'campo-selecao';
+      const opcaoVazia = document.createElement('option');
+      opcaoVazia.value = '';
+      opcaoVazia.textContent = 'Escolha uma opção';
+      elemento.appendChild(opcaoVazia);
+      const opcoes = resolverOpcoesSelecao(resultado.valores);
+      for (const opcao of opcoes) {
+        const item = document.createElement('option');
+        item.value = opcao;
+        item.textContent = opcao;
+        elemento.appendChild(item);
+      }
+      elemento.value = opcoes.includes(respostaSalva[campo.id]) ? respostaSalva[campo.id] : '';
+      valoresAtuais[campo.id] = elemento.value;
+      elemento.addEventListener('change', () => {
+        valoresAtuais[campo.id] = elemento.value;
+        recalcular();
+      });
+      container.appendChild(elemento);
+    } else if (campo.tipo === 'selecao') {
+      const elemento = document.createElement('select');
+      elemento.id = `${bloco.id}-${campo.id}`;
+      elemento.className = 'campo-selecao';
+      const opcaoVazia = document.createElement('option');
+      opcaoVazia.value = '';
+      opcaoVazia.textContent = 'Escolha uma opção';
+      elemento.appendChild(opcaoVazia);
+      for (const opcao of campo.opcoes) {
+        const item = document.createElement('option');
+        item.value = opcao;
+        item.textContent = opcao;
+        elemento.appendChild(item);
+      }
+      elemento.value = respostaSalva[campo.id] || '';
+      valoresAtuais[campo.id] = elemento.value;
+      elemento.addEventListener('change', () => {
+        valoresAtuais[campo.id] = elemento.value;
+        recalcular();
+      });
+      container.appendChild(elemento);
+    } else {
+      const elemento = document.createElement('input');
+      elemento.type = 'number';
+      elemento.inputMode = 'numeric';
+      if (campo.minimo !== undefined) elemento.min = String(campo.minimo);
+      if (campo.maximo !== undefined) elemento.max = String(campo.maximo);
+      elemento.id = `${bloco.id}-${campo.id}`;
+      elemento.className = 'campo-numero';
+      elemento.value = respostaSalva[campo.id] ?? '';
+      valoresAtuais[campo.id] = elemento.value;
+      elemento.addEventListener('input', () => {
+        valoresAtuais[campo.id] = elemento.value;
+        recalcular();
+      });
+      container.appendChild(elemento);
+    }
+  }
+
+  container.appendChild(resultadoTexto);
+  container.appendChild(botaoContinuar);
+  recalcular();
   return container;
 }
 
