@@ -70,6 +70,7 @@ function renderizarBloco(bloco, ctx) {
   if (bloco.tipo === 'cenario') return renderizarCenario(bloco, ctx);
   if (bloco.tipo === 'lista_aberta') return renderizarListaAberta(bloco, ctx);
   if (bloco.tipo === 'calculo') return renderizarCalculo(bloco, ctx);
+  if (bloco.tipo === 'escolha_simples') return renderizarEscolhaSimples(bloco, ctx);
   throw new Error(`Tipo de bloco desconhecido: ${bloco.tipo}`);
 }
 
@@ -339,6 +340,44 @@ async function renderizarCalculo(bloco, ctx) {
   container.appendChild(resultadoTexto);
   container.appendChild(botaoContinuar);
   recalcular();
+  return container;
+}
+
+async function renderizarEscolhaSimples(bloco, ctx) {
+  const container = document.createElement('div');
+  container.className = 'bloco';
+
+  const enunciado = document.createElement('p');
+  enunciado.className = 'enunciado';
+  enunciado.textContent = bloco.enunciado;
+  container.appendChild(enunciado);
+
+  const opcoesContainer = document.createElement('div');
+  opcoesContainer.className = 'opcoes';
+
+  const botaoContinuar = criarBotaoGrande(ctx.ehUltimoBloco ? 'Concluir' : 'Continuar', ctx.aoAvancar);
+
+  bloco.opcoes.forEach((opcao, indice) => {
+    const botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'opcao';
+    botao.setAttribute('aria-pressed', ctx.respostaSalva === indice ? 'true' : 'false');
+    botao.textContent = opcao;
+    if (ctx.respostaSalva === indice) botao.classList.add('opcao-selecionada');
+    botao.addEventListener('click', () => {
+      Array.from(opcoesContainer.children).forEach((b) => {
+        b.classList.remove('opcao-selecionada');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      botao.classList.add('opcao-selecionada');
+      botao.setAttribute('aria-pressed', 'true');
+      ctx.salvarResposta(bloco.id, indice);
+    });
+    opcoesContainer.appendChild(botao);
+  });
+
+  container.appendChild(opcoesContainer);
+  container.appendChild(botaoContinuar);
   return container;
 }
 
