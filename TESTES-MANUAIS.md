@@ -35,6 +35,15 @@ Ver Task 14, Step 4 do plano de implementação: arquivo com JSON quebrado, e ar
 
 Comece a preencher o bloco `b3` (lista aberta), preencha 2 de 5 campos, recarregue a página sem avançar. Esperado: os 2 campos preenchidos continuam lá, ainda no mesmo bloco (`#bloco-3` no hash).
 
+## Sincronização de conclusão com o Supabase
+
+Requer um link de sessão válido, gerado pelo painel do aluno em `tocaonegocio.com.br/atividades/painel.html` (matrícula de teste ativa, aula com `link_atividade` cadastrado).
+
+1. Abra o DevTools (aba Network) antes de clicar no link do painel. Complete a aula até o fim. Esperado: uma requisição `POST` para `.../rest/v1/progresso?on_conflict=matricula_id,aula_id` com status `2xx`, e uma nova linha em `progresso` no dashboard do Supabase (`concluida = true`, `matricula_id`/`aula_id` corretos).
+2. Complete a mesma aula de novo (ela já estava concluída). Esperado: uma nova requisição é enviada, mas o número de linhas em `progresso` para essa combinação de matrícula/aula continua sendo 1 (upsert, não duplica).
+3. Acesse `atividade.html?trilha=trilha-ia&aula=aula-01` diretamente, sem vir do painel (sem `matricula_id`/`aula_id`/`#tok=`). Esperado: a atividade funciona normalmente do início ao fim; no console, nenhum erro — no máximo o aviso "Não foi possível sincronizar..." se você completar a aula sem esses parâmetros.
+4. No painel, copie o link de uma aula, mas edite manualmente `matricula_id` na URL para um uuid aleatório antes de abrir. Complete a aula. Esperado: o console mostra o aviso de falha de sincronização (a RLS nega a escrita), e nenhuma linha nova aparece em `progresso` para esse uuid inventado.
+
 ## Já cobertos por observação direta durante o desenvolvimento
 
 - 360px sem rolagem horizontal, em toda tela (inicial, cada tipo de bloco, diagnóstico).

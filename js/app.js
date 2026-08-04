@@ -12,8 +12,10 @@ import {
 } from './blocos.js';
 import { avaliarCalculos } from './formula.js';
 import { criarResolvedorDependencias } from './dependencias.js';
+import { lerELimparParametrosDeSessao, notificarConclusao } from './progresso-remoto.js';
 
 const armazenamento = criarArmazenamento(window.localStorage);
+const sessaoRemota = lerELimparParametrosDeSessao();
 
 window.addEventListener('pagehide', () => {
   armazenamento.descarregarPendencias();
@@ -433,6 +435,11 @@ async function iniciarAtividade() {
     mostrarAvisoArmazenamentoIndisponivel();
   }
 
+  const respostasAtuais = await armazenamento.obterRespostasDaAula(trilha, aula);
+  if (calcularProgresso(dadosAula.blocos, respostasAtuais) >= dadosAula.blocos.length) {
+    notificarConclusao(sessaoRemota);
+  }
+
   document.title = `${dadosAula.titulo} — Atividade`;
   const tituloAula = document.getElementById('titulo-aula');
   if (tituloAula) tituloAula.textContent = dadosAula.titulo || '';
@@ -513,6 +520,7 @@ async function iniciarAtividade() {
     const proximo = indiceAtual + 1;
     if (proximo >= dadosAula.blocos.length) {
       await armazenamento.descarregarPendencias();
+      notificarConclusao(sessaoRemota);
       window.location.href = 'index.html';
       return;
     }
