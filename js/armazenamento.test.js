@@ -105,6 +105,17 @@ test('importarTudo informa quais chaves ja existem no destino, para pedir confir
   assert.deepEqual(validacao.jaExistentes, ['toca:v1:trilha-ia:aula-01']);
 });
 
+test('jaExistentes nao conta a chave de indice como uma aula substituida', async () => {
+  const origem = criarArmazenamento(criarStorageFalso(), 5);
+  await origem.salvarRespostasDaAula('trilha-ia', 'aula-01', { b1: 1 });
+  const exportado = await origem.exportarTudo();
+
+  const destino = criarArmazenamento(criarStorageFalso(), 5);
+  await destino.salvarRespostasDaAula('trilha-ia', 'aula-01', { b1: 'valor antigo' });
+  const validacao = await destino.importarTudo(exportado);
+  assert.deepEqual(validacao.jaExistentes, ['toca:v1:trilha-ia:aula-01']);
+});
+
 test('estaIndisponivel comeca falso e vira verdadeiro quando a gravacao falha', async () => {
   const storageQueFalha = {
     getItem: () => null,

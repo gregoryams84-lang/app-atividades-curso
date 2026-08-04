@@ -105,7 +105,7 @@ export function criarArmazenamento(storage, atrasoMs = ATRASO_PADRAO_MS) {
     if (chaves.length === 0) {
       return { valido: false, motivo: 'Este arquivo não contém respostas deste aplicativo.' };
     }
-    const jaExistentes = chaves.filter((c) => storage.getItem(c) !== null);
+    const jaExistentes = chaves.filter((c) => c !== CHAVE_INDICE && storage.getItem(c) !== null);
     return { valido: true, chaves, jaExistentes };
   }
 
