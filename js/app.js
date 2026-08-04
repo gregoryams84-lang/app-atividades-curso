@@ -685,6 +685,60 @@ async function iniciarDiagnostico() {
   botaoImprimir.addEventListener('click', () => window.print());
 }
 
+function configurarExportarImportar() {
+  const botaoExportar = document.getElementById('botao-exportar');
+  const botaoImportar = document.getElementById('botao-importar');
+  const entradaImportar = document.getElementById('entrada-importar');
+  const confirmacao = document.getElementById('confirmacao-importar');
+  if (!botaoExportar) return;
+
+  botaoExportar.addEventListener('click', async () => {
+    const tudo = await armazenamento.exportarTudo();
+    const blob = new Blob([JSON.stringify(tudo, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'minhas-respostas.json';
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+
+  botaoImportar.addEventListener('click', () => entradaImportar.click());
+
+  entradaImportar.addEventListener('change', async () => {
+    const arquivo = entradaImportar.files[0];
+    if (!arquivo) return;
+    const texto = await arquivo.text();
+    let dados;
+    try {
+      dados = JSON.parse(texto);
+    } catch {
+      confirmacao.hidden = false;
+      confirmacao.innerHTML = '<p class="mensagem-erro">Este arquivo não é válido.</p>';
+      return;
+    }
+    const validacao = await armazenamento.importarTudo(dados);
+    if (!validacao.valido) {
+      confirmacao.hidden = false;
+      confirmacao.innerHTML = `<p class="mensagem-erro">${validacao.motivo}</p>`;
+      return;
+    }
+    confirmacao.hidden = false;
+    confirmacao.innerHTML = '';
+    const aviso = document.createElement('p');
+    aviso.textContent = validacao.jaExistentes.length > 0
+      ? `Isso vai substituir ${validacao.jaExistentes.length} aula(s) que já têm respostas salvas neste celular. Quer continuar?`
+      : 'Quer recuperar essas respostas agora?';
+    confirmacao.appendChild(aviso);
+    const botaoConfirmar = criarBotaoGrande('Sim, recuperar', async () => {
+      await armazenamento.importarTudo(dados, true);
+      window.location.reload();
+    });
+    confirmacao.appendChild(botaoConfirmar);
+  });
+}
+
 iniciarPaginaInicial();
 iniciarAtividade();
 iniciarDiagnostico();
+configurarExportarImportar();
