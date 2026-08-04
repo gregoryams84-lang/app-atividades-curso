@@ -69,7 +69,7 @@ h2 { font-size: 21px; margin: 0 0 12px; }
 .botao-grande:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
 .botao-grande[hidden] { display: none; }
 
-.botao-secundario { display: inline-block; color: var(--verde); font-weight: 600; text-decoration: none; margin-top: 4px; }
+.botao-secundario { display: inline-flex; align-items: center; min-height: var(--espaco-toque-minimo); color: var(--verde); font-weight: 600; text-decoration: none; margin-top: 4px; }
 .botao-secundario:hover { text-decoration: underline; }
 
 .acoes-globais { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--borda); display: flex; flex-direction: column; gap: 12px; }
@@ -87,7 +87,7 @@ h2 { font-size: 21px; margin: 0 0 12px; }
 .barra-progresso-preenchida { background: var(--verde); height: 100%; transition: width 0.3s ease; }
 .barra-progresso-texto { max-width: 640px; margin: 6px auto 24px; padding: 0 16px; font-size: 14px; color: var(--neutro); }
 
-.link-voltar { display: inline-block; color: var(--verde); font-weight: 600; text-decoration: none; margin-bottom: 16px; }
+.link-voltar { display: inline-flex; align-items: center; min-height: var(--espaco-toque-minimo); color: var(--verde); font-weight: 600; text-decoration: none; margin-bottom: 16px; }
 .link-voltar:hover { text-decoration: underline; }
 
 .bloco { padding: 0 0 20px; }
