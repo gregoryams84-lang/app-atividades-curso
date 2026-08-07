@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { extrairParametrosDeSessao, notificarConclusao } from './progresso-remoto.js';
+import { extrairParametrosDeSessao, notificarConclusao, lerELimparParametrosDeSessao } from './progresso-remoto.js';
 
 test('extrai matricula, aula e token quando os tres parametros estao presentes', () => {
   const sessao = extrairParametrosDeSessao('?matricula_id=m1&aula_id=a1', '#tok=abc123');
@@ -62,4 +62,20 @@ test('notificarConclusao retorna false quando o fetch rejeita, sem lancar erro',
   const fetchFalso = async () => { throw new Error('sem rede'); };
   const resultado = await notificarConclusao({ matriculaId: 'm1', aulaId: 'a1', token: 'tok123' }, fetchFalso);
   assert.equal(resultado, false);
+});
+
+test('lerELimparParametrosDeSessao retorna null, sem lancar erro, quando o hash tem escape percent malformado', () => {
+  const originalWindow = globalThis.window;
+  const originalHistory = globalThis.history;
+  globalThis.window = {
+    location: { search: '?matricula_id=m1&aula_id=a1', hash: '#tok=%', pathname: '/atividade.html' }
+  };
+  globalThis.history = { replaceState: () => { throw new Error('replaceState nao deveria ser chamado'); } };
+  try {
+    const resultado = lerELimparParametrosDeSessao();
+    assert.equal(resultado, null);
+  } finally {
+    globalThis.window = originalWindow;
+    globalThis.history = originalHistory;
+  }
 });

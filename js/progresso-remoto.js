@@ -12,11 +12,16 @@ export function extrairParametrosDeSessao(search, hash) {
 }
 
 export function lerELimparParametrosDeSessao() {
-  const sessao = extrairParametrosDeSessao(window.location.search, window.location.hash);
-  if (sessao) {
-    history.replaceState(null, '', window.location.pathname + window.location.search);
+  try {
+    const sessao = extrairParametrosDeSessao(window.location.search, window.location.hash);
+    if (sessao) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    return sessao;
+  } catch (erro) {
+    console.warn('Não foi possível ler os parâmetros de sessão da URL.', erro);
+    return null;
   }
-  return sessao;
 }
 
 export async function notificarConclusao(sessao, fetchImpl = fetch) {
@@ -35,7 +40,8 @@ export async function notificarConclusao(sessao, fetchImpl = fetch) {
         aula_id: sessao.aulaId,
         concluida: true,
         concluida_em: new Date().toISOString()
-      })
+      }),
+      keepalive: true
     });
     if (!resposta.ok) {
       console.warn(`Não foi possível sincronizar a conclusão da aula com o Supabase (status ${resposta.status}).`);
