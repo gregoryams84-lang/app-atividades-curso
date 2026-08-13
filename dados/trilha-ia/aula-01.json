@@ -16,7 +16,7 @@
         "Falta informação para decidir"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 3:30 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 0:55 do vídeo.",
       "explicacao_erro": "As três perguntas são: repete, custa tempo, a resposta segue padrão.",
       "feedback_acerto": "Exato. Repete, soma tempo, e a resposta depende só do endereço — é padrão."
     },
@@ -31,7 +31,7 @@
         "Falta informação para decidir"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 3:30 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 1:40 do vídeo.",
       "explicacao_erro": "Uma reclamação de aniversário não se repete do mesmo jeito e exige julgamento — não é padrão.",
       "feedback_acerto": "Isso. É rara e depende do seu julgamento. Automatizar aqui custa cliente."
     },
