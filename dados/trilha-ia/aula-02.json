@@ -7,16 +7,6 @@
   "blocos": [
     {
       "id": "b1",
-      "tipo": "escolha_simples",
-      "enunciado": "Qual dessas ferramentas você já abriu no celular alguma vez?",
-      "opcoes": [
-        "Nenhuma ainda",
-        "Já abri, mas nunca usei pra o negócio",
-        "Já usei pra alguma coisa do negócio"
-      ]
-    },
-    {
-      "id": "b2",
       "tipo": "cenario",
       "enunciado": "Um dono de salão de beleza quer escrever a legenda de um post sobre uma promoção de corte e escova. Qual tipo de ferramenta serve melhor pra essa tarefa?",
       "opcoes": [
@@ -28,6 +18,16 @@
       "dica_erro": "Reveja o trecho das três categorias no vídeo.",
       "explicacao_erro": "Legenda é texto — ferramenta de conversa é a que ajuda a escrever e ajustar o tom.",
       "feedback_acerto": "Isso. Texto é trabalho de ferramenta de conversa."
+    },
+    {
+      "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Qual dessas ferramentas você já abriu no celular alguma vez?",
+      "opcoes": [
+        "Nenhuma ainda",
+        "Já abri, mas nunca usei pra o negócio",
+        "Já usei pra alguma coisa do negócio"
+      ]
     },
     {
       "id": "b3",
