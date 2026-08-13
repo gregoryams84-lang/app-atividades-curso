@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-ia",
+  "aula": "aula-02",
+  "titulo": "As ferramentas que cabem no bolso",
+  "habilidade": "Identificar qual tipo de ferramenta de IA serve pra qual tipo de tarefa, testando na prática.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "escolha_simples",
+      "enunciado": "Qual dessas ferramentas você já abriu no celular alguma vez?",
+      "opcoes": [
+        "Nenhuma ainda",
+        "Já abri, mas nunca usei pra o negócio",
+        "Já usei pra alguma coisa do negócio"
+      ]
+    },
+    {
+      "id": "b2",
+      "tipo": "cenario",
+      "enunciado": "Um dono de salão de beleza quer escrever a legenda de um post sobre uma promoção de corte e escova. Qual tipo de ferramenta serve melhor pra essa tarefa?",
+      "opcoes": [
+        "Ferramenta de conversa (tipo ChatGPT ou Gemini)",
+        "Ferramenta de imagem (tipo Canva com IA)",
+        "Nenhuma, isso precisa ser feito manualmente"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o trecho das três categorias no vídeo.",
+      "explicacao_erro": "Legenda é texto — ferramenta de conversa é a que ajuda a escrever e ajustar o tom.",
+      "feedback_acerto": "Isso. Texto é trabalho de ferramenta de conversa."
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Teste agora uma ferramenta de conversa gratuita com a tarefa que você escolheu na Aula 1. Cole aqui a resposta que ela te deu (ou resuma em poucas palavras).",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["a resposta que a ferramenta te deu"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Essa resposta já serve do jeito que veio, ou precisa de ajuste pra soar como você fala com seu cliente?",
+      "opcoes": [
+        "Já serve do jeito que veio",
+        "Precisa de ajuste",
+        "Não consegui testar ainda"
+      ]
+    }
+  ]
+}
