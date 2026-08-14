@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-dinheiro",
+  "aula": "aula-03",
+  "titulo": "Precificação",
+  "habilidade": "Precificar considerando custo + margem e também o valor percebido pelo cliente.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Duas confeiteiras fazem o mesmo bolo, com o mesmo custo de ingrediente. Uma cobra R$ 80, a outra R$ 150, e as duas vendem regularmente pra públicos diferentes. Isso é possível porque:",
+      "opcoes": [
+        "Uma das duas está cobrando errado",
+        "O preço não depende só do custo — depende também do que o cliente enxerga de valor (embalagem, atendimento, marca)",
+        "R$ 150 é sempre exagero pra bolo"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho de 1:00 do vídeo.",
+      "explicacao_erro": "O custo garante que você não perde dinheiro — mas o valor percebido é o que explica preços diferentes pro mesmo produto.",
+      "feedback_acerto": "Isso. O cliente paga pelo que enxerga de valor, não só pelo ingrediente."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva seu custo fixo (o que você paga vendendo ou não, dividido pelo que produz no mês) e seu custo variável (o que muda por unidade vendida).",
+      "quantidade_campos": 2,
+      "minimo_preenchido": 1,
+      "placeholders": ["custo fixo por unidade: R$ 10", "custo variável por unidade: R$ 15"]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Além do material, o que seu cliente está pagando de verdade (tempo economizado, confiança, resultado, experiência)? Liste pelo menos 2 coisas.",
+      "quantidade_campos": 2,
+      "minimo_preenchido": 1,
+      "placeholders": ["não precisa se preocupar em fazer sozinho", "confiança de que vai ficar pronto no prazo"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Olhando pro que você escreveu, seu preço atual reflete esse valor, ou está abaixo do que você realmente entrega?",
+      "opcoes": [
+        "Reflete bem",
+        "Acho que está abaixo",
+        "Nunca tinha pensado nisso"
+      ]
+    }
+  ]
+}
