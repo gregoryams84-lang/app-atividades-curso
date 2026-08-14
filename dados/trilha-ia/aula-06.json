@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-ia",
+  "aula": "aula-06",
+  "titulo": "O que não é pra delegar",
+  "habilidade": "Reconhecer os limites do uso de IA e fechar a trilha com um mini-plano de uso de IA pro próprio negócio.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Você quer usar uma ferramenta de IA gratuita pra gerar mensagens de cobrança em massa, e pra isso pensa em colar a lista completa de clientes inadimplentes (nome, telefone, valor da dívida) na ferramenta. Isso é seguro?",
+      "opcoes": [
+        "Sim, é só texto, não tem problema",
+        "Não, dado de cliente não deve ser colado em ferramenta gratuita sem saber o que ela faz com ele",
+        "Só é seguro se a ferramenta for paga"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
+      "explicacao_erro": "Dado sensível de cliente (nome, telefone, valor de dívida) é do cliente, não seu pra expor em qualquer ferramenta.",
+      "feedback_acerto": "Isso. Dado de cliente pede cuidado, mesmo em ferramenta que parece inofensiva."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste 2 ou 3 tarefas do seu negócio que você vai automatizar primeiro (pode puxar do que você já viu nas aulas anteriores).",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": ["responder dúvida de preço no WhatsApp", "rascunhar post da semana"]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Pra cada uma dessas tarefas, qual ferramenta você vai usar?",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": ["ferramenta de conversa gratuita"]
+    },
+    {
+      "id": "b4",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva pelo menos uma situação do seu negócio onde você NÃO vai deixar a IA decidir sozinha.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["reclamação de cliente antigo, decisão de perdoar dívida"]
+    },
+    {
+      "id": "b5",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois das seis aulas, você se sente mais confiante pra usar IA no seu negócio essa semana?",
+      "opcoes": [
+        "Sim, já sei por onde começar",
+        "Mais ou menos, quero rever alguma aula",
+        "Ainda não, preciso de mais um exemplo"
+      ]
+    }
+  ]
+}
