@@ -12,8 +12,10 @@ pra algo que o CNAE de MEI não cobre mais.
 
 [1:10] O que muda ao sair do MEI: passa a precisar de contador —
 obrigatório —, a forma de calcular imposto muda, e as obrigações ficam
-mais frequentes. Não é motivo pra medo, é motivo pra se planejar com
-antecedência.
+mais frequentes. E se você passar do limite sem perceber, pode ser
+desenquadrado do MEI de forma automática — ou seja, reclassificado como
+ME, às vezes com efeito retroativo. Não é motivo pra medo, é motivo pra
+se planejar com antecedência.
 
 [1:50] Demonstração: como acompanhar o próprio faturamento acumulado do
 ano (no app MEI ou numa planilha simples) pra não ser pego de surpresa
