@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-06",
+  "titulo": "Um agente que atende por você",
+  "habilidade": "Configurar uma resposta automática de IA pra atender WhatsApp, Messenger ou Direct, com regra clara de quando passa pra um humano.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um agente de IA configurado sem limite responde a um cliente: \"Sim, garantimos entrega em 1 hora\" — mas essa informação nunca foi confirmada pelo dono. O cliente cobra depois e a entrega demora 3 horas. O que deu errado?",
+      "opcoes": [
+        "Nada, agente sempre erra às vezes",
+        "O agente foi configurado sem limite claro do que pode prometer sozinho",
+        "O cliente que entendeu errado"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho de 1:00 do vídeo.",
+      "explicacao_erro": "Sem um limite definido do que o agente pode afirmar, ele pode prometer algo que ninguém confirmou.",
+      "feedback_acerto": "Isso. O problema não é ter agente — é não ter definido o limite dele."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste 4 ou 5 perguntas que mais se repetem no seu atendimento (reaproveite a lista da trilha \"IA no Negócio\", Aula 1, se você já fez ela).",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 1,
+      "placeholders": ["vocês entregam no meu bairro?", "qual o horário de funcionamento?"]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva pelo menos 1 situação que seu agente NUNCA deve responder sozinho — sempre passa pra você.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["reclamação sobre pedido errado", "negociação de preço"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de configurar, você testa o agente com poucas conversas antes de deixar ele atender todo mundo?",
+      "opcoes": [
+        "Sim, sempre testo antes",
+        "Vou testar depois dessa aula",
+        "Não tinha pensado nisso"
+      ]
+    },
+    {
+      "id": "b5",
+      "tipo": "escolha_simples",
+      "enunciado": "Fechando a trilha \"Vender pela internet e pelo WhatsApp\" — você se sente pronto pra aplicar as 6 aulas no seu negócio?",
+      "opcoes": [
+        "Sim, já sei por onde começar",
+        "Preciso rever alguma aula",
+        "Ainda não"
+      ]
+    }
+  ]
+}
