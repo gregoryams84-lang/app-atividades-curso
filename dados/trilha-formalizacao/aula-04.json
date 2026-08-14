@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-formalizacao",
+  "aula": "aula-04",
+  "titulo": "Organizando os documentos",
+  "habilidade": "Saber quais documentos guardar e montar um sistema simples de organização.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Uma cliente pede nota fiscal de um serviço que pagou há 3 meses, e o prestador não emitiu na hora e não guardou o comprovante do pagamento. O que ele perde com isso?",
+      "opcoes": [
+        "Nada, nota fiscal é só formalidade",
+        "Perde a chance de comprovar a venda pra declaração e fica sem prova em caso de problema com a cliente",
+        "Só perde se a cliente reclamar"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "explicacao_erro": "Sem nota e sem comprovante, falta prova da venda pra declaração e pra qualquer imprevisto com o cliente.",
+      "feedback_acerto": "Isso. Documento é prova, não formalidade vazia."
+    },
+    {
+      "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Hoje, seus comprovantes (nota, pagamento de DAS, despesas) estão:",
+      "opcoes": [
+        "Organizados num lugar só",
+        "Espalhados, mas eu acho quando preciso",
+        "Eu realmente não sei onde estão a maioria"
+      ]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste os 3 tipos de documento que você mais precisa guardar no seu negócio.",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": ["nota fiscal de venda", "comprovante de pagamento do DAS", "recibo de compra de material"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Você vai criar a pasta (física ou digital) desse ano essa semana?",
+      "opcoes": [
+        "Sim, crio agora",
+        "Vou criar depois",
+        "Já tenho, só vou organizar melhor"
+      ]
+    }
+  ]
+}
