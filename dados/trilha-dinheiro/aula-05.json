@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-dinheiro",
+  "aula": "aula-05",
+  "titulo": "Gastos fixos e variáveis",
+  "habilidade": "Distinguir gasto fixo de variável e identificar o que dá pra cortar sem comprometer o negócio.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um negócio corta o gasto com material (variável) achando que está economizando, mas continua pagando uma assinatura de sistema (fixo) que quase não usa. No fim do mês, o corte fez pouca diferença. Por quê?",
+      "opcoes": [
+        "Material nunca deveria ser cortado",
+        "O gasto fixo que pesava (a assinatura) continuou do mesmo jeito, e é ele que consome o caixa todo mês, vendendo ou não",
+        "Cortar gasto sempre resolve, só demora pra fazer efeito"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho de 1:00 do vídeo.",
+      "explicacao_erro": "Gasto fixo pesa igual, vendendo ou não — cortar só o variável deixa o maior peso intocado.",
+      "feedback_acerto": "Isso. O fixo que não se ajusta ao movimento é o que mais merece revisão."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste de 4 a 6 gastos do seu negócio esse mês.",
+      "quantidade_campos": 6,
+      "minimo_preenchido": 1,
+      "placeholders": ["aluguel do espaço", "material de trabalho", "assinatura de sistema"]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Agora escreva, pra cada gasto que você listou, se ele é fixo (acontece todo mês, quase o mesmo valor) ou variável (muda conforme você vende/produz).",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["aluguel: fixo. material: variável."]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Olhando sua lista, tem algum gasto fixo que pesa mais do que deveria?",
+      "opcoes": [
+        "Sim, já sei qual",
+        "Acho que sim, preciso olhar melhor",
+        "Não, meus fixos estão enxutos"
+      ]
+    }
+  ]
+}
