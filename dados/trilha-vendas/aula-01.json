@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-01",
+  "titulo": "Perfil que vende sem gastar",
+  "habilidade": "Estruturar um perfil de Instagram/Facebook com ajuda de IA (bio, destaques, primeira grade de posts).",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um cliente novo chega no perfil de uma loja de roupas e a bio diz só \"Moda feminina\". Ele quer saber se vendem no tamanho dele e como comprar. O que essa bio está faltando?",
+      "opcoes": [
+        "Nada, bio deve ser só o nicho do negócio",
+        "Informação prática: como comprar, tamanhos, forma de entrega",
+        "Mais emoji e cor no texto"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:50 do vídeo.",
+      "explicacao_erro": "Bio sem informação prática (como comprar, o que oferece) não converte visita em venda.",
+      "feedback_acerto": "Isso. Sem essa informação, o cliente novo desiste antes de perguntar."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva o que seu negócio vende, pra quem, e como o cliente compra (link, WhatsApp, endereço) — cada informação em uma linha.",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": [
+        "vendo bolos de aniversário sob encomenda",
+        "pra famílias no meu bairro",
+        "compra pelo WhatsApp, link na bio"
+      ]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Peça pra uma ferramenta de IA escrever 3 opções de bio usando essas informações. Cole aqui a que você mais gostou.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["a bio escolhida, já do seu jeito"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Seu perfil já tem destaques (stories fixados) que respondem \"como comprar\" e \"onde fica\"?",
+      "opcoes": [
+        "Sim, já tenho",
+        "Não, vou criar",
+        "Não sabia que servia pra isso"
+      ]
+    }
+  ]
+}
