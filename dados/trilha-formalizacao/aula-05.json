@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-formalizacao",
+  "aula": "aula-05",
+  "titulo": "Quando a empresa cresce",
+  "habilidade": "Reconhecer os sinais de que é hora de sair do MEI e entender o que muda.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um dono de negócio MEI percebe, em outubro, que já faturou quase o limite do ano — mas só vai conferir de novo em dezembro. Se ele passar do limite sem perceber, o que pode acontecer?",
+      "opcoes": [
+        "Nada, é só um número de referência",
+        "Pode ser desenquadrado do MEI e ter que se regularizar como ME, às vezes com efeito retroativo",
+        "O governo avisa automaticamente e resolve sozinho"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho de 0:25 do vídeo.",
+      "explicacao_erro": "Passar do limite sem perceber pode gerar desenquadramento do MEI, com regularização exigida depois.",
+      "feedback_acerto": "Isso. Vale acompanhar antes de ser surpreendido perto do fim do ano."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva como você vai acompanhar seu faturamento acumulado esse ano (app, planilha, outro jeito).",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["vou anotar toda venda numa planilha simples"]
+    },
+    {
+      "id": "b3",
+      "tipo": "escolha_simples",
+      "enunciado": "Hoje, qual desses sinais está mais perto de acontecer com você?",
+      "opcoes": [
+        "Faturamento chegando perto do limite",
+        "Preciso contratar mais gente",
+        "Minha atividade mudou",
+        "Nenhum, ainda estou longe disso"
+      ]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Se algum desses sinais aparecer, você já sabe que vai precisar de um contador pra te ajudar na troca?",
+      "opcoes": [
+        "Sim, já sei disso",
+        "Não sabia, bom saber agora",
+        "Já tenho contador"
+      ]
+    }
+  ]
+}
