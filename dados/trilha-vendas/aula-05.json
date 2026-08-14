@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-05",
+  "titulo": "Automatizando a postagem com n8n",
+  "habilidade": "Entender e montar um fluxo básico de automação (gerar conteúdo, agendar, publicar) usando um fluxo pronto de n8n.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um dono já tem os posts prontos (texto e imagem definidos), mas gasta 2 horas por semana só publicando manualmente, um por um, nos horários certos. Pelas três perguntas da trilha \"IA no Negócio\" (repete, custa tempo, segue padrão), essa tarefa de publicar é:",
+      "opcoes": [
+        "Não é candidata, publicar exige cuidado humano toda vez",
+        "Candidata forte — repete toda semana, custa tempo real, e o processo é sempre o mesmo",
+        "Só é candidata se o negócio for grande"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:55 do vídeo.",
+      "explicacao_erro": "Publicar um post já pronto, no horário certo, é um processo que se repete do mesmo jeito toda vez — diferente de decidir o que postar.",
+      "feedback_acerto": "Isso. A tarefa de publicar (não de criar) passa nas três perguntas."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Descreva em até 3 passos o fluxo que você quer automatizar (ex: 1. gerar legenda 2. gerar imagem 3. publicar às segundas de manhã).",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": ["gerar legenda a partir do banco de ideias"]
+    },
+    {
+      "id": "b3",
+      "tipo": "escolha_simples",
+      "enunciado": "Você já tem uma conta no n8n (ou ferramenta parecida de automação)?",
+      "opcoes": [
+        "Sim",
+        "Não, vou criar",
+        "Nunca tinha ouvido falar até essa aula"
+      ]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Nas primeiras semanas de automação, você vai revisar o conteúdo antes dele publicar sozinho?",
+      "opcoes": [
+        "Sim, sempre",
+        "Só às vezes",
+        "Não, vou confiar direto"
+      ]
+    }
+  ]
+}
