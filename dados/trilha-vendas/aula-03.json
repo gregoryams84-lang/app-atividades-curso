@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-03",
+  "titulo": "Conteúdo com IA que não parece IA",
+  "habilidade": "Gerar texto, imagem e legenda com IA mantendo a voz do próprio negócio.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Duas legendas pro mesmo post de uma padaria: A) \"Surpreenda-se com nossos deliciosos produtos artesanais feitos com amor e dedicação!\" B) \"Pão de queijo saindo do forno agora, R$ 12 a dúzia, é só chegar.\" Qual soa mais como um negócio de verdade?",
+      "opcoes": [
+        "A, porque é mais elogiosa",
+        "B, porque é específica e soa como alguém falando de verdade",
+        "As duas são iguais"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "explicacao_erro": "A legenda A é genérica — poderia ser de qualquer padaria. A B tem informação real (produto, preço, hora).",
+      "feedback_acerto": "Isso. Informação real bate texto bonito genérico."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Monte seu pedido (contexto + tarefa + formato + exemplo) pra gerar a legenda de um post real do seu negócio.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["contexto: ... tarefa: escreve legenda sobre ... formato: 2 linhas, direto ... exemplo: ..."]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Cole aqui a legenda que a IA gerou, já ajustada do seu jeito.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["a legenda final, pronta pra postar"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Essa legenda já está pronta pra publicar essa semana?",
+      "opcoes": [
+        "Sim",
+        "Quase, falta um ajuste",
+        "Ainda não"
+      ]
+    }
+  ]
+}
