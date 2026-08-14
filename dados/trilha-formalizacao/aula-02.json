@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-formalizacao",
+  "aula": "aula-02",
+  "titulo": "Abrindo o CNPJ certo pro seu momento",
+  "habilidade": "Escolher entre MEI e ME conforme o negócio, e escolher o CNAE certo pra atividade real.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um dono de doceria caseira abre o CNPJ como MEI e escolhe o CNAE genérico de \"comércio varejista\", achando que serve pra qualquer coisa. Meses depois descobre que esse CNAE não cobre fabricação de alimentos. O que ele deveria ter feito?",
+      "opcoes": [
+        "Nada, CNAE genérico sempre serve",
+        "Pesquisado o CNAE específico da atividade de fabricação de alimentos antes de abrir",
+        "Trocado pra ME direto, sem mexer no CNAE"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 1:00 do vídeo.",
+      "explicacao_erro": "CNAE genérico pode não cobrir a atividade real — o certo é pesquisar o CNAE específico antes de abrir.",
+      "feedback_acerto": "Isso. O CNAE precisa bater com o que o negócio realmente faz."
+    },
+    {
+      "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Pensando no seu negócio (ou o que você pretende abrir), ele se encaixa melhor em:",
+      "opcoes": [
+        "MEI — trabalho sozinho ou com no máximo 1 funcionário",
+        "ME — já fatura mais ou tenho sócio",
+        "Não sei ainda, preciso pesquisar"
+      ]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva, com suas palavras, o que seu negócio faz de verdade no dia a dia (isso ajuda a achar o CNAE certo depois).",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["faço doces sob encomenda e vendo pronto também"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Você já conferiu (ou vai conferir) se o CNAE do seu CNPJ bate com o que você escreveu acima?",
+      "opcoes": [
+        "Já conferi, está certo",
+        "Vou conferir depois dessa aula",
+        "Ainda não tenho CNPJ, vou escolher com cuidado"
+      ]
+    }
+  ]
+}
