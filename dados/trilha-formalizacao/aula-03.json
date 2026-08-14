@@ -15,8 +15,8 @@
         "Só precisa pagar se faturar acima de um certo valor no mês"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
-      "explicacao_erro": "O DAS não chega sozinho — é preciso consultar/gerar ativamente todo mês.",
+      "dica_erro": "Reveja o trecho dos 1:50 do vídeo.",
+      "explicacao_erro": "O DAS não chega sozinho — é preciso consultar/gerar ativamente todo mês, e isso vale mesmo em mês sem venda nenhuma: o DAS é devido todo mês, independente do faturamento.",
       "feedback_acerto": "Isso. Ninguém avisa — o hábito de conferir é seu."
     },
     {

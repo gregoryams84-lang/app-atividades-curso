@@ -15,7 +15,7 @@
         "Só precisa abrir CNPJ se contratar funcionário"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 1:00 do vídeo.",
       "explicacao_erro": "Prestar serviço de forma recorrente sem CNPJ é informalidade — vale avaliar abrir o CNPJ certo pra atividade.",
       "feedback_acerto": "Isso. Cliente fixo e recorrência são sinal de que vale formalizar."
     },

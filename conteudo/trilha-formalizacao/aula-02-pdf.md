@@ -4,6 +4,7 @@
 |---|---|---|
 | Sozinho ou até 1 funcionário | Sim | Pode ter mais |
 | Dentro do limite anual (confira o valor atual) | Sim | Acima do limite do MEI |
+| Atividade (CNAE) permitida no MEI | Sim, precisa estar na lista | Não depende da lista do MEI |
 
 ## O que meu negócio faz de verdade
 

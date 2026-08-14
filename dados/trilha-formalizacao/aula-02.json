@@ -15,7 +15,7 @@
         "Trocado pra ME direto, sem mexer no CNAE"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 1:00 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 1:40 do vídeo.",
       "explicacao_erro": "CNAE genérico pode não cobrir a atividade real — o certo é pesquisar o CNAE específico antes de abrir.",
       "feedback_acerto": "Isso. O CNAE precisa bater com o que o negócio realmente faz."
     },

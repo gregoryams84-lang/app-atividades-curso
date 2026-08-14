@@ -6,13 +6,16 @@
 calendário na cabeça. Essa aula resolve isso.
 
 [0:25] Duas obrigações que se repetem sempre: o DAS — o boleto mensal,
-com vencimento todo mês (confira a data e o valor exatos no app MEI ou
-no Portal do Empreendedor, porque isso muda). E a declaração anual, o
-DASN-SIMEI — uma vez por ano, resume o que você faturou.
+com vencimento todo mês, mesmo em mês sem nenhuma venda (confira a data
+e o valor exatos no app MEI ou no Portal do Empreendedor, porque isso
+muda). E a declaração anual, o DASN-SIMEI — uma vez por ano, resume o
+que você faturou.
 
 [1:10] O que acontece se atrasa: juro, multa, e em casos mais sérios
 pode perder o enquadramento como MEI — vale muito mais resolver rápido
-do que deixar acumular.
+do que deixar acumular. Se você já é ME, suas obrigações recorrentes são
+outras, e quem monta esse calendário com você é o contador — mas o
+hábito de ter data marcada é o mesmo.
 
 [1:50] Demonstração: gerando o boleto do mês (app MEI ou Portal do
 Empreendedor) e marcando a data no calendário do celular com lembrete

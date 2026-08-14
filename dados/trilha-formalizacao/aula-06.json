@@ -15,7 +15,7 @@
         "O que guarda na cabeça, porque presta mais atenção"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
       "explicacao_erro": "Checklist escrito tira a dependência da memória — é a mesma lógica de qualquer lembrete recorrente.",
       "feedback_acerto": "Isso. Escrito não esquece."
     },
@@ -46,11 +46,12 @@
     {
       "id": "b5",
       "tipo": "escolha_simples",
-      "enunciado": "Depois dessa trilha, você se sente mais seguro sobre a formalização do seu negócio?",
+      "enunciado": "Olhando o checklist que você acabou de montar, qual parte você tem mais risco de deixar passar?",
       "opcoes": [
-        "Sim, já sei o que fazer",
-        "Preciso rever alguma aula",
-        "Ainda tenho dúvida específica, vou procurar um contador"
+        "A data do DAS",
+        "A declaração anual (DASN-SIMEI)",
+        "Onde estão guardados os documentos",
+        "Nenhuma dessas, mas ainda tenho dúvida específica — vou procurar um contador"
       ]
     }
   ]

@@ -20,5 +20,5 @@ antes de qualquer coisa nova.
 deixar atrasado sem perceber, custa mais caro depois — multa, perda de
 benefício, confusão.
 
-[2:15] Agora é sua vez: responde as três perguntas na atividade, e a
-trilha se ajusta ao seu ponto de partida.
+[2:15] Agora é sua vez: responde as três perguntas na atividade, e você
+já sabe em que parte da trilha prestar mais atenção.
