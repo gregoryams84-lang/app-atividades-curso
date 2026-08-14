@@ -23,5 +23,7 @@ transferência pro humano.
 mais caro que não ter agente nenhum. Teste com poucas conversas antes de
 ativar pra valer.
 
-[2:55] Isso fecha a trilha inteira: lista as perguntas mais comuns do seu
-negócio — elas viram a base do seu agente.
+[2:55] Você já estruturou seu perfil, configurou o WhatsApp, criou
+conteúdo com IA, organizou sua rotina de postagem e automatizou a
+publicação. Isso fecha a trilha inteira: lista as perguntas mais comuns
+do seu negócio — elas viram a base do seu agente.

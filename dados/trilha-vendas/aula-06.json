@@ -22,7 +22,7 @@
     {
       "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Liste 4 ou 5 perguntas que mais se repetem no seu atendimento (reaproveite a lista da trilha \"IA no Negócio\", Aula 1, se você já fez ela).",
+      "enunciado": "Liste 4 ou 5 perguntas que mais se repetem no seu atendimento — essas são as perguntas que seu agente vai responder sozinho (reaproveite a lista da trilha \"IA no Negócio\", Aula 1, se você já fez ela).",
       "quantidade_campos": 5,
       "minimo_preenchido": 1,
       "placeholders": ["vocês entregam no meu bairro?", "qual o horário de funcionamento?"]
