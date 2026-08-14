@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-ia",
+  "aula": "aula-03",
+  "titulo": "Fazendo a IA trabalhar por você",
+  "habilidade": "Montar um pedido reutilizável com contexto, tarefa, formato e exemplo, e melhorá-lo por iteração.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva seu contexto de negócio em uma frase: quem você é, pra quem vende.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["salão de beleza em bairro de classe média, clientes de 25 a 50 anos"]
+    },
+    {
+      "id": "b2",
+      "tipo": "cenario",
+      "enunciado": "Dois pedidos pra mesma tarefa. Pedido A: \"Escreve um post pra mim\". Pedido B: contexto + tarefa específica + formato + exemplo do seu tom. Qual tem mais chance de vir com uma resposta útil de primeira?",
+      "opcoes": [
+        "Pedido A, é mais direto",
+        "Pedido B, porque dá contexto pra IA acertar o tom e o tamanho",
+        "Os dois vêm iguais"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja as quatro partes do molde no vídeo.",
+      "explicacao_erro": "Sem contexto, tarefa, formato e exemplo, a IA responde genérico — parecido com o que aconteceu na Aula 2.",
+      "feedback_acerto": "Isso. Quanto mais completo o pedido, menos ajuste depois."
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Monte seu pedido completo (contexto + tarefa + formato + exemplo) pra uma tarefa real do seu negócio. Escreva o pedido inteiro aqui.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["contexto: ... tarefa: ... formato: ... exemplo: ..."]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de testar esse pedido numa ferramenta, a resposta veio melhor que a da Aula 2?",
+      "opcoes": [
+        "Sim, bem melhor",
+        "Um pouco melhor",
+        "Ainda não testei"
+      ]
+    }
+  ]
+}
