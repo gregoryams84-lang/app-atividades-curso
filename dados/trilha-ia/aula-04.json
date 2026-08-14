@@ -22,7 +22,7 @@
     {
       "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Copie aqui uma resposta genérica que uma IA te deu (pode ser da Aula 2 ou testando agora) já reescrita do seu jeito.",
+      "enunciado": "Pegue a resposta genérica que uma IA te deu (pode ser da Aula 2 ou testando agora). Reescreva do seu jeito e cole a sua versão aqui.",
       "quantidade_campos": 1,
       "minimo_preenchido": 1,
       "placeholders": ["a versão reescrita, do jeito que você falaria"]
@@ -39,7 +39,7 @@
       "correta": 1,
       "dica_erro": "Reveja o trecho dos 2:20 do vídeo.",
       "explicacao_erro": "Situação delicada permite rascunho de IA, mas a revisão manual antes de mandar é sempre obrigatória.",
-      "feedback_acerto": "Isso. Pode ajudar a rascunhar, mas quem decide e revisa é você."
+      "feedback_acerto": "Isso. Pode ajudar a rascunhar, mas quem decide e revisa é você. Na Aula 1 essa reclamação não passou no teste de automatizar o envio da resposta — aqui é diferente: rascunhar com a IA e revisar antes de mandar não é a IA decidindo sozinha, é você usando ela como ponto de partida."
     },
     {
       "id": "b4",

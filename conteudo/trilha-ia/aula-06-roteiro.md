@@ -12,7 +12,7 @@ perdoar dívida, responder uma crise — é sua, não da IA. Situação delicada
 de cliente, como vimos na Aula 4, sempre passa por revisão sua.
 
 [1:15] Dado de cliente, numa frase: é do cliente, não seu pra jogar em
-qualquer lugar — trate como trataria o dinheiro dele.
+qualquer lugar — trate como trataria o dinheiro dele. Isso tem nome: LGPD.
 
 [1:45] Agora você já testou ferramenta, montou pedido, revisou resposta,
 organizou rotina. Essa atividade final não é pergunta de múltipla

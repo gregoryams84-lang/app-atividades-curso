@@ -30,7 +30,7 @@
     {
       "id": "b3",
       "tipo": "lista_aberta",
-      "enunciado": "Pra cada uma dessas tarefas, qual ferramenta você vai usar?",
+      "enunciado": "Pra cada uma dessas tarefas, qual ferramenta você vai usar? (na mesma ordem da lista acima)",
       "quantidade_campos": 3,
       "minimo_preenchido": 1,
       "placeholders": ["ferramenta de conversa gratuita"]
