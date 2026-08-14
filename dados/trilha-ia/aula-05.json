@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-ia",
+  "aula": "aula-05",
+  "titulo": "Organização da rotina",
+  "habilidade": "Usar IA em tarefas de fundo (agenda, cobrança, rascunho) que sustentam o negócio sem aparecer pro cliente.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste de 3 a 5 tarefas de fundo que você faz toda semana e nunca tem tempo (cobrança, agenda, organização).",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 1,
+      "placeholders": [
+        "organizar a agenda da semana",
+        "mandar mensagem de cobrança",
+        "rascunhar o post de segunda"
+      ]
+    },
+    {
+      "id": "b2",
+      "tipo": "cenario",
+      "enunciado": "Você tem 8 compromissos anotados sem ordem nenhuma no papel. Pedir pra uma IA organizar por dia da semana é:",
+      "opcoes": [
+        "Arriscado, porque agenda é coisa séria demais pra IA",
+        "Uma boa tarefa de fundo pra treinar, o risco de errar é baixo",
+        "Inútil, é mais rápido fazer na mão"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 2:00 do vídeo.",
+      "explicacao_erro": "Tarefa de fundo não aparece pro cliente — é um bom lugar pra treinar com IA sem medo.",
+      "feedback_acerto": "Isso. Baixo risco, alto ganho de tempo."
+    },
+    {
+      "id": "b3",
+      "tipo": "calculo",
+      "enunciado": "Agora escolha UMA dessas tarefas de fundo e responda.",
+      "campos": [
+        { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das que você listou?", "depende_de": { "trilha": "trilha-ia", "aula": "aula-05", "bloco": "b1" } },
+        { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz", "unidade": "vezes", "minimo": 0, "maximo": 999 },
+        { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos", "unidade": "minutos", "minimo": 0, "maximo": 999 }
+      ],
+      "calculos": {
+        "total": "vezes_semana * minutos_vez",
+        "horas": "total * 4.345 / 60"
+      },
+      "resultado_texto": "Essa tarefa de fundo consome cerca de {total} minutos por semana, ou {horas} horas por mês."
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de ver o tempo que isso consome, você organiza essa tarefa com ajuda de IA essa semana?",
+      "opcoes": [
+        "Sim, começo hoje",
+        "Sim, mas só na próxima semana",
+        "Ainda não tenho certeza"
+      ]
+    }
+  ]
+}
