@@ -125,6 +125,48 @@
           "arquivo": "dados/trilha-formalizacao/aula-06.json"
         }
       ]
+    },
+    {
+      "id": "trilha-dinheiro",
+      "titulo": "Gerir o dinheiro",
+      "aulas": [
+        {
+          "id": "aula-01",
+          "titulo": "Pra onde seu dinheiro vai",
+          "ordem": 1,
+          "arquivo": "dados/trilha-dinheiro/aula-01.json"
+        },
+        {
+          "id": "aula-02",
+          "titulo": "Fluxo de caixa simples",
+          "ordem": 2,
+          "arquivo": "dados/trilha-dinheiro/aula-02.json"
+        },
+        {
+          "id": "aula-03",
+          "titulo": "Precificação",
+          "ordem": 3,
+          "arquivo": "dados/trilha-dinheiro/aula-03.json"
+        },
+        {
+          "id": "aula-04",
+          "titulo": "Pró-labore",
+          "ordem": 4,
+          "arquivo": "dados/trilha-dinheiro/aula-04.json"
+        },
+        {
+          "id": "aula-05",
+          "titulo": "Gastos fixos e variáveis",
+          "ordem": 5,
+          "arquivo": "dados/trilha-dinheiro/aula-05.json"
+        },
+        {
+          "id": "aula-06",
+          "titulo": "Seu painel financeiro",
+          "ordem": 6,
+          "arquivo": "dados/trilha-dinheiro/aula-06.json"
+        }
+      ]
     }
   ]
 }
