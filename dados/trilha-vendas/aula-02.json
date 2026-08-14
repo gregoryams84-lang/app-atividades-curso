@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-02",
+  "titulo": "WhatsApp Business configurado direito",
+  "habilidade": "Configurar catálogo, mensagem automática de ausência e organização de conversa no WhatsApp Business.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um cliente manda \"vocês entregam no meu bairro?\" às 23h pro WhatsApp de uma loja sem mensagem automática configurada. A loja só vê e responde às 9h do dia seguinte. O que isso custa?",
+      "opcoes": [
+        "Nada, o cliente vai esperar a resposta",
+        "Provavelmente a venda — o cliente já comprou em outro lugar que respondeu na hora",
+        "Só custa se o cliente reclamar depois"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "explicacao_erro": "Sem resposta na hora, o cliente segue pra próxima opção — a venda se perde antes de qualquer conversa.",
+      "feedback_acerto": "Isso. Resposta rápida, mesmo automática, mantém o cliente esperando você."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Escreva o rascunho da sua mensagem automática de ausência — o que o cliente recebe quando manda mensagem fora do seu horário.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["oi! recebi sua mensagem, respondo assim que abrir, geralmente até as 9h"]
+    },
+    {
+      "id": "b3",
+      "tipo": "escolha_simples",
+      "enunciado": "Seu WhatsApp Business já tem catálogo de produtos configurado?",
+      "opcoes": [
+        "Sim",
+        "Não, vou configurar",
+        "Não sabia que dava pra fazer isso"
+      ]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Das três configurações (catálogo, mensagem automática, etiquetas), qual você ativa primeiro essa semana?",
+      "opcoes": [
+        "Catálogo",
+        "Mensagem automática",
+        "Etiquetas"
+      ]
+    }
+  ]
+}
