@@ -31,9 +31,9 @@
       "id": "b3",
       "tipo": "lista_aberta",
       "enunciado": "Agora escreva, pra cada gasto que você listou, se ele é fixo (acontece todo mês, quase o mesmo valor) ou variável (muda conforme você vende/produz).",
-      "quantidade_campos": 1,
+      "quantidade_campos": 6,
       "minimo_preenchido": 1,
-      "placeholders": ["aluguel: fixo. material: variável."]
+      "placeholders": ["fixo", "variável", "fixo"]
     },
     {
       "id": "b4",
