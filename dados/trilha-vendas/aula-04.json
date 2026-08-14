@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-vendas",
+  "aula": "aula-04",
+  "titulo": "Rotina de postagem sem travar",
+  "habilidade": "Montar um banco de ideias e um calendário simples de postagem semanal.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste 5 temas de post que sempre funcionam pro seu negócio (pode pedir ajuda de IA se travar).",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 1,
+      "placeholders": [
+        "bastidor de como o produto é feito",
+        "dúvida frequente de cliente respondida",
+        "promoção da semana"
+      ]
+    },
+    {
+      "id": "b2",
+      "tipo": "cenario",
+      "enunciado": "Um dono posta só quando lembra, sem padrão nenhum — às vezes 3 posts numa semana, depois 2 semanas sem nada. O engajamento vive caindo. O que resolve isso?",
+      "opcoes": [
+        "Postar todo santo dia, sem falta",
+        "Um calendário fixo, mesmo que só 2 ou 3 dias por semana",
+        "Parar de postar até ter mais tempo"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 2:00 do vídeo.",
+      "explicacao_erro": "Consistência importa mais que quantidade — poucos dias fixos batem postagem irregular.",
+      "feedback_acerto": "Isso. Regularidade, não volume, é o que sustenta o engajamento."
+    },
+    {
+      "id": "b3",
+      "tipo": "calculo",
+      "enunciado": "Escolha 2 ou 3 dias da semana pra postar e o tema de cada um.",
+      "campos": [
+        { "id": "tema", "tipo": "selecao", "rotulo": "Qual tema da sua lista?", "depende_de": { "trilha": "trilha-vendas", "aula": "aula-04", "bloco": "b1" } },
+        { "id": "dias_semana", "tipo": "numero", "rotulo": "Em quantos dias da semana você posta esse tema", "unidade": "dias", "minimo": 0, "maximo": 7 }
+      ],
+      "calculos": {
+        "posts_mes": "dias_semana * 4.345"
+      },
+      "resultado_texto": "Nesse ritmo, esse tema vira cerca de {posts_mes} posts por mês."
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Você consegue manter esses dias fixos nas próximas 2 semanas?",
+      "opcoes": [
+        "Sim",
+        "Vou tentar",
+        "Não, preciso simplificar mais"
+      ]
+    }
+  ]
+}
