@@ -7,18 +7,6 @@
   "blocos": [
     {
       "id": "b1",
-      "tipo": "lista_aberta",
-      "enunciado": "Liste 5 temas de post que sempre funcionam pro seu negócio (pode pedir ajuda de IA se travar).",
-      "quantidade_campos": 5,
-      "minimo_preenchido": 1,
-      "placeholders": [
-        "bastidor de como o produto é feito",
-        "dúvida frequente de cliente respondida",
-        "promoção da semana"
-      ]
-    },
-    {
-      "id": "b2",
       "tipo": "cenario",
       "enunciado": "Um dono posta só quando lembra, sem padrão nenhum — às vezes 3 posts numa semana, depois 2 semanas sem nada. O engajamento vive caindo. O que resolve isso?",
       "opcoes": [
@@ -32,11 +20,23 @@
       "feedback_acerto": "Isso. Regularidade, não volume, é o que sustenta o engajamento."
     },
     {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Liste 5 temas de post que sempre funcionam pro seu negócio (pode pedir ajuda de IA se travar).",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 1,
+      "placeholders": [
+        "bastidor de como o produto é feito",
+        "dúvida frequente de cliente respondida",
+        "promoção da semana"
+      ]
+    },
+    {
       "id": "b3",
       "tipo": "calculo",
-      "enunciado": "Escolha 2 ou 3 dias da semana pra postar e o tema de cada um.",
+      "enunciado": "Escolha UM tema da sua lista e em quantos dias por semana você vai postá-lo.",
       "campos": [
-        { "id": "tema", "tipo": "selecao", "rotulo": "Qual tema da sua lista?", "depende_de": { "trilha": "trilha-vendas", "aula": "aula-04", "bloco": "b1" } },
+        { "id": "tema", "tipo": "selecao", "rotulo": "Qual tema da sua lista?", "depende_de": { "trilha": "trilha-vendas", "aula": "aula-04", "bloco": "b2" } },
         { "id": "dias_semana", "tipo": "numero", "rotulo": "Em quantos dias da semana você posta esse tema", "unidade": "dias", "minimo": 0, "maximo": 7 }
       ],
       "calculos": {
