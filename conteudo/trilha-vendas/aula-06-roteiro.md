@@ -3,8 +3,8 @@
 **Habilidade:** configurar uma resposta automática de IA pra atender WhatsApp, Messenger ou Direct, com regra clara de quando passa pra um humano.
 
 [0:00] Você já tem a mensagem automática de ausência da Aula 2. Essa aula
-vai além: um agente que conversa de verdade — responde dúvida comum,
-manda catálogo, agenda — sem você digitar nada.
+vai além: um agente que conversa de verdade — responde dúvida comum e
+manda catálogo, sem você digitar nada.
 
 [0:25] A diferença entre mensagem automática e agente: a mensagem
 automática dá sempre a mesma resposta. O agente entende o que o cliente

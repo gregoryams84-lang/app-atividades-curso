@@ -21,6 +21,16 @@
     },
     {
       "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Seu perfil já tem destaques (stories fixados) que respondem \"como comprar\" e \"onde fica\"?",
+      "opcoes": [
+        "Sim, já tenho",
+        "Não, vou criar",
+        "Não sabia que servia pra isso"
+      ]
+    },
+    {
+      "id": "b3",
       "tipo": "lista_aberta",
       "enunciado": "Escreva o que seu negócio vende, pra quem, e como o cliente compra (link, WhatsApp, endereço) — cada informação em uma linha.",
       "quantidade_campos": 3,
@@ -29,16 +39,6 @@
         "vendo bolos de aniversário sob encomenda",
         "pra famílias no meu bairro",
         "compra pelo WhatsApp, link na bio"
-      ]
-    },
-    {
-      "id": "b3",
-      "tipo": "escolha_simples",
-      "enunciado": "Seu perfil já tem destaques (stories fixados) que respondem \"como comprar\" e \"onde fica\"?",
-      "opcoes": [
-        "Sim, já tenho",
-        "Não, vou criar",
-        "Não sabia que servia pra isso"
       ]
     },
     {

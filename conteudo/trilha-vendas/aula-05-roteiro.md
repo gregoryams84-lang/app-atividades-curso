@@ -1,6 +1,6 @@
 # Aula 5 — Automatizando a postagem com n8n
 
-**Habilidade:** entender e montar um fluxo básico de automação (gerar conteúdo → agendar → publicar) usando um fluxo pronto de n8n.
+**Habilidade:** entender e montar, do zero, um fluxo básico de automação (gerar conteúdo → agendar → publicar) usando n8n.
 
 [0:00] Até aqui você aprendeu a criar conteúdo e manter uma rotina de
 postagem manual. Essa aula ensina a tirar sua mão do meio — um fluxo que
@@ -14,11 +14,13 @@ fluxo roda, por exemplo toda segunda de manhã. Geração — a IA cria o
 texto a partir do seu banco de ideias da Aula 4. Publicação — posta
 automaticamente na rede escolhida.
 
-[1:40] Demonstração: usando um fluxo pronto que você importa, ajustando
-só o seu banco de ideias e o horário — não precisa montar do zero.
+[1:40] Demonstração: montando, passo a passo, as três caixinhas do seu
+primeiro fluxo — gatilho, geração, publicação — ligando uma na outra.
 
 [2:20] Um aviso: automação publica sozinha, mas não decide sozinha o que
 é apropriado. Revise o conteúdo gerado nas primeiras semanas, até
-confiar no padrão.
+confiar no padrão. Vale lembrar também que o n8n pode exigir criar
+conta e, dependendo do uso, ter custo.
 
-[2:50] Agora é sua vez: importa o fluxo modelo e testa com um post.
+[2:50] Agora é sua vez: monta seu primeiro fluxo simples com essas três
+partes e testa com um post.

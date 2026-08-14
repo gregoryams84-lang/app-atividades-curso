@@ -47,7 +47,7 @@
     {
       "id": "b4",
       "tipo": "escolha_simples",
-      "enunciado": "Você consegue manter esses dias fixos nas próximas 2 semanas?",
+      "enunciado": "Você consegue manter esse ritmo nas próximas 2 semanas?",
       "opcoes": [
         "Sim",
         "Vou tentar",
