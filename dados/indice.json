@@ -83,6 +83,48 @@
           "arquivo": "dados/trilha-vendas/aula-06.json"
         }
       ]
+    },
+    {
+      "id": "trilha-formalizacao",
+      "titulo": "Formalizar e manter a empresa em dia",
+      "aulas": [
+        {
+          "id": "aula-01",
+          "titulo": "Onde você está agora",
+          "ordem": 1,
+          "arquivo": "dados/trilha-formalizacao/aula-01.json"
+        },
+        {
+          "id": "aula-02",
+          "titulo": "Abrindo o CNPJ certo pro seu momento",
+          "ordem": 2,
+          "arquivo": "dados/trilha-formalizacao/aula-02.json"
+        },
+        {
+          "id": "aula-03",
+          "titulo": "As obrigações que se repetem",
+          "ordem": 3,
+          "arquivo": "dados/trilha-formalizacao/aula-03.json"
+        },
+        {
+          "id": "aula-04",
+          "titulo": "Organizando os documentos",
+          "ordem": 4,
+          "arquivo": "dados/trilha-formalizacao/aula-04.json"
+        },
+        {
+          "id": "aula-05",
+          "titulo": "Quando a empresa cresce",
+          "ordem": 5,
+          "arquivo": "dados/trilha-formalizacao/aula-05.json"
+        },
+        {
+          "id": "aula-06",
+          "titulo": "Seu checklist de em dia",
+          "ordem": 6,
+          "arquivo": "dados/trilha-formalizacao/aula-06.json"
+        }
+      ]
     }
   ]
 }
