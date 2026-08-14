@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-dinheiro",
+  "aula": "aula-01",
+  "titulo": "Pra onde seu dinheiro vai",
+  "habilidade": "Reconhecer por que misturar dinheiro pessoal e do negócio mascara prejuízo, e separar as contas.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Uma dona de salão usa a mesma carteira pro dinheiro do salão e pra casa. Num mês bom, ela paga o aluguel de casa com o caixa do salão. No mês seguinte, o salão vende pouco, mas ela não percebe porque \"sempre tem dinheiro\". O que está acontecendo?",
+      "opcoes": [
+        "Nada, ela está gerindo bem porque nunca falta dinheiro",
+        "Ela não consegue saber se o salão dá lucro de verdade — o dinheiro pessoal está mascarando o resultado real",
+        "O problema só existe se ela abrir uma empresa formal"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
+      "explicacao_erro": "Sem separação, não dá pra saber se o negócio sozinho fecha a conta — o dinheiro pessoal esconde o resultado real.",
+      "feedback_acerto": "Isso. Misturar não é só bagunça, é não saber se o negócio se sustenta sozinho."
+    },
+    {
+      "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Hoje, seu dinheiro pessoal e do negócio estão:",
+      "opcoes": [
+        "Bem separados",
+        "Meio misturados, mas eu sei distinguir",
+        "Totalmente misturados, é tudo a mesma coisa"
+      ]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Olhe suas últimas movimentações (papel, app, caderno) e liste 3 que você não teria certeza se são pessoais ou do negócio.",
+      "quantidade_campos": 3,
+      "minimo_preenchido": 1,
+      "placeholders": ["compra no mercado paga com o caixa do negócio"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Você vai separar (mesmo que simbolicamente, tipo um envelope ou conta digital) essa semana?",
+      "opcoes": [
+        "Sim, faço agora",
+        "Vou fazer depois",
+        "Já tenho separado"
+      ]
+    }
+  ]
+}
