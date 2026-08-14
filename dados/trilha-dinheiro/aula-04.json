@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-dinheiro",
+  "aula": "aula-04",
+  "titulo": "Pró-labore",
+  "habilidade": "Definir quanto tirar do negócio pra você sem sufocar o caixa.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Um dono de negócio tira R$ 2.000 num mês de venda boa e R$ 500 no mês seguinte, porque \"tira o que sobra no dia\". O negócio nunca consegue guardar reserva. O que está faltando?",
+      "opcoes": [
+        "Ele devia vender mais todo mês",
+        "Um valor fixo de pró-labore, calculado pelo que o negócio sustenta, não pelo que sobra no dia",
+        "Nada, isso é normal em negócio pequeno"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
+      "explicacao_erro": "Tirar o que sobra no dia varia demais e nunca deixa o negócio guardar reserva — o pró-labore precisa ser um valor fixo, calculado pelo que o negócio sustenta.",
+      "feedback_acerto": "Isso. Valor fixo, calculado pelo que sobra em média — não pelo que sobra no dia."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Olhando seu fluxo de caixa (Aula 2), escreva quanto sobrou, em média, nos últimos meses.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["sobrou em média R$ 800 por mês"]
+    },
+    {
+      "id": "b3",
+      "tipo": "lista_aberta",
+      "enunciado": "Com base nisso, escreva um valor (ou regra) de pró-labore que o negócio consegue sustentar todo mês.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["vou tirar R$ 600 fixos todo mês"]
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "Esse valor é diferente do que você tira hoje?",
+      "opcoes": [
+        "Sim, é menor do que eu tiro hoje",
+        "Sim, é maior — posso tirar mais",
+        "É igual ao que já tiro"
+      ]
+    }
+  ]
+}
