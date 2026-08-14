@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-ia",
+  "aula": "aula-04",
+  "titulo": "Atendimento sem parecer robô",
+  "habilidade": "Revisar uma resposta de IA genérica até soar como o próprio dono, e reconhecer quando a revisão manual é obrigatória.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Uma IA respondeu a um cliente: \"Agradecemos seu contato. Nossa equipe está à disposição para auxiliá-lo(a) em qualquer necessidade que você tenha!\". O principal problema dessa resposta é:",
+      "opcoes": [
+        "Está errada, o cliente não vai entender",
+        "É longa e genérica demais, não soa como uma pessoa falando",
+        "Não tem problema nenhum, pode mandar assim"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "explicacao_erro": "A resposta é educada mas genérica — não parece ninguém falando de verdade com o cliente.",
+      "feedback_acerto": "Isso. Genérica demais — falta o seu jeito de falar."
+    },
+    {
+      "id": "b2",
+      "tipo": "lista_aberta",
+      "enunciado": "Copie aqui uma resposta genérica que uma IA te deu (pode ser da Aula 2 ou testando agora) já reescrita do seu jeito.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["a versão reescrita, do jeito que você falaria"]
+    },
+    {
+      "id": "b3",
+      "tipo": "cenario",
+      "enunciado": "Você recebe uma reclamação de cliente sobre atraso na entrega. O que fazer?",
+      "opcoes": [
+        "Deixar a IA responder sozinha, é mais rápido",
+        "Pode usar a IA pra rascunhar, mas sempre revisar e ajustar antes de mandar",
+        "Nunca usar IA nem pra rascunhar, escrever tudo do zero"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 2:20 do vídeo.",
+      "explicacao_erro": "Situação delicada permite rascunho de IA, mas a revisão manual antes de mandar é sempre obrigatória.",
+      "feedback_acerto": "Isso. Pode ajudar a rascunhar, mas quem decide e revisa é você."
+    },
+    {
+      "id": "b4",
+      "tipo": "escolha_simples",
+      "enunciado": "No seu negócio, em qual tipo de mensagem você mais precisa desse cuidado de revisar antes de mandar?",
+      "opcoes": [
+        "Resposta de preço ou prazo",
+        "Reclamação",
+        "Cobrança",
+        "Pergunta geral sobre o produto"
+      ]
+    }
+  ]
+}
