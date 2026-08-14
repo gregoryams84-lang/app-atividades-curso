@@ -1,5 +1,6 @@
 # Material de apoio — Aula 6: Meu painel financeiro
 
+**Minhas contas (pessoal e negócio) já estão separadas (Aula 1)?** ( ) sim ( ) preciso separar
 **Entrada média (Aula 2):** _______________________
 **Saída média (Aula 2):** _______________________
 **Pró-labore definido (Aula 4):** _______________________
