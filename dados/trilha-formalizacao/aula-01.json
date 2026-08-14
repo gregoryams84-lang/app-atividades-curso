@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "trilha": "trilha-formalizacao",
+  "aula": "aula-01",
+  "titulo": "Onde você está agora",
+  "habilidade": "Diagnosticar, por três perguntas, em que estágio de formalização o negócio está.",
+  "blocos": [
+    {
+      "id": "b1",
+      "tipo": "cenario",
+      "enunciado": "Uma cabeleireira vende serviço há 8 meses, tem clientes fixos, mas nunca abriu CNPJ porque \"não sabia por onde começar\". Ela está:",
+      "opcoes": [
+        "Regular, atendimento não precisa de CNPJ",
+        "Informal — vale a pena avaliar abrir o CNPJ certo pro que ela faz",
+        "Só precisa abrir CNPJ se contratar funcionário"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
+      "explicacao_erro": "Prestar serviço de forma recorrente sem CNPJ é informalidade — vale avaliar abrir o CNPJ certo pra atividade.",
+      "feedback_acerto": "Isso. Cliente fixo e recorrência são sinal de que vale formalizar."
+    },
+    {
+      "id": "b2",
+      "tipo": "escolha_simples",
+      "enunciado": "Você tem CNPJ aberto hoje?",
+      "opcoes": [
+        "Sim, sei que tipo",
+        "Sim, mas não sei que tipo/regime",
+        "Não tenho ainda"
+      ]
+    },
+    {
+      "id": "b3",
+      "tipo": "escolha_simples",
+      "enunciado": "Se tem CNPJ, você sabe se está com alguma obrigação atrasada (guia não paga, declaração não feita)?",
+      "opcoes": [
+        "Sei que está tudo em dia",
+        "Acho que tem algo atrasado",
+        "Não sei",
+        "Não tenho CNPJ ainda"
+      ]
+    },
+    {
+      "id": "b4",
+      "tipo": "lista_aberta",
+      "enunciado": "Com base nas respostas acima, escreva em uma frase qual é o seu próximo passo nessa trilha (abrir CNPJ, resolver atraso, ou organizar o que já tem).",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["preciso abrir o CNPJ certo pro meu negócio"]
+    }
+  ]
+}
