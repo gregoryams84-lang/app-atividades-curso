@@ -33,14 +33,6 @@
     },
     {
       "id": "b3",
-      "tipo": "lista_aberta",
-      "enunciado": "Peça pra uma ferramenta de IA escrever 3 opções de bio usando essas informações. Cole aqui a que você mais gostou.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["a bio escolhida, já do seu jeito"]
-    },
-    {
-      "id": "b4",
       "tipo": "escolha_simples",
       "enunciado": "Seu perfil já tem destaques (stories fixados) que respondem \"como comprar\" e \"onde fica\"?",
       "opcoes": [
@@ -48,6 +40,14 @@
         "Não, vou criar",
         "Não sabia que servia pra isso"
       ]
+    },
+    {
+      "id": "b4",
+      "tipo": "lista_aberta",
+      "enunciado": "Peça pra uma ferramenta de IA escrever 3 opções de bio usando essas informações. Cole aqui a que você mais gostou.",
+      "quantidade_campos": 1,
+      "minimo_preenchido": 1,
+      "placeholders": ["a bio escolhida, já do seu jeito"]
     }
   ]
 }
