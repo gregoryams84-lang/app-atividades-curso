@@ -10,9 +10,12 @@ Isso é não ter fluxo de caixa.
 entra e tudo que sai, com data. Não precisa de sistema caro — papel,
 planilha simples ou app gratuito servem.
 
-[1:00] Duas colunas resolvem noventa por cento: entrada — o que vendeu,
+[1:00] Duas colunas já resolvem quase tudo: entrada — o que vendeu,
 quando — e saída — o que pagou, quando, pra quê. A diferença entre as
-duas é o que sobra de verdade.
+duas é o que sobra de verdade. Vale também anotar o que já tem
+compromisso pros próximos dias — uma conta que vence, um fornecedor que
+espera pagamento — pra não contar como livre um dinheiro que já tem
+destino.
 
 [1:40] Demonstração: registrando as últimas cinco movimentações do
 negócio nas duas colunas.

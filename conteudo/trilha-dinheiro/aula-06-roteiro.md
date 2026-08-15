@@ -8,6 +8,7 @@ painel mensal só.
 
 [0:25] Não tem conteúdo novo aqui — é organizar o que já viu: quanto
 entra, quanto sai, quanto você tira, e se o preço ainda faz sentido.
+Quem escreve os números vê a tendência chegando antes dela virar crise.
 
 [1:00] Demonstração: preenchendo o painel com os números reais que você
 já levantou nas aulas anteriores.

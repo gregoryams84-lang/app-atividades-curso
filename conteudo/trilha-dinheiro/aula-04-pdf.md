@@ -4,4 +4,5 @@
 
 **Meu valor (ou regra) de pró-labore:** _______________________
 
-Esse valor é fixo — não muda porque o mês foi bom ou ruim.
+Esse valor é fixo — não muda porque o mês foi bom ou ruim. Ele fica
+abaixo da média, pra caber nos meses fracos e sobrar reserva.

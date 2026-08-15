@@ -9,5 +9,8 @@
 1. _______________________________________________
 2. _______________________________________________
 
+**Meu preço hoje:** _______________________
+**Meu preço depois de olhar pro valor percebido:** _______________________
+
 Revise seu preço com os dois olhares: cobre o custo, e reflete o valor
 que você entrega.

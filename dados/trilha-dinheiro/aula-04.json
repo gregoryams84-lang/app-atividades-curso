@@ -17,12 +17,12 @@
       "correta": 1,
       "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
       "explicacao_erro": "Tirar o que sobra no dia varia demais e nunca deixa o negócio guardar reserva — o pró-labore precisa ser um valor fixo, calculado pelo que o negócio sustenta.",
-      "feedback_acerto": "Isso. Valor fixo, calculado pelo que sobra em média — não pelo que sobra no dia."
+      "feedback_acerto": "Isso. Valor fixo, calculado pelo que o negócio sustenta com folga pros meses fracos — não pelo que sobra no dia."
     },
     {
       "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Olhando seu fluxo de caixa (Aula 2), escreva quanto sobrou, em média, nos últimos meses.",
+      "enunciado": "Olhando seu fluxo de caixa (Aula 2), escreva quanto sobrou, em média, nos últimos meses. Se ainda não tem meses registrados, use uma estimativa de cabeça dos últimos 2-3 meses.",
       "quantidade_campos": 1,
       "minimo_preenchido": 1,
       "placeholders": ["sobrou em média R$ 800 por mês"]
@@ -30,7 +30,7 @@
     {
       "id": "b3",
       "tipo": "lista_aberta",
-      "enunciado": "Com base nisso, escreva um valor (ou regra) de pró-labore que o negócio consegue sustentar todo mês.",
+      "enunciado": "Com base nisso, escreva um valor (ou regra) de pró-labore abaixo dessa média — o que o negócio sustenta até num mês fraco, deixando parte pra reserva e pro que precisa reinvestir.",
       "quantidade_campos": 1,
       "minimo_preenchido": 1,
       "placeholders": ["vou tirar R$ 600 fixos todo mês"]

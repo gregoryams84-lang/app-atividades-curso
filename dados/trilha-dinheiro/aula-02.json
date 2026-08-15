@@ -30,7 +30,7 @@
     {
       "id": "b3",
       "tipo": "lista_aberta",
-      "enunciado": "Liste as últimas 3 saídas (despesas) do seu negócio, com valor aproximado.",
+      "enunciado": "Liste as últimas 3 saídas (despesas) do seu negócio, com valor aproximado — inclua também alguma saída que já está compromissada pros próximos dias (conta que vence, fornecedor que espera pagamento), se tiver.",
       "quantidade_campos": 3,
       "minimo_preenchido": 1,
       "placeholders": ["compra de material, R$ 60"]

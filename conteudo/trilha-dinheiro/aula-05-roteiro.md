@@ -7,7 +7,9 @@ o que é fácil de cortar, não o que realmente pesa.
 
 [0:25] Gasto fixo: acontece todo mês, quase no mesmo valor, você vende
 ou não — aluguel, assinatura, internet. Gasto variável: muda conforme
-você produz ou vende — material, comissão, frete.
+você produz ou vende — material, comissão, frete. Você já usou essa
+separação pra montar seu preço na Aula 3 — os gastos que você lista
+aqui são as mesmas saídas que você já vem registrando desde a Aula 2.
 
 [1:00] Por que separar importa: cortar gasto variável é rápido (compra
 menos material se vender menos). Cortar gasto fixo geralmente exige

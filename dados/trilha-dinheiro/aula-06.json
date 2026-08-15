@@ -15,14 +15,14 @@
         "O que sente, porque conhece o negócio de verdade"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 0:25 do vídeo.",
       "explicacao_erro": "Números escritos mostram tendência antes de virar crise — \"sentir\" só percebe quando já está ruim.",
       "feedback_acerto": "Isso. Painel revisado mostra o problema chegando, não só quando ele já chegou."
     },
     {
       "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Escreva o total de entrada e saída médio dos últimos meses (Aula 2).",
+      "enunciado": "Escreva a entrada média e a saída média dos últimos meses (Aula 2). Se ainda não tem meses registrados, use uma estimativa de cabeça dos últimos 2-3 meses.",
       "quantidade_campos": 2,
       "minimo_preenchido": 1,
       "placeholders": ["entrada média: R$ 2.500", "saída média: R$ 1.700"]

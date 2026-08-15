@@ -8,7 +8,8 @@ te tira do jogo. Essa aula vai além.
 
 [0:25] A base ainda importa: custo fixo — o que você paga vendendo ou
 não — mais custo variável — o que muda por unidade — mais a margem que
-você quer ganhar. Isso garante que você não trabalha no prejuízo.
+você quer ganhar (a gente aprofunda a diferença entre fixo e variável na
+Aula 5). Isso reduz o risco de vender no prejuízo.
 
 [1:00] Mas o preço não é só matemática de custo — é também o que aquilo
 vale pra quem compra. Duas pessoas fazendo o mesmo bolo podem cobrar

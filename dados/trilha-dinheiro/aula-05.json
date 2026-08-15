@@ -15,7 +15,7 @@
         "Cortar gasto sempre resolve, só demora pra fazer efeito"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho de 1:00 do vídeo.",
+      "dica_erro": "Reveja o trecho dos 1:00 do vídeo.",
       "explicacao_erro": "Gasto fixo pesa igual, vendendo ou não — cortar só o variável deixa o maior peso intocado.",
       "feedback_acerto": "Isso. O fixo que não se ajusta ao movimento é o que mais merece revisão."
     },
@@ -30,10 +30,10 @@
     {
       "id": "b3",
       "tipo": "lista_aberta",
-      "enunciado": "Agora escreva, pra cada gasto que você listou, se ele é fixo (acontece todo mês, quase o mesmo valor) ou variável (muda conforme você vende/produz).",
+      "enunciado": "Agora escreva cada gasto que você tem e se ele é fixo (acontece todo mês, quase o mesmo valor) ou variável (muda conforme você vende/produz) — por exemplo, \"aluguel do espaço: fixo\".",
       "quantidade_campos": 6,
       "minimo_preenchido": 1,
-      "placeholders": ["fixo", "variável", "fixo"]
+      "placeholders": ["aluguel do espaço: fixo", "material de trabalho: variável", "assinatura de sistema: fixo"]
     },
     {
       "id": "b4",

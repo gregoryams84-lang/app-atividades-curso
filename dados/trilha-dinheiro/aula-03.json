@@ -15,14 +15,14 @@
         "R$ 150 é sempre exagero pra bolo"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho de 1:00 do vídeo.",
-      "explicacao_erro": "O custo garante que você não perde dinheiro — mas o valor percebido é o que explica preços diferentes pro mesmo produto.",
+      "dica_erro": "Reveja o trecho dos 1:00 do vídeo.",
+      "explicacao_erro": "O custo garante que cada venda cubra o custo — mas o valor percebido é o que explica preços diferentes pro mesmo produto.",
       "feedback_acerto": "Isso. O cliente paga pelo que enxerga de valor, não só pelo ingrediente."
     },
     {
       "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Escreva seu custo fixo (o que você paga vendendo ou não, dividido pelo que produz no mês) e seu custo variável (o que muda por unidade vendida).",
+      "enunciado": "Escreva seu custo fixo (o que você paga vendendo ou não, dividido pelo que vende no mês) e seu custo variável (o que muda por unidade vendida).",
       "quantidade_campos": 2,
       "minimo_preenchido": 1,
       "placeholders": ["custo fixo por unidade: R$ 10", "custo variável por unidade: R$ 15"]
