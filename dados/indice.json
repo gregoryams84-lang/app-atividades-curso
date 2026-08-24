@@ -6,7 +6,7 @@
       "aulas": [
         {
           "id": "aula-01",
-          "titulo": "Você já usa IA. O problema é como.",
+          "titulo": "Os 3 agentes que tocam meu negócio por mim",
           "ordem": 1,
           "arquivo": "dados/trilha-ia/aula-01.json"
         },

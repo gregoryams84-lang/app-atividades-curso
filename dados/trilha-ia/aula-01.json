@@ -2,49 +2,49 @@
   "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-01",
-  "titulo": "Você já usa IA. O problema é como.",
-  "habilidade": "Reconhecer, pelas três perguntas, se uma tarefa do seu negócio vale a pena automatizar.",
+  "titulo": "Os 3 agentes que tocam meu negócio por mim",
+  "habilidade": "Reconhecer os pontos do negócio onde um agente de IA pode assumir o trabalho repetitivo — e o que continua sendo só seu.",
   "blocos": [
     {
       "id": "b1",
       "tipo": "cenario",
-      "enunciado": "Um dono de pizzaria gasta cerca de 15 minutos por dia respondendo a mesma pergunta, \"vocês entregam no meu bairro?\". Pelas três perguntas da aula, essa tarefa é:",
+      "enunciado": "Um aluno manda mensagem perguntando \"como eu emito meu boleto?\" — a mesma pergunta que chega dezenas de vezes por dia. Qual dos 3 agentes resolve isso sozinho?",
       "opcoes": [
-        "Não é candidata, é tempo demais para automatizar",
-        "Candidata forte, porque repete, custa tempo e a resposta segue um padrão",
-        "Não é candidata, porque atendimento nunca deve ser automatizado",
-        "Falta informação para decidir"
+        "Agente de secretaria",
+        "Agente comercial",
+        "Agente de marketing e conteúdo",
+        "Nenhum, precisa ser você pessoalmente"
       ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:55 do vídeo.",
-      "explicacao_erro": "As três perguntas são: repete, custa tempo, a resposta segue padrão.",
-      "feedback_acerto": "Exato. Repete, soma tempo, e a resposta depende só do endereço — é padrão."
+      "correta": 0,
+      "dica_erro": "É uma dúvida de quem já é aluno, não de quem tá decidindo se compra.",
+      "explicacao_erro": "O agente de secretaria cuida das dúvidas repetitivas de quem já é aluno/cliente — boleto, primeira aula, certificado, carteirinha.",
+      "feedback_acerto": "Exato. Repete, segue um padrão, e não exige julgamento seu — é o tipo de coisa que o agente de secretaria resolve sozinho, a qualquer hora."
     },
     {
       "id": "b2",
       "tipo": "cenario",
-      "enunciado": "A mesma pizzaria recebe uma reclamação de um cliente que pediu para um aniversário e a pizza chegou fria. Pelas três perguntas, essa tarefa é:",
+      "enunciado": "Um aluno manda mensagem dizendo que quer desistir do curso. Pelo que a aula mostrou, o que acontece com esse caso?",
       "opcoes": [
-        "Candidata forte, porque reclamação sempre tem resposta pronta",
-        "Não é candidata, porque depende de julgamento e do histórico daquele cliente",
-        "Candidata, desde que a resposta seja revisada depois",
-        "Falta informação para decidir"
+        "O agente de secretaria responde com uma justificativa padrão",
+        "Vai direto pra você — cada motivo pede um acolhimento diferente",
+        "O agente comercial oferece um desconto automático",
+        "Fica esperando até o aluno desistir de desistir"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 1:40 do vídeo.",
-      "explicacao_erro": "Uma reclamação de aniversário não se repete do mesmo jeito e exige julgamento — não é padrão.",
-      "feedback_acerto": "Isso. É rara e depende do seu julgamento. Automatizar aqui custa cliente."
+      "dica_erro": "Repensa: essa resposta pode mudar de aluno pra aluno, dependendo do motivo?",
+      "explicacao_erro": "Uma desistência não segue padrão — o motivo muda, e a resposta certa depende de ouvir a pessoa. Automatizar aqui custaria aluno, não tempo.",
+      "feedback_acerto": "Isso. Repete (sempre tem algum caso), mas não segue padrão — exige acolhimento de verdade, então fica com você."
     },
     {
       "id": "b3",
       "tipo": "lista_aberta",
-      "enunciado": "Liste 5 tarefas que você repete no seu negócio toda semana. Escreva do jeito que você falaria, não precisa ser formal.",
+      "enunciado": "Pensa nos últimos 7 dias: qual pergunta ou tarefa você respondeu do mesmo jeito mais de uma vez — no atendimento, nas vendas ou no conteúdo que você posta? Liste pelo menos 5.",
       "quantidade_campos": 5,
       "minimo_preenchido": 1,
       "placeholders": [
         "responder quanto custa no WhatsApp",
         "montar o post da promoção",
-        "lembrar de cobrar quem ficou devendo"
+        "explicar a forma de pagamento pra quem pergunta"
       ]
     },
     {
@@ -55,23 +55,25 @@
         { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das cinco?", "depende_de": { "trilha": "trilha-ia", "aula": "aula-01", "bloco": "b3" } },
         { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz", "unidade": "vezes", "minimo": 0, "maximo": 999 },
         { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos", "unidade": "minutos", "minimo": 0, "maximo": 999 },
-        { "id": "resposta_padrao", "tipo": "selecao", "rotulo": "A resposta certa é quase sempre a mesma?", "opcoes": ["Sim", "Não", "Às vezes"] }
+        { "id": "qual_agente", "tipo": "selecao", "rotulo": "Qual dos 3 agentes resolveria isso?", "opcoes": ["Secretaria", "Comercial", "Marketing e conteúdo"] }
       ],
       "calculos": {
         "total": "vezes_semana * minutos_vez",
         "horas": "total * 4.345 / 60"
       },
-      "resultado_texto": "Você gasta cerca de {total} minutos por semana, o que dá {horas} horas por mês."
+      "resultado_texto": "Você gasta cerca de {total} minutos por semana nisso, o que dá {horas} horas por mês que um agente poderia devolver pra você."
     },
     {
       "id": "b5",
       "tipo": "escolha_simples",
-      "enunciado": "Olhando o número que apareceu acima, essa tarefa vale ser atacada primeiro?",
+      "enunciado": "Um agente de IA é a mesma coisa que aquele chatbot de resposta pronta que trava no primeiro \"não entendi\"?",
       "opcoes": [
-        "Sim, é a que mais me consome",
-        "Não, tem outra da lista que é pior",
-        "Ainda não sei"
-      ]
+        "Sim, é basicamente a mesma coisa",
+        "Não — o agente é treinado com meu conteúdo e minha forma de atender, disponível o tempo todo"
+      ],
+      "correta": 1,
+      "explicacao_erro": "Chatbot de fluxo travado é diferente de um agente treinado com o seu conteúdo real, capaz de responder de verdade e só te chamar quando o caso é delicado.",
+      "feedback_acerto": "Isso mesmo — essa diferença é o que faz o agente funcionar de verdade no dia a dia do negócio."
     }
   ]
 }

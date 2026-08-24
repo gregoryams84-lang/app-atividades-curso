@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 1 — Os 3 agentes que tocam meu negócio por mim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #14513C;
+    --verde-escuro: #0F3A2B;
+    --verde-claro: #E4EDE8;
+    --tinta: #16191C;
+    --papel: #F5F6F3;
+    --neutro: #5B6560;
+    --neutro-claro: #E9EBE8;
+    --ambar: #8A5A12;
+    --ambar-claro: #F3E7D6;
+    --borda: #D9DCD8;
+  }
+
+  * { box-sizing: border-box; }
+
+  @page { size: A4; margin: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    color: var(--tinta);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body { font-size: 14.5px; line-height: 1.58; }
+
+  h1, h2, h3 { font-family: "Fraunces", serif; font-weight: 600; margin: 0; color: var(--verde); }
+
+  .banda-topo {
+    background: var(--verde);
+    color: var(--papel);
+    padding: 15mm 18mm 9mm;
+  }
+  .banda-topo h1 { color: #FFFFFF; }
+
+  .selo {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 10px;
+  }
+
+  .banda-topo h1 { font-size: 27px; line-height: 1.22; margin-bottom: 10px; max-width: 150mm; }
+
+  .habilidade-topo {
+    font-size: 13px;
+    color: #D8E4DD;
+    max-width: 150mm;
+    margin: 0;
+  }
+  .habilidade-topo strong { color: #FFFFFF; font-weight: 600; }
+
+  .conteudo { padding: 9mm 18mm 6mm; }
+
+  section { margin-bottom: 7mm; break-inside: avoid; }
+
+  .rotulo-secao {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--neutro);
+    margin-bottom: 4px;
+  }
+
+  h2.titulo-secao { font-size: 18px; margin-bottom: 3mm; }
+
+  p { margin: 0 0 8px; }
+
+  /* --- Bloco de história (exemplo real) --- */
+  .caixa-historia {
+    background: var(--papel);
+    border-left: 3px solid var(--verde);
+    border-radius: 4px;
+    padding: 4mm 5mm;
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+  .caixa-historia .rotulo-secao { color: var(--verde); margin-bottom: 6px; }
+  .caixa-historia p:last-child { margin-bottom: 0; }
+  .caixa-historia p { color: var(--tinta); }
+
+  /* --- Três agentes --- */
+  .lista-perguntas { display: flex; flex-direction: column; gap: 3.5mm; }
+  .cartao-pergunta {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .numero-pergunta {
+    flex: 0 0 auto;
+    width: 8mm;
+    height: 8mm;
+    border-radius: 50%;
+    background: var(--verde);
+    color: #FFFFFF;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .texto-pergunta h3 { font-size: 15.5px; margin-bottom: 2px; }
+  .texto-pergunta .explicacao { color: var(--tinta); margin-bottom: 3px; }
+  .texto-pergunta .exemplo {
+    color: var(--neutro);
+    font-size: 12.5px;
+    font-style: italic;
+  }
+  .cartao-pergunta.destaque { border-color: var(--ambar); background: var(--ambar-claro); }
+  .cartao-pergunta.destaque .numero-pergunta { background: var(--ambar); }
+  .cartao-pergunta.destaque .exemplo { color: var(--ambar); font-style: normal; font-weight: 600; }
+
+  /* --- Fluxograma --- */
+  .caixa-fluxograma {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 5mm;
+    text-align: center;
+    background: var(--papel);
+  }
+  .caixa-fluxograma svg { width: 100%; height: auto; max-width: 168mm; }
+  .legenda-fluxograma {
+    display: flex;
+    justify-content: center;
+    gap: 8mm;
+    margin-top: 3mm;
+    font-size: 11.5px;
+    color: var(--neutro);
+  }
+  .legenda-fluxograma span { display: inline-flex; align-items: center; gap: 2mm; }
+  .ponto { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
+  /* --- Dois casos --- */
+  .grade-casos { display: flex; gap: 4mm; }
+  .cartao-caso {
+    flex: 1;
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .cartao-caso.ok { background: var(--verde-claro); border: 1px solid var(--verde); }
+  .cartao-caso.nao { background: var(--neutro-claro); border: 1px solid var(--borda); }
+  .rotulo-caso {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2mm;
+  }
+  .cartao-caso.ok .rotulo-caso { color: var(--verde); }
+  .cartao-caso.nao .rotulo-caso { color: var(--neutro); }
+  .cartao-caso h3 { font-size: 14px; margin-bottom: 2mm; color: var(--tinta); }
+  .checagem { list-style: none; margin: 0 0 3mm; padding: 0; font-size: 12.5px; }
+  .checagem li { margin-bottom: 1.5mm; padding-left: 5mm; position: relative; }
+  .checagem li::before { position: absolute; left: 0; font-weight: 700; }
+  .checagem .sim::before { content: "✓"; color: var(--verde); }
+  .checagem .nao::before { content: "✕"; color: var(--ambar); }
+  .conclusao-caso { font-size: 12.5px; font-weight: 600; margin: 0; }
+  .cartao-caso.ok .conclusao-caso { color: var(--verde-escuro); }
+  .cartao-caso.nao .conclusao-caso { color: var(--ambar); }
+
+  /* --- Gráfico de acúmulo --- */
+  .caixa-grafico {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .legenda-grafico-topo { font-size: 12px; color: var(--neutro); margin-bottom: 4mm; }
+  .barra-linha { display: flex; align-items: center; gap: 3mm; margin-bottom: 3.5mm; }
+  .barra-linha:last-child { margin-bottom: 0; }
+  .barra-rotulo { flex: 0 0 34mm; font-size: 12px; font-weight: 600; text-align: right; }
+  .barra-trilho { flex: 1; background: var(--neutro-claro); border-radius: 5px; height: 8mm; position: relative; overflow: hidden; }
+  .barra-preenchida { background: var(--verde); height: 100%; border-radius: 5px 0 0 5px; display: flex; align-items: center; }
+  .barra-linha:nth-child(2) .barra-preenchida { background: #4E7C67; }
+  .barra-linha:nth-child(3) .barra-preenchida { background: #9BB8AA; }
+  .barra-valor { flex: 0 0 26mm; font-size: 12.5px; font-weight: 700; color: var(--tinta); }
+  .nota-grafico { font-size: 11.5px; color: var(--neutro); margin-top: 4mm; margin-bottom: 0; }
+
+  /* --- Atividade --- */
+  .caixa-atividade {
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .instrucao-atividade { color: var(--tinta); margin-bottom: 4mm; }
+  .instrucao-atividade strong { color: var(--verde); }
+  .linha-preencher {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    border-bottom: 1px solid var(--borda);
+    padding: 3mm 0;
+  }
+  .linha-preencher:first-of-type { padding-top: 0; }
+  .num-linha {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    color: var(--verde);
+    font-size: 14px;
+    flex: 0 0 auto;
+  }
+
+  /* --- Resumo final --- */
+  .caixa-resumo {
+    background: var(--verde);
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .caixa-resumo .rotulo-secao { color: var(--verde-claro); }
+  .caixa-resumo ul { margin: 0; padding-left: 5mm; }
+  .caixa-resumo li { margin-bottom: 2mm; font-size: 13px; }
+  .caixa-resumo li:last-child { margin-bottom: 0; }
+  .caixa-resumo strong { color: #FFFFFF; }
+
+  .rodape {
+    text-align: center;
+    font-size: 11px;
+    color: var(--neutro);
+    padding: 4mm 18mm 10mm;
+  }
+</style>
+</head>
+<body>
+
+  <div class="banda-topo">
+    <div class="selo">Toca o Negócio · Trilha IA no Negócio · Aula 1</div>
+    <h1>Os 3 agentes que tocam meu negócio por mim</h1>
+    <p class="habilidade-topo"><strong>O que você leva desta aula:</strong> reconhecer os pontos do seu negócio onde um agente de IA pode assumir o trabalho repetitivo — e o que continua sendo só seu.</p>
+  </div>
+
+  <div class="conteudo">
+
+    <section>
+      <div class="caixa-historia">
+        <div>
+          <div class="rotulo-secao">Um exemplo real, de outra frente do meu trabalho</div>
+          <p>Numa outra frente — um polo de ensino a distância, com cursos regulados e autorizados pelo MEC —, cheguei a ter uma base de mil alunos. Todo dia, dezenas de vezes, caía a mesma pergunta no WhatsApp: "como eu gero meu boleto?", "como assisto a primeira aula?", "onde fica minha carteirinha?". Eu tinha gente contratada só pra secretaria, pra comercial e pra criar conteúdo — o dia inteiro.</p>
+          <p>Esse material não te dá uma lista de vinte ferramentas de IA. Te mostra os 3 agentes que criei pra assumir esse trabalho repetitivo — e um agente <strong>não</strong> é aquele chatbot de resposta pronta que trava no primeiro "não entendi". É uma versão treinada com o meu conteúdo e a minha forma de atender, disponível 24 horas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Os 3 agentes</h2>
+      <div class="lista-perguntas">
+
+        <div class="cartao-pergunta">
+          <div class="numero-pergunta">1</div>
+          <div class="texto-pergunta">
+            <h3>Agente de secretaria</h3>
+            <p class="explicacao">Responde as dúvidas repetitivas de quem já é aluno — boleto, primeira aula, certificado, carteirinha — a qualquer hora do dia, sem depender do humor de ninguém.</p>
+            <p class="exemplo">Exemplo: 90% das dúvidas de mil alunos eram sempre as mesmas 4 ou 5 perguntas.</p>
+          </div>
+        </div>
+
+        <div class="cartao-pergunta">
+          <div class="numero-pergunta">2</div>
+          <div class="texto-pergunta">
+            <h3>Agente comercial</h3>
+            <p class="explicacao">Atende quem ainda não comprou: responde sobre valor, duração, certificação, e já cadastra o lead pronto pra você fechar.</p>
+            <p class="exemplo">Exemplo: você só entra na conversa pra fechar a matrícula — o resto o agente já resolveu.</p>
+          </div>
+        </div>
+
+        <div class="cartao-pergunta destaque">
+          <div class="numero-pergunta">3</div>
+          <div class="texto-pergunta">
+            <h3>Agente de marketing e conteúdo</h3>
+            <p class="explicacao">Cria e agenda posts pro Instagram, Facebook e TikTok em horários estratégicos — você só aprova por e-mail antes de publicar.</p>
+            <p class="exemplo">Exemplo: 3 posts por dia, todo dia, sem você abrir um editor de vídeo.</p>
+          </div>
+        </div>
+
+      </div>
+      <p style="margin-top:3mm; font-size:12.5px; color: var(--neutro);">Os 3 têm uma coisa em comum: resolvem o que se repete e segue um padrão. O que é delicado — uma desistência, uma negociação — continua com você.</p>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Como decidir o que é do agente (ou seu)</h2>
+      <div class="caixa-fluxograma">
+        <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#5B6560" />
+            </marker>
+          </defs>
+
+          <!-- start -->
+          <rect x="100" y="14" width="220" height="46" rx="23" fill="#E4EDE8" stroke="#14513C" stroke-width="1.5"/>
+          <text x="210" y="42" text-anchor="middle" font-family="Inter" font-size="15" font-weight="600" fill="#16191C">Pergunta ou pedido chega</text>
+
+          <line x1="210" y1="60" x2="210" y2="96" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+
+          <!-- diamond A -->
+          <polygon points="210,98 325,166 210,234 95,166" fill="#FFFFFF" stroke="#14513C" stroke-width="1.5"/>
+          <text x="210" y="160" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="600" fill="#16191C">1. Já apareceu</text>
+          <text x="210" y="177" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="600" fill="#16191C">antes?</text>
+
+          <!-- branch nao A -->
+          <line x1="325" y1="166" x2="448" y2="166" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+          <text x="387" y="156" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#8A5A12">Não</text>
+          <rect x="450" y="136" width="200" height="60" rx="8" fill="#E9EBE8" stroke="#D9DCD8" stroke-width="1.5"/>
+          <text x="550" y="161" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#16191C">Vai direto</text>
+          <text x="550" y="178" text-anchor="middle" font-family="Inter" font-size="13" font-weight="600" fill="#16191C">pra você</text>
+
+          <!-- down to diamond B -->
+          <line x1="210" y1="234" x2="210" y2="270" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+          <text x="225" y="256" font-family="Inter" font-size="12" font-weight="700" fill="#14513C">Sim</text>
+
+          <!-- diamond B -->
+          <polygon points="210,272 335,340 210,408 85,340" fill="#F3E7D6" stroke="#8A5A12" stroke-width="1.5"/>
+          <text x="210" y="332" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="600" fill="#16191C">2. Segue um</text>
+          <text x="210" y="349" text-anchor="middle" font-family="Inter" font-size="13.5" font-weight="600" fill="#16191C">padrão?</text>
+          <text x="210" y="366" text-anchor="middle" font-family="Inter" font-size="10" fill="#5B6560">não muda com o caso</text>
+
+          <!-- branch nao B -->
+          <line x1="335" y1="340" x2="458" y2="340" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+          <text x="392" y="330" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#8A5A12">Não</text>
+          <rect x="460" y="310" width="220" height="60" rx="8" fill="#F3E7D6" stroke="#8A5A12" stroke-width="1.5"/>
+          <text x="570" y="335" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#8A5A12">Vai pra você</text>
+          <text x="570" y="352" text-anchor="middle" font-family="Inter" font-size="10.5" fill="#8A5A12">(caso delicado)</text>
+
+          <!-- down to final -->
+          <line x1="210" y1="408" x2="210" y2="444" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+          <text x="225" y="430" font-family="Inter" font-size="12" font-weight="700" fill="#14513C">Sim</text>
+
+          <!-- final box -->
+          <rect x="80" y="446" width="260" height="52" rx="26" fill="#14513C"/>
+          <text x="210" y="478" text-anchor="middle" font-family="Inter" font-size="16" font-weight="700" fill="#FFFFFF">O agente resolve</text>
+        </svg>
+      </div>
+      <div class="legenda-fluxograma">
+        <span><span class="ponto" style="background:#14513C;"></span>O agente resolve sozinho</span>
+        <span><span class="ponto" style="background:#E9EBE8; border:1px solid #D9DCD8;"></span>Nunca apareceu — vai pra você</span>
+        <span><span class="ponto" style="background:#F3E7D6; border:1px solid #8A5A12;"></span>Não segue padrão — exige julgamento</span>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Dois casos, lado a lado</h2>
+      <div class="grade-casos">
+        <div class="cartao-caso ok">
+          <div class="rotulo-caso">Caso 1 — secretaria</div>
+          <h3>"Como eu emito meu boleto?"</h3>
+          <ul class="checagem">
+            <li class="sim">Se repete: pergunta várias vezes por dia</li>
+            <li class="sim">Custa tempo: somava um funcionário inteiro</li>
+            <li class="sim">Segue padrão: a resposta é sempre a mesma</li>
+          </ul>
+          <p class="conclusao-caso">Bateu nas três → o agente resolve sozinho.</p>
+        </div>
+        <div class="cartao-caso nao">
+          <div class="rotulo-caso">Caso 2 — mesmo aluno</div>
+          <h3>"Quero desistir do curso"</h3>
+          <ul class="checagem">
+            <li class="sim">Se repete: sempre tem algum caso assim</li>
+            <li class="sim">Custa tempo: leva alguns minutos de conversa</li>
+            <li class="nao">Segue padrão: cada motivo pede um acolhimento diferente</li>
+          </ul>
+          <p class="conclusao-caso">Falhou na 3 → vai direto pra você. Automatizar aqui custaria aluno, não tempo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">O que sobrou pra você</h2>
+      <div class="caixa-grafico">
+        <p class="legenda-grafico-topo">Antes, 3 pessoas cuidavam disso em tempo integral. Hoje, é você quem decide — em poucos minutos, algumas vezes ao dia.</p>
+
+        <div class="barra-linha">
+          <div class="barra-rotulo">Secretaria (antes)</div>
+          <div class="barra-trilho"><div class="barra-preenchida" style="width: 100%;"></div></div>
+          <div class="barra-valor">dia inteiro</div>
+        </div>
+        <div class="barra-linha">
+          <div class="barra-rotulo">Comercial (antes)</div>
+          <div class="barra-trilho"><div class="barra-preenchida" style="width: 100%;"></div></div>
+          <div class="barra-valor">dia inteiro</div>
+        </div>
+        <div class="barra-linha">
+          <div class="barra-rotulo">Hoje, com os 3 agentes</div>
+          <div class="barra-trilho"><div class="barra-preenchida" style="width: 10%;"></div></div>
+          <div class="barra-valor">minutos, 3x ao dia</div>
+        </div>
+
+        <p class="nota-grafico">Você troca "responder tudo" por "aprovar o que já veio pronto" — o tempo que sobra é pra pensar no negócio, não pra operar ele.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Sua vez</h2>
+      <div class="caixa-atividade">
+        <p class="instrucao-atividade">Pensa nos <strong>últimos 7 dias</strong>: qual pergunta ou tarefa você respondeu do mesmo jeito, mais de uma vez — no atendimento, nas vendas ou no conteúdo que você posta? Lista pelo menos <strong>5</strong>. Guarde essa lista — as próximas aulas te ensinam a transformar isso num agente.</p>
+
+        <div class="linha-preencher"><span class="num-linha">1</span></div>
+        <div class="linha-preencher"><span class="num-linha">2</span></div>
+        <div class="linha-preencher"><span class="num-linha">3</span></div>
+        <div class="linha-preencher"><span class="num-linha">4</span></div>
+        <div class="linha-preencher"><span class="num-linha">5</span></div>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 0;">
+      <div class="caixa-resumo">
+        <div class="rotulo-secao">Resumo rápido</div>
+        <ul>
+          <li><strong>1. Secretaria:</strong> dúvidas repetitivas de quem já é aluno ou cliente.</li>
+          <li><strong>2. Comercial:</strong> dúvidas de quem ainda não fechou — até o momento de fechar.</li>
+          <li><strong>3. Conteúdo:</strong> posts criados e agendados, você só aprova.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="rodape">Toca o Negócio · Trilha IA no Negócio · Aula 1</p>
+
+</body>
+</html>
