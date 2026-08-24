@@ -40,14 +40,90 @@ h2 { font-size: 21px; margin: 0 0 12px; }
 .mensagem-erro { background: var(--neutro-claro); color: var(--tinta); border-radius: 8px; padding: 16px; font-size: 18px; }
 .mensagem-carregando { color: var(--neutro); padding: 16px 0; }
 
-.lista-trilhas { display: flex; flex-direction: column; gap: 32px; }
-.trilha { display: flex; flex-direction: column; gap: 12px; }
-.lista-aulas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-.aula { display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid var(--borda); border-radius: 8px; }
-.aula-estado { font-size: 14px; font-weight: 600; color: var(--neutro); }
-.aula-concluida .aula-estado { color: var(--verde); }
-.aula-titulo { color: var(--verde); font-size: 17px; font-weight: 600; text-decoration: none; }
-.aula-titulo:hover { text-decoration: underline; }
+.lista-trilhas { display: flex; flex-direction: column; gap: 20px; }
+
+.trilha-cartao {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(22, 25, 28, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+.trilha-cartao:hover { box-shadow: 0 6px 20px rgba(22, 25, 28, 0.08); }
+.trilha-cartao--completa { border-color: var(--verde); box-shadow: 0 4px 16px rgba(20, 81, 60, 0.1); }
+
+.trilha-cabecalho { display: flex; align-items: flex-start; gap: 12px; }
+.trilha-numero {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde);
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trilha-cartao--completa .trilha-numero { background: var(--verde); color: #FFFFFF; }
+.trilha-titulo-bloco h2 { margin: 0; }
+
+.trilha-progresso-texto { font-size: 13px; font-weight: 600; color: var(--neutro); margin: 0 0 6px; }
+.trilha-progresso-barra { height: 6px; border-radius: 3px; background: var(--neutro-claro); overflow: hidden; }
+.trilha-progresso-preenchimento { height: 100%; background: var(--verde); border-radius: 3px; transition: width 0.3s ease; }
+.trilha-cartao--completa .trilha-progresso-texto { color: var(--verde); }
+.trilha-cartao--completa .trilha-progresso-preenchimento { background: var(--ambar); }
+
+.trilha-continuar {
+  display: block;
+  min-height: var(--espaco-toque-minimo);
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  color: var(--papel);
+  background: var(--verde);
+  border-radius: 8px;
+}
+.trilha-continuar:hover { background: var(--verde-escuro); }
+.trilha-continuar[hidden] { display: none; }
+
+.lista-aulas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.aula-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--neutro-claro);
+}
+.aula-item:last-child { border-bottom: none; }
+.aula-item-status { flex: none; width: 20px; height: 20px; color: var(--borda); }
+.aula-item--em-andamento .aula-item-status { color: var(--ambar); }
+.aula-item--concluida .aula-item-status { color: var(--verde); }
+.aula-item-titulo { color: var(--tinta); font-size: 16px; font-weight: 600; text-decoration: none; }
+.aula-item--concluida .aula-item-titulo { color: var(--verde); }
+.aula-item-titulo:hover { text-decoration: underline; }
+
+.trilha-diagnostico {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: var(--espaco-toque-minimo);
+  color: var(--neutro);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  align-self: flex-start;
+}
+.trilha-diagnostico:hover { color: var(--verde); text-decoration: underline; }
+.trilha-diagnostico::after { content: "→"; }
 
 .botao-grande {
   display: block;

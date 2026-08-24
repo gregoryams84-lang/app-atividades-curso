@@ -574,68 +574,118 @@ async function iniciarAtividade() {
   await renderizarPasso();
 }
 
+const ICONE_STATUS_CONCLUIDA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5 L10.5 15.5 L16.5 9"/></svg>';
+const ICONE_STATUS_EM_ANDAMENTO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 12 L12 7" stroke-linecap="round"/></svg>';
+const ICONE_STATUS_PENDENTE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>';
+
+const ICONE_POR_ESTADO = {
+  'concluida': ICONE_STATUS_CONCLUIDA,
+  'em-andamento': ICONE_STATUS_EM_ANDAMENTO,
+  'nao-iniciada': ICONE_STATUS_PENDENTE
+};
+
 async function iniciarPaginaInicial() {
   const listaTrilhas = document.getElementById('lista-trilhas');
   if (!listaTrilhas) return;
   try {
     const indice = await buscarJson('dados/indice.json');
     listaTrilhas.innerHTML = '';
-    for (const trilha of indice.trilhas) {
-      const secao = document.createElement('section');
-      secao.className = 'trilha';
+    indice.trilhas.forEach((trilha, indiceTrilha) => {
+      const cartao = document.createElement('section');
+      cartao.className = 'trilha-cartao';
 
+      const cabecalho = document.createElement('div');
+      cabecalho.className = 'trilha-cabecalho';
+      const numero = document.createElement('span');
+      numero.className = 'trilha-numero';
+      numero.textContent = String(indiceTrilha + 1);
+      const tituloBloco = document.createElement('div');
+      tituloBloco.className = 'trilha-titulo-bloco';
       const titulo = document.createElement('h2');
       titulo.textContent = trilha.titulo;
-      secao.appendChild(titulo);
+      tituloBloco.appendChild(titulo);
+      cabecalho.appendChild(numero);
+      cabecalho.appendChild(tituloBloco);
+      cartao.appendChild(cabecalho);
+
+      const progressoWrapper = document.createElement('div');
+      progressoWrapper.className = 'trilha-progresso';
+      const progressoTexto = document.createElement('p');
+      progressoTexto.className = 'trilha-progresso-texto';
+      const progressoBarra = document.createElement('div');
+      progressoBarra.className = 'trilha-progresso-barra';
+      const progressoPreenchimento = document.createElement('div');
+      progressoPreenchimento.className = 'trilha-progresso-preenchimento';
+      progressoBarra.appendChild(progressoPreenchimento);
+      progressoWrapper.appendChild(progressoTexto);
+      progressoWrapper.appendChild(progressoBarra);
+      cartao.appendChild(progressoWrapper);
+
+      const botaoContinuar = document.createElement('a');
+      botaoContinuar.className = 'trilha-continuar';
+      cartao.appendChild(botaoContinuar);
 
       const aulasOrdenadas = [...trilha.aulas].sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
-      const lista = document.createElement('ul');
+      const lista = document.createElement('ol');
       lista.className = 'lista-aulas';
-      let proximaPendente = null;
 
-      for (const aula of aulasOrdenadas) {
-        try {
-          const dadosAula = await buscarJson(aula.arquivo);
-          const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
-          const progresso = calcularProgresso(dadosAula.blocos, respostas);
-          const estado = progresso === 0 ? 'nao-iniciada' : progresso >= dadosAula.blocos.length ? 'concluida' : 'em-andamento';
-          if (estado !== 'concluida' && !proximaPendente) proximaPendente = aula;
+      (async () => {
+        let proximaPendente = null;
+        let concluidas = 0;
 
-          const item = document.createElement('li');
-          item.className = `aula aula-${estado}`;
-          const rotuloEstado = document.createElement('span');
-          rotuloEstado.className = 'aula-estado';
-          rotuloEstado.textContent = estado === 'nao-iniciada' ? 'Não iniciada' : estado === 'em-andamento' ? 'Em andamento' : 'Concluída';
-          const link = document.createElement('a');
-          link.className = 'aula-titulo';
-          link.href = `atividade.html?trilha=${trilha.id}&aula=${aula.id}`;
-          link.textContent = aula.titulo;
-          item.appendChild(rotuloEstado);
-          item.appendChild(link);
-          lista.appendChild(item);
-        } catch (erro) {
-          console.error(erro);
-          continue;
+        for (const aula of aulasOrdenadas) {
+          try {
+            const dadosAula = await buscarJson(aula.arquivo);
+            const respostas = await armazenamento.obterRespostasDaAula(trilha.id, aula.id);
+            const progresso = calcularProgresso(dadosAula.blocos, respostas);
+            const estado = progresso === 0 ? 'nao-iniciada' : progresso >= dadosAula.blocos.length ? 'concluida' : 'em-andamento';
+            if (estado === 'concluida') concluidas += 1;
+            if (estado !== 'concluida' && !proximaPendente) proximaPendente = aula;
+
+            const item = document.createElement('li');
+            item.className = `aula-item aula-item--${estado}`;
+            const status = document.createElement('span');
+            status.className = 'aula-item-status';
+            status.innerHTML = ICONE_POR_ESTADO[estado];
+            const link = document.createElement('a');
+            link.className = 'aula-item-titulo';
+            link.href = `atividade.html?trilha=${trilha.id}&aula=${aula.id}`;
+            link.textContent = aula.titulo;
+            item.appendChild(status);
+            item.appendChild(link);
+            lista.appendChild(item);
+          } catch (erro) {
+            console.error(erro);
+            continue;
+          }
         }
-      }
-      secao.appendChild(lista);
 
-      if (proximaPendente) {
-        const botao = document.createElement('a');
-        botao.className = 'botao-grande';
-        botao.href = `atividade.html?trilha=${trilha.id}&aula=${proximaPendente.id}`;
-        botao.textContent = `Continuar: ${proximaPendente.titulo}`;
-        secao.insertBefore(botao, lista);
-      }
+        const total = aulasOrdenadas.length;
+        const percentual = total === 0 ? 0 : Math.round((concluidas / total) * 100);
+        progressoTexto.textContent = `${concluidas} de ${total} aulas concluídas`;
+        progressoPreenchimento.style.width = `${percentual}%`;
+        if (concluidas === total && total > 0) {
+          cartao.classList.add('trilha-cartao--completa');
+        }
+
+        if (proximaPendente) {
+          botaoContinuar.href = `atividade.html?trilha=${trilha.id}&aula=${proximaPendente.id}`;
+          botaoContinuar.textContent = concluidas === 0 ? `Começar: ${proximaPendente.titulo}` : `Continuar: ${proximaPendente.titulo}`;
+        } else {
+          botaoContinuar.hidden = true;
+        }
+      })();
+
+      cartao.appendChild(lista);
 
       const linkDiagnostico = document.createElement('a');
-      linkDiagnostico.className = 'botao-secundario';
+      linkDiagnostico.className = 'trilha-diagnostico';
       linkDiagnostico.href = `diagnostico.html?trilha=${trilha.id}`;
       linkDiagnostico.textContent = 'Ver o que você já construiu';
-      secao.appendChild(linkDiagnostico);
+      cartao.appendChild(linkDiagnostico);
 
-      listaTrilhas.appendChild(secao);
-    }
+      listaTrilhas.appendChild(cartao);
+    });
   } catch {
     listaTrilhas.innerHTML = '<p class="mensagem-erro">Não foi possível carregar as aulas agora. Tente novamente em instantes.</p>';
   }
