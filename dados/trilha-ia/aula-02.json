@@ -3,49 +3,74 @@
   "trilha": "trilha-ia",
   "aula": "aula-02",
   "titulo": "Preparando seu computador pra usar IA de verdade",
-  "habilidade": "Identificar qual tipo de ferramenta de IA serve pra qual tipo de tarefa, testando na prática.",
+  "habilidade": "Montar o ambiente de trabalho completo — Windows 11 Pro, Claude Pro, GitHub e VS Code conectados — e saber pra que serve cada peça.",
   "blocos": [
     {
       "id": "b1",
       "tipo": "cenario",
-      "enunciado": "Um dono de salão de beleza quer escrever a legenda de um post sobre uma promoção de corte e escova. Qual tipo de ferramenta serve melhor pra essa tarefa?",
+      "enunciado": "Você abre Configurações > Sistema > Ativação e descobre que seu Windows é a versão Home, não a Pro. O que fazer antes de continuar?",
       "opcoes": [
-        "Ferramenta de conversa (tipo ChatGPT ou Gemini)",
-        "Ferramenta de imagem (tipo Canva com IA)",
-        "Nenhuma, isso precisa ser feito manualmente"
+        "Seguir assim mesmo, o Home também tem as ferramentas necessárias",
+        "Fazer a troca pro Windows 11 Pro antes de instalar o resto",
+        "Desistir, só dá pra usar em outro computador"
       ],
-      "correta": 0,
-      "dica_erro": "Reveja o trecho das três categorias no vídeo.",
-      "explicacao_erro": "Legenda é texto — ferramenta de conversa é a que ajuda a escrever e ajustar o tom.",
-      "feedback_acerto": "Isso. Texto é trabalho de ferramenta de conversa."
+      "correta": 1,
+      "dica_erro": "Reveja o trecho da verificação do Windows no vídeo.",
+      "explicacao_erro": "Só o Windows 11 Pro tem as ferramentas necessárias pra usar o Claude Code — o Home não serve. Dá pra adquirir a licença em lugares como o Mercado Livre.",
+      "feedback_acerto": "Isso — sem o Pro, o Claude Code simplesmente não funciona no seu computador."
     },
     {
       "id": "b2",
-      "tipo": "escolha_simples",
-      "enunciado": "Qual dessas ferramentas você já abriu no celular alguma vez?",
+      "tipo": "cenario",
+      "enunciado": "Na hora de criar sua conta no Claude, qual plano você precisa escolher pra ter acesso ao Claude Code?",
       "opcoes": [
-        "Nenhuma ainda",
-        "Já abri, mas nunca usei pro negócio",
-        "Já usei pra alguma coisa do negócio"
-      ]
+        "O plano gratuito, pra testar antes",
+        "O plano Pro",
+        "Tanto faz, o Claude Code vem em todos"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho da instalação do Claude.",
+      "explicacao_erro": "No plano gratuito o Claude Code não funciona. Esse projeto é pra sair do papel de verdade, então já entra direto no Pro.",
+      "feedback_acerto": "Exato — é o plano Pro que libera o Claude Code, sem ele nada funciona de verdade."
     },
     {
       "id": "b3",
-      "tipo": "lista_aberta",
-      "enunciado": "Teste agora uma ferramenta de conversa gratuita com a tarefa que você escolheu na Aula 1. Cole aqui a resposta que ela te deu (ou resuma em poucas palavras).",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["a resposta que a ferramenta te deu"]
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de instalar o VS Code, com qual conta você faz login nele pra conectar tudo na mesma nuvem?",
+      "opcoes": [
+        "Conta Microsoft",
+        "Conta do GitHub que você acabou de criar",
+        "Não precisa fazer login"
+      ],
+      "correta": 1,
+      "explicacao_erro": "É a conta do GitHub que conecta o VS Code à nuvem onde o projeto fica registrado.",
+      "feedback_acerto": "Isso — o GitHub é a nuvem, e o VS Code entra nela com essa conta."
     },
     {
       "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "Essa resposta já serve do jeito que veio, ou precisa de ajuste pra soar como você fala com seu cliente?",
-      "opcoes": [
-        "Já serve do jeito que veio",
-        "Precisa de ajuste",
-        "Não consegui testar ainda"
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que seu ambiente está pronto: liste os 4 itens abaixo que você já deixou funcionando no seu computador.",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "Windows 11 Pro verificado",
+        "Claude instalado, plano Pro",
+        "Conta no GitHub criada",
+        "VS Code instalado e conectado ao GitHub"
       ]
+    },
+    {
+      "id": "b5",
+      "tipo": "escolha_simples",
+      "enunciado": "Pra que serve o terminal PowerShell no seu computador?",
+      "opcoes": [
+        "É só decoração, não precisa mexer nele",
+        "Guardar chaves e senhas de acesso que não podem ficar circulando pela nuvem",
+        "Serve só pra abrir o navegador mais rápido"
+      ],
+      "correta": 1,
+      "explicacao_erro": "O PowerShell é o terminal do seu computador — é ali que ficam chaves e senhas que não podem ser transmitidas pela nuvem, com acesso só seu.",
+      "feedback_acerto": "Isso — e o próprio VS Code já tem um terminal PowerShell embutido, então tudo fica no mesmo lugar."
     }
   ]
 }
