@@ -59,9 +59,23 @@ function mostrarAvisoArmazenamentoIndisponivel() {
   pagina.prepend(aviso);
 }
 
+const URL_AULA_NO_SITE_PRINCIPAL = 'https://tocaonegocio.com.br/atividades/aula.html';
+
 function pegarParametrosDaUrl() {
   const parametros = new URLSearchParams(window.location.search);
-  return { trilha: parametros.get('trilha'), aula: parametros.get('aula') };
+  return { trilha: parametros.get('trilha'), aula: parametros.get('aula'), aulaId: parametros.get('aula_id') };
+}
+
+// O link assinado que "Fazer atividade" (em aula.html, no site principal)
+// gera inclui aula_id (o uuid real da aula no Supabase) na URL, além do
+// trilha/aula (slugs próprios deste app). Só nesse caso dá pra montar o
+// link de volta -- quem abre essa página direto (sem vir de aula.html)
+// não tem aula_id, então o link de voltar fica escondido.
+function configurarLinkVoltarAula(aulaId) {
+  const link = document.getElementById('link-voltar-aula');
+  if (!link || !aulaId) return;
+  link.href = `${URL_AULA_NO_SITE_PRINCIPAL}?aula_id=${encodeURIComponent(aulaId)}`;
+  link.hidden = false;
 }
 
 function pegarIndiceDoHash(totalDeBlocos) {
@@ -394,7 +408,8 @@ async function iniciarAtividade() {
   const conteudo = document.getElementById('conteudo-bloco');
   if (!conteudo) return;
 
-  const { trilha, aula } = pegarParametrosDaUrl();
+  const { trilha, aula, aulaId } = pegarParametrosDaUrl();
+  configurarLinkVoltarAula(aulaId);
   if (!trilha || !aula) {
     mostrarErroAtividade('Não encontramos esta atividade. Volte para a área de membros e clique no link novamente.');
     return;

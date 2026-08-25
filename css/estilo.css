@@ -166,6 +166,10 @@ h2 { font-size: 21px; margin: 0 0 12px; }
 .link-voltar { display: inline-flex; align-items: center; min-height: var(--espaco-toque-minimo); color: var(--verde); font-weight: 600; text-decoration: none; margin-bottom: 16px; }
 .link-voltar:hover { text-decoration: underline; }
 
+.link-voltar-aula { display: inline-flex; align-items: center; min-height: var(--espaco-toque-minimo); color: var(--neutro); font-weight: 600; font-size: 15px; text-decoration: none; margin-bottom: 8px; }
+.link-voltar-aula:hover { color: var(--verde); text-decoration: underline; }
+.link-voltar-aula[hidden] { display: none; }
+
 .bloco { padding: 0 0 20px; }
 .enunciado { font-size: 20px; font-weight: 600; margin: 0 0 16px; font-family: inherit; }
 
