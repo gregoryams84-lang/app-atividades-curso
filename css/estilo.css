@@ -72,6 +72,7 @@ h2 { font-size: 21px; margin: 0 0 12px; }
   justify-content: center;
 }
 .trilha-cartao--completa .trilha-numero { background: var(--verde); color: #FFFFFF; }
+.trilha-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ambar); margin: 0 0 2px; }
 .trilha-titulo-bloco h2 { margin: 0; }
 
 .trilha-progresso-texto { font-size: 13px; font-weight: 600; color: var(--neutro); margin: 0 0 6px; }
@@ -104,9 +105,13 @@ h2 { font-size: 21px; margin: 0 0 12px; }
   border-bottom: 1px solid var(--neutro-claro);
 }
 .aula-item:last-child { border-bottom: none; }
-.aula-item-status { flex: none; width: 20px; height: 20px; color: var(--borda); }
+.aula-item-status { flex: none; width: 20px; height: 20px; color: var(--borda); margin-top: 1px; }
 .aula-item--em-andamento .aula-item-status { color: var(--ambar); }
 .aula-item--concluida .aula-item-status { color: var(--verde); }
+.aula-item-texto { display: flex; flex-direction: column; gap: 1px; }
+.aula-item-numero { font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--neutro); margin: 0; }
+.aula-item--concluida .aula-item-numero { color: var(--verde); }
+.aula-item--em-andamento .aula-item-numero { color: var(--ambar); }
 .aula-item-titulo { color: var(--tinta); font-size: 16px; font-weight: 600; text-decoration: none; }
 .aula-item--concluida .aula-item-titulo { color: var(--verde); }
 .aula-item-titulo:hover { text-decoration: underline; }

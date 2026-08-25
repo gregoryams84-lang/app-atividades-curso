@@ -599,11 +599,32 @@ const ICONE_POR_ESTADO = {
   'nao-iniciada': ICONE_STATUS_PENDENTE
 };
 
+// Esse app usa ids próprios (trilha-ia, aula-01...) sem relação com o
+// uuid real da aula no Supabase, do site principal. Esse mapa liga os
+// dois lados, pra aluno com matrícula ir direto pra "página central"
+// da aula (vídeo + material + atividade + certificado) em vez de cair
+// só na atividade escrita. Só tem entrada pras aulas que já existem de
+// verdade no banco do site -- as outras seguem indo pra atividade.html
+// até a aula ser criada lá (aí é só eu adicionar a entrada aqui).
+function montarLinkDaAula(mapaAulaCentral, trilhaId, aulaId) {
+  const aulaIdReal = mapaAulaCentral[`${trilhaId}:${aulaId}`];
+  if (aulaIdReal) {
+    return `https://tocaonegocio.com.br/atividades/aula.html?aula_id=${encodeURIComponent(aulaIdReal)}`;
+  }
+  return `atividade.html?trilha=${trilhaId}&aula=${aulaId}`;
+}
+
 async function iniciarPaginaInicial() {
   const listaTrilhas = document.getElementById('lista-trilhas');
   if (!listaTrilhas) return;
   try {
     const indice = await buscarJson('dados/indice.json');
+    let mapaAulaCentral = {};
+    try {
+      mapaAulaCentral = await buscarJson('dados/mapa-aula-central.json');
+    } catch {
+      mapaAulaCentral = {};
+    }
     listaTrilhas.innerHTML = '';
     indice.trilhas.forEach((trilha, indiceTrilha) => {
       const cartao = document.createElement('section');
@@ -616,8 +637,12 @@ async function iniciarPaginaInicial() {
       numero.textContent = String(indiceTrilha + 1);
       const tituloBloco = document.createElement('div');
       tituloBloco.className = 'trilha-titulo-bloco';
+      const eyebrow = document.createElement('p');
+      eyebrow.className = 'trilha-eyebrow';
+      eyebrow.textContent = `Trilha ${indiceTrilha + 1}`;
       const titulo = document.createElement('h2');
       titulo.textContent = trilha.titulo;
+      tituloBloco.appendChild(eyebrow);
       tituloBloco.appendChild(titulo);
       cabecalho.appendChild(numero);
       cabecalho.appendChild(tituloBloco);
@@ -662,12 +687,19 @@ async function iniciarPaginaInicial() {
             const status = document.createElement('span');
             status.className = 'aula-item-status';
             status.innerHTML = ICONE_POR_ESTADO[estado];
+            const textoBloco = document.createElement('div');
+            textoBloco.className = 'aula-item-texto';
+            const numeroAula = document.createElement('p');
+            numeroAula.className = 'aula-item-numero';
+            numeroAula.textContent = `Aula ${aula.ordem ?? ''}`;
             const link = document.createElement('a');
             link.className = 'aula-item-titulo';
-            link.href = `atividade.html?trilha=${trilha.id}&aula=${aula.id}`;
+            link.href = montarLinkDaAula(mapaAulaCentral, trilha.id, aula.id);
             link.textContent = aula.titulo;
+            textoBloco.appendChild(numeroAula);
+            textoBloco.appendChild(link);
             item.appendChild(status);
-            item.appendChild(link);
+            item.appendChild(textoBloco);
             lista.appendChild(item);
           } catch (erro) {
             console.error(erro);
@@ -684,7 +716,7 @@ async function iniciarPaginaInicial() {
         }
 
         if (proximaPendente) {
-          botaoContinuar.href = `atividade.html?trilha=${trilha.id}&aula=${proximaPendente.id}`;
+          botaoContinuar.href = montarLinkDaAula(mapaAulaCentral, trilha.id, proximaPendente.id);
           botaoContinuar.textContent = concluidas === 0 ? `Começar: ${proximaPendente.titulo}` : `Continuar: ${proximaPendente.titulo}`;
         } else {
           botaoContinuar.hidden = true;
