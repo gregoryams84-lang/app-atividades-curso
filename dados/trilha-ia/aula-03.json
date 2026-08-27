@@ -2,47 +2,143 @@
   "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-03",
-  "titulo": "Fazendo a IA trabalhar por você",
-  "habilidade": "Montar um pedido reutilizável com contexto, tarefa, formato e exemplo, e melhorá-lo por iteração.",
+  "titulo": "MCPs e Skills: o Claude com superpoderes",
+  "habilidade": "Entender a diferença entre MCP e Skill, reconhecer as ferramentas dos três kits apresentados, cadastrar as contas necessárias e instalar tudo no VS Code, saindo pronto pra colocar a mão na massa num projeto real do próprio negócio.",
   "blocos": [
     {
       "id": "b1",
       "tipo": "lista_aberta",
-      "enunciado": "Escreva seu contexto de negócio em uma frase: quem você é, pra quem vende.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["salão de beleza em bairro de classe média, clientes de 25 a 50 anos"]
+      "enunciado": "Antes de qualquer pedido pro Claude, a aula ensina a antecipar o contexto do seu negócio. Escreva 4 fatos reais, do jeito que você contaria pro Claude: o que você vende, quantos funcionários tem, onde fica, e um número real (quanto vende ou atende por semana).",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "o que você vende ou o serviço que presta",
+        "quantos funcionários você tem",
+        "bairro e cidade onde fica",
+        "um número real: quanto vende ou atende por semana"
+      ]
     },
     {
       "id": "b2",
       "tipo": "cenario",
-      "enunciado": "Dois pedidos pra mesma tarefa. Pedido A: \"Escreve um post pra mim\". Pedido B: contexto + tarefa específica + formato + exemplo do seu tom. Qual tem mais chance de vir com uma resposta útil de primeira?",
+      "enunciado": "Você quer que o Claude sempre estruture seus posts pro Instagram do mesmo jeito — gancho, desenvolvimento, chamada final — toda vez que você pedir um post novo. Isso é um MCP ou uma Skill?",
       "opcoes": [
-        "Pedido A, é mais direto",
-        "Pedido B, porque dá contexto pra IA acertar o tom e o tamanho",
-        "Os dois vêm iguais"
+        "Um MCP, porque dá uma ferramenta nova pro Claude",
+        "Uma Skill, porque ensina um procedimento a seguir, sem abrir porta nova",
+        "Os dois fazem exatamente a mesma coisa"
       ],
       "correta": 1,
-      "dica_erro": "Reveja as quatro partes do molde no vídeo.",
-      "explicacao_erro": "Sem contexto, tarefa, formato e exemplo, a IA responde genérico — parecido com o que aconteceu na Aula 2.",
-      "feedback_acerto": "Isso. Quanto mais completo o pedido, menos ajuste depois."
+      "dica_erro": "Reveja a diferença entre MCP e Skill na Parte 3 do vídeo.",
+      "explicacao_erro": "MCP dá acesso a algo que o Claude não consegue sozinho — buscar na internet, gerar imagem — abre uma porta nova. Skill não abre porta nenhuma, só ensina o procedimento que o Claude segue quando a tarefa combina com aquele assunto.",
+      "feedback_acerto": "Isso — Skill é manual de procedimento, não ferramenta nova."
     },
     {
       "id": "b3",
-      "tipo": "lista_aberta",
-      "enunciado": "Monte seu pedido completo (contexto + tarefa + formato + exemplo) pra uma tarefa real do seu negócio. Escreva o pedido inteiro aqui.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["contexto: ... tarefa: ... formato: ... exemplo: ..."]
+      "tipo": "cenario",
+      "enunciado": "Uma biblioteca que você usa mudou depois que o Claude foi treinado, e ele sugere um jeito de usar que não existe mais. Qual MCP do Kit de Ferramentas A busca a documentação atual direto na fonte?",
+      "opcoes": [
+        "Context7",
+        "Chrome DevTools",
+        "Supabase"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Kit de Ferramentas A, na Parte 4 do vídeo.",
+      "explicacao_erro": "Context7 busca a documentação técnica atualizada de uma biblioteca, framework ou API direto na fonte, na hora que você pergunta.",
+      "feedback_acerto": "Isso — pra documentação desatualizada, é o Context7 que resolve."
     },
     {
       "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "Depois de testar esse pedido numa ferramenta, a resposta veio melhor que a da Aula 2?",
+      "tipo": "cenario",
+      "enunciado": "Você já gerou uma imagem com o Kairogen ou o Nanobanana, mas ela precisa de mais nitidez antes de publicar. Qual ferramenta do Kit de Ferramentas B resolve essa etapa final de acabamento?",
       "opcoes": [
-        "Sim, bem melhor",
-        "Um pouco melhor",
-        "Ainda não testei"
+        "Magnific",
+        "Jina AI",
+        "Superpowers"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Kit de Ferramentas B, na Parte 5 do vídeo.",
+      "explicacao_erro": "Magnific entra depois que o Kairogen ou o Nanobanana já geraram algo — é quem melhora a resolução e recria o detalhe fino, o único MCP remoto do kit.",
+      "feedback_acerto": "Isso — pra dar o acabamento final numa imagem já gerada, é o Magnific."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "Você quer aprender a chamar a API do Claude direto no seu próprio código, fora do Claude Code. Qual ferramenta do Kit de Ferramentas C serve de referência pra isso?",
+      "opcoes": [
+        "Superpowers",
+        "Claude Cookbook",
+        "Find Skills"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Kit de Ferramentas C, na Parte 6 do vídeo.",
+      "explicacao_erro": "O Claude Cookbook não é MCP nem Skill ativa — é uma pasta de exemplos oficiais mostrando como usar a API e o SDK do Claude direito, pra quando a tarefa é programar fora do Claude Code.",
+      "feedback_acerto": "Isso — pra consultar exemplo oficial de código, é o Cookbook."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "Você acabou de criar a API Key do NanoBanana no Google AI Studio. Segundo a aula, qual o próximo passo, antes de seguir pro cadastro seguinte?",
+      "opcoes": [
+        "Colar a chave direto no VS Code na hora, sem guardar em outro lugar",
+        "Copiar a chave e guardar num documento à parte, pra usar depois no VS Code",
+        "Não precisa guardar, a chave fica salva automaticamente na conta"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 7 do vídeo, sobre o cadastro das ferramentas.",
+      "explicacao_erro": "A aula orienta copiar a chave e guardar num documento à parte (no exemplo mostrado, um Word) — ela vai ser usada mais adiante, junto com a do Find Skills, na hora de colar tudo no VS Code.",
+      "feedback_acerto": "Isso — guarda a chave num documento à parte até chegar a hora de usar no VS Code."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Você colou o mcp.json no \"Open User Configuration\" do VS Code, clicou Start em cada ferramenta e já colou as chaves do NanoBanana e do Find Skills. Falta um passo antes de considerar a instalação completa — qual?",
+      "opcoes": [
+        "Reiniciar o computador",
+        "Ctrl+S, pra salvar a configuração",
+        "Nenhum, já está tudo pronto"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 8 do vídeo, sobre a instalação no VS Code.",
+      "explicacao_erro": "Sem Ctrl+S a configuração que você colou e ativou não fica salva no VS Code — é o passo final que não pode ser esquecido.",
+      "feedback_acerto": "Isso — Ctrl+S é o que grava tudo que você configurou."
+    },
+    {
+      "id": "b8",
+      "tipo": "cenario",
+      "enunciado": "Na hora de montar o site, o Claude pede que você conte a história do seu negócio (quem fundou, de onde veio). Seu negócio não tem uma história assim pra contar. O que a aula recomenda?",
+      "opcoes": [
+        "Inventar uma história bonita, contanto que pareça verdadeira",
+        "Não contar nenhuma história — nunca inventar uma história falsa pro cliente",
+        "Copiar a história de um concorrente conhecido"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 9 do vídeo, sobre a criação do site (mão na massa).",
+      "explicacao_erro": "A aula é direta nisso: história falsa pode derrubar um negócio quando descoberta — cita o caso real de uma marca famosa cancelada por mentir sobre a própria origem. Se você não tem uma história real pra contar, não conta nenhuma.",
+      "feedback_acerto": "Isso — verdade sempre, mesmo que signifique não contar história nenhuma."
+    },
+    {
+      "id": "b9",
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que seu kit de ferramentas está pronto: liste os 5 itens abaixo que você já deixou funcionando.",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 5,
+      "placeholders": [
+        "Contas cadastradas: Kairogen, Jina, NanoBanana, Magnific, Find Skills, Supabase, HeyGen",
+        "Node.js instalado",
+        "Chaves do NanoBanana e do Find Skills guardadas num documento à parte",
+        "mcp.json colado no Open User Configuration do VS Code",
+        "Start clicado em cada MCP/Skill e Ctrl+S salvo"
+      ]
+    },
+    {
+      "id": "b10",
+      "tipo": "escolha_simples",
+      "enunciado": "Com o ambiente pronto, qual vai ser a primeira coisa que você vai pedir pro Claude criar pro seu negócio, seguindo a dica da aula de ir direto ao que você precisa?",
+      "opcoes": [
+        "Uma imagem ou post pro Instagram/Facebook",
+        "Meu site ou aplicativo",
+        "Uma automação ou consulta no meu banco de dados",
+        "Ainda não decidi"
       ]
     }
   ]
