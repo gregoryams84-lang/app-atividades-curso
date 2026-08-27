@@ -42,39 +42,27 @@
       "aulas": [
         {
           "id": "aula-01",
-          "titulo": "Perfil que vende sem gastar",
+          "titulo": "Deixe seu Instagram e Facebook prontos pra aprovação da Meta",
           "ordem": 1,
           "arquivo": "dados/trilha-vendas/aula-01.json"
         },
         {
           "id": "aula-02",
-          "titulo": "WhatsApp Business configurado direito",
+          "titulo": "Cadastre o WhatsApp na Meta e conecte o agente",
           "ordem": 2,
           "arquivo": "dados/trilha-vendas/aula-02.json"
         },
         {
           "id": "aula-03",
-          "titulo": "Conteúdo com IA que não parece IA",
+          "titulo": "Automação de conteúdo pras redes sociais",
           "ordem": 3,
           "arquivo": "dados/trilha-vendas/aula-03.json"
         },
         {
           "id": "aula-04",
-          "titulo": "Rotina de postagem sem travar",
+          "titulo": "Fechamento e próximo passo: Formalização da empresa",
           "ordem": 4,
           "arquivo": "dados/trilha-vendas/aula-04.json"
-        },
-        {
-          "id": "aula-05",
-          "titulo": "Automatizando a postagem com n8n",
-          "ordem": 5,
-          "arquivo": "dados/trilha-vendas/aula-05.json"
-        },
-        {
-          "id": "aula-06",
-          "titulo": "Um agente que atende por você",
-          "ordem": 6,
-          "arquivo": "dados/trilha-vendas/aula-06.json"
         }
       ]
     },

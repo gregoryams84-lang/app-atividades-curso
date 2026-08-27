@@ -1,20 +1,27 @@
-# Aula 4 — Rotina de postagem sem travar
+# Aula 4 — Fechamento e próximo passo: Formalização da empresa
 
-**Habilidade:** montar um banco de ideias e um calendário simples de postagem semanal.
+> **Nota (2026-08-27):** aula nova, não existia no plano anterior de 6
+> aulas (que terminava em "Um agente que atende por você"). Gregory
+> redefiniu a Trilha 2 pra fechar com uma aula de recap + chamado pra
+> Trilha 3. **Ainda não gravado.** A atividade (`aula-04.json`) e o
+> material de apoio (`aula-04-pdf.md`) serão escritos a partir da
+> transcrição real assim que o vídeo for gravado.
 
-[0:00] A postagem trava não por falta de ideia — trava porque você só
-pensa nela na hora de postar, cansado, sem tempo.
+**Habilidade:** revisar o que foi montado na trilha (perfil aprovado,
+agente conectado no WhatsApp e Instagram, automação de conteúdo rodando)
+e decidir o próximo passo pro negócio.
 
-[0:25] Tem duas partes: um banco de ideias — temas que sempre
-funcionam pro seu negócio, tipo bastidor, produto, dúvida de cliente,
-promoção — e um calendário simples — que dia posta o quê.
+[0:00] Recap rápido do que ficou pronto: Página e Instagram aprovados pela
+Meta (Aula 1), agente respondendo cliente no WhatsApp e Instagram (Aula
+2), automação gerando conteúdo pras redes (Aula 3).
 
-[1:10] Demonstração: pedir pra IA sugerir 5 ideias de post baseadas no
-tipo do seu negócio, e guardar numa lista pra não depender de inspiração
-todo dia.
+[0:40] Com o atendimento e o conteúdo automatizados, o negócio já
+consegue vender de forma mais consistente sem depender só do tempo do
+dono.
 
-[2:00] Calendário não precisa ser todo dia. Dois ou três posts fixos por
-semana já muda o jogo.
+[1:10] Chamada pra Trilha 3 — Formalização e obrigações da empresa:
+com a operação rodando, o próximo ponto de atenção é deixar o negócio em
+dia com o que é obrigatório (formalização, obrigações). Reforça por que
+isso importa antes de escalar mais.
 
-[2:30] Agora é sua vez: monta seu banco de ideias e escolhe os dias da
-semana.
+[1:40] Fechamento: convite direto pra continuar na Trilha 3.

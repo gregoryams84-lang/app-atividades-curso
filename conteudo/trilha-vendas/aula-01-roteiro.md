@@ -1,26 +1,35 @@
-# Aula 1 — Perfil que vende sem gastar
+# Aula 1 — Deixe seu Instagram e Facebook prontos pra aprovação da Meta
 
-**Habilidade:** estruturar um perfil de Instagram/Facebook com ajuda de IA (bio, destaques, primeira grade de posts) que comunica o negócio com clareza, sem gastar nada.
+> **Nota (2026-08-27):** este roteiro substitui a versão anterior ("Perfil
+> que vende sem gastar", sobre bio/destaques/grade de posts com IA).
+> Gregory redefiniu a Trilha 2 inteira em 4 aulas, encadeadas com o agente
+> montado na Trilha 1 (Chatvolt). **Ainda não gravado.** A atividade
+> (`aula-01.json`) e o material de apoio (`aula-01-pdf.md`) continuam
+> apontando pro conteúdo antigo por enquanto — serão reescritos a partir da
+> transcrição real assim que os vídeos forem gravados, do mesmo jeito que
+> foi feito pra Trilha 1.
 
-[0:00] Você abre seu Instagram agora e a bio diz só o nome do seu negócio.
-Um cliente novo chega lá e não sabe o que você vende, onde fica, nem como
-comprar. Isso custa venda todo dia.
+**Habilidade:** deixar a Página do Facebook e o perfil profissional do
+Instagram do negócio nos padrões que a Meta exige, pra depois conseguir
+aprovação de WhatsApp Business e conectar o agente.
 
-[0:25] Essa aula ensina a montar, ou consertar, três coisas do seu perfil
-com ajuda de IA: a bio, os destaques e a primeira grade de posts — sem
-gastar nada.
+[0:00] Antes de conectar qualquer agente de IA no WhatsApp ou Instagram do
+negócio, tem um passo que ninguém pula: a Meta precisa aprovar. E ela só
+aprova página e perfil que já estão configurados direito.
 
-[0:50] A bio em três partes: o que você vende, pra quem, e como o cliente
-compra — link, WhatsApp ou endereço. Pede pra uma ferramenta de IA
-escrever três opções de bio com essas informações, e escolhe a que soa
-mais como você.
+[0:25] O que a Meta cobra: Página do Facebook ativa, com informações
+completas do negócio (categoria, endereço se tiver, forma de contato).
+Instagram em conta profissional/comercial, não pessoal. Os dois vinculados
+um ao outro.
 
-[1:40] Destaques não são decoração — são as perguntas que todo cliente
-novo faz. "Como comprar?", "Onde fica?", "Dúvidas frequentes". Cada
-destaque responde uma delas.
+[1:10] Passo a passo: criar ou ajustar a Página do Facebook, preencher
+categoria e informações do negócio, trocar (ou confirmar) o Instagram pra
+conta profissional, e vincular Instagram + Página dentro das configurações
+da Meta.
 
-[2:10] A primeira grade: três posts que respondem essas mesmas dúvidas,
-não só "produto bonito".
+[2:00] Erros comuns que travam aprovação: informação incompleta na Página,
+categoria errada, conta de Instagram ainda pessoal.
 
-[2:40] Agora é sua vez: usa a IA pra escrever sua bio nova, com as três
-partes.
+[2:30] Agora é sua vez: confere os três itens (Página completa, Instagram
+profissional, os dois vinculados) e ajusta o que estiver faltando — sem
+isso pronto, a Aula 2 não avança.
