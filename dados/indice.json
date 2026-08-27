@@ -24,21 +24,15 @@
         },
         {
           "id": "aula-04",
-          "titulo": "Atendimento sem parecer robô",
+          "titulo": "Monte seu agente de atendimento no WhatsApp",
           "ordem": 4,
           "arquivo": "dados/trilha-ia/aula-04.json"
         },
         {
           "id": "aula-05",
-          "titulo": "Organização da rotina",
+          "titulo": "Automatize o que acontece por trás do agente",
           "ordem": 5,
           "arquivo": "dados/trilha-ia/aula-05.json"
-        },
-        {
-          "id": "aula-06",
-          "titulo": "O que não é pra delegar",
-          "ordem": 6,
-          "arquivo": "dados/trilha-ia/aula-06.json"
         }
       ]
     },

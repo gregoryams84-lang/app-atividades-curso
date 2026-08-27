@@ -1,27 +1,58 @@
-# Aula 4 — Atendimento sem parecer robô
+# Aula 4 — Monte seu agente de atendimento no WhatsApp
 
-**Habilidade:** revisar e editar uma resposta de IA genérica até soar como o próprio dono falando com o cliente, e reconhecer quando a revisão manual é obrigatória.
+> **Nota (2026-08-27):** este roteiro substitui a versão anterior ("Atendimento
+> sem parecer robô", sobre revisar texto genérico de IA). No fechamento do
+> vídeo "mão na massa" da Aula 3, Gregory já anuncia que a próxima aula é
+> sobre montar um agente de WhatsApp de verdade — este roteiro alinha o
+> conteúdo com essa promessa e com a estrutura de 5 vídeos definida por ele.
+> **Ainda não gravado.** A atividade (`aula-04.json`) e o material de apoio
+> (`aula-04-pdf.md`) continuam apontando pro conteúdo antigo por enquanto —
+> serão reescritos a partir da transcrição real assim que os vídeos forem
+> gravados, do mesmo jeito que foi feito pras Aulas 2 e 3.
 
-[0:00] Olha essa resposta que uma IA deu pra uma mensagem de cliente:
-"Olá! Agradecemos seu contato. Nossa equipe está à disposição para
-auxiliá-lo(a) em qualquer necessidade que você tenha!" Ninguém fala assim
-com cliente de verdade. Isso aqui espanta mais do que ajuda.
+**Habilidade:** configurar do zero um agente de IA real no Chatvolt,
+conectado ao WhatsApp do negócio, com base de conhecimento própria, testado
+e pronto pra responder cliente sozinho.
 
-[0:30] Isso acontece porque a IA tenta ser educada de um jeito genérico —
-ela não conhece seu jeito de falar. Consertar isso antes de mandar é
-trabalho seu, sempre.
+**Ferramenta:** Chatvolt (mesma plataforma que Gregory já usa nos próprios
+agentes de negócio, "Ana" e "Gregory").
 
-[1:00] Três perguntas rápidas pra revisar: tem palavra que eu nunca uso?
-Corta. Tá formal demais pro meu cliente? Ajusta o tom. Faltou alguma
-informação real, tipo preço ou prazo? Completa.
+## Estrutura em 5 partes
 
-[1:45] Reescrevendo ao vivo aquela resposta de abertura: "Oi! Recebi sua
-mensagem, já te respondo com o que você precisa." Mais curto, mais parecido
-com gente de verdade.
+**Parte 1 — Apresentação**
+Situa o problema (Aula 2 revisou texto que VOCÊ manda; e quando o cliente
+manda fora do horário, ou chegam várias mensagens de uma vez?) e apresenta
+a promessa da aula: sair com um agente de verdade respondendo sozinho no
+WhatsApp do negócio.
 
-[2:20] Um aviso importante: situação delicada — reclamação, cobrança,
-crise com cliente — nunca é resposta automática sozinha. É revisão manual
-sempre, sem exceção. Isso volta com mais força na última aula da trilha.
+**Parte 2 — Chatvolt**
+Apresenta a ferramenta: o que é, pra que serve, como criar a conta. Contexto
+de por que essa é a plataforma escolhida (é a mesma usada em produção,
+não é só um exemplo de sala de aula).
 
-[2:45] Agora é sua vez: pega uma resposta genérica de IA (pode ser a da
-Aula 2) e reescreve até soar como você.
+**Parte 3 — Criar agente e configurações no Chatvolt**
+Passo a passo de criar o agente dentro do Chatvolt e conectar o número de
+WhatsApp do negócio. Configurações principais: nome do agente, tom de voz,
+limites do que ele pode responder sozinho vs. o que precisa escalar pro
+dono (reclamação, cobrança, negociação — reforça o que já foi dito na
+Aula 2: crise nunca fica só com a IA).
+
+**Parte 4 — Criar base de conhecimento pro agente**
+Como alimentar o agente com informação real do negócio — os mesmos fatos
+levantados na Aula 3 (o que vende, funcionários, localização, número real)
+mais as perguntas mais comuns dos clientes e como o dono normalmente
+responde. É essa base que faz o agente responder com informação certa, não
+genérica.
+
+**Parte 5 — Testar o agente**
+Demonstração ao vivo: mensagem de teste chegando no WhatsApp conectado e o
+agente respondendo sozinho. Fecha reforçando acompanhar as primeiras
+conversas reais de perto antes de confiar 100% no agente.
+
+## Depois de gravado
+
+Repetir o processo já validado nas Aulas 2 e 3: transcrever cada vídeo,
+reescrever `aula-04-roteiro.md` como resumo real parte a parte, reescrever
+`dados/trilha-ia/aula-04.json` (atividade) e `conteudo/trilha-ia/aula-04-pdf.md`
+(material de apoio) com base no conteúdo real gravado, e corrigir o título
+em `dados/indice.json` se mudar.
