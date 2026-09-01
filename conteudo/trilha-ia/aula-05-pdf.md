@@ -1,4 +1,4 @@
-# Material de apoio — Aula 5: Automatize o que acontece por trás do agente
+# Material de apoio — Aula 5: Automatize a criação do seu conteúdo
 
 ## O problema que essa aula resolve
 

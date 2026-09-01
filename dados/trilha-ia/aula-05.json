@@ -2,7 +2,7 @@
   "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-05",
-  "titulo": "Automatize o que acontece por trás do agente",
+  "titulo": "Automatize a criação do seu conteúdo",
   "habilidade": "Usar a criação por IA do n8n pra montar, sem programar, uma automação que gera sozinha o post do dia (legenda, imagem e narração) e entrega pronto pro seu e-mail, pra você aprovar antes de publicar.",
   "blocos": [
     {

@@ -1,4 +1,4 @@
-# Aula 5 — Automatize o que acontece por trás do agente
+# Aula 5 — Automatize a criação do seu conteúdo
 
 **Habilidade:** entender o que é o n8n e usar a criação por IA da plataforma
 pra montar, sem programar, uma automação que gera sozinha o post do dia
