@@ -2,54 +2,143 @@
   "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-04",
-  "titulo": "Atendimento sem parecer robô",
-  "habilidade": "Revisar uma resposta de IA genérica até soar como o próprio dono, e reconhecer quando a revisão manual é obrigatória.",
+  "titulo": "Monte seu agente de atendimento no WhatsApp",
+  "habilidade": "Criar do zero, dentro do Chatvolt, um agente de IA treinado com informação real do seu negócio, publicado e testado — pronto pra assumir o atendimento repetitivo no WhatsApp sem perder o controle das situações que ainda precisam de você.",
   "blocos": [
     {
       "id": "b1",
-      "tipo": "cenario",
-      "enunciado": "Uma IA respondeu a um cliente: \"Agradecemos seu contato. Nossa equipe está à disposição para auxiliá-lo(a) em qualquer necessidade que você tenha!\". O principal problema dessa resposta é:",
-      "opcoes": [
-        "Está errada, o cliente não vai entender",
-        "É longa e genérica demais, não soa como uma pessoa falando",
-        "Não tem problema nenhum, pode mandar assim"
-      ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
-      "explicacao_erro": "A resposta é educada mas genérica — não parece ninguém falando de verdade com o cliente.",
-      "feedback_acerto": "Isso. Genérica demais — falta o seu jeito de falar."
+      "tipo": "lista_aberta",
+      "enunciado": "Antes de configurar qualquer agente, ele precisa de uma base de conhecimento real — é isso que a aula ensina. Escreva 4 fatos concretos do seu negócio, exatamente do jeito que vão entrar nessa base: um produto ou serviço que mais gera dúvida do cliente, a pergunta mais comum que os clientes fazem, uma regra de atendimento (horário, prazo, forma de entrega), e uma situação que precisa SEMPRE ser respondida por você, nunca só pelo agente.",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "o produto ou serviço que mais gera dúvida",
+        "a pergunta mais comum dos seus clientes",
+        "uma regra real de atendimento (horário, prazo, entrega)",
+        "uma situação que precisa sempre passar por você, nunca só pelo agente"
+      ]
     },
     {
       "id": "b2",
-      "tipo": "lista_aberta",
-      "enunciado": "Pegue a resposta genérica que uma IA te deu (pode ser da Aula 2 ou testando agora). Reescreva do seu jeito e cole a sua versão aqui.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["a versão reescrita, do jeito que você falaria"]
+      "tipo": "cenario",
+      "enunciado": "Você acabou de criar sua conta no Chatvolt (com \"continuar com o Google\"), e a plataforma já pede na hora pra você criar um agente. Segundo a aula, o que fazer nesse momento?",
+      "opcoes": [
+        "Criar o agente ali mesmo, já que ela está pedindo",
+        "Fechar essa janela (o X) e ir pra página principal antes de criar o agente",
+        "Cancelar a conta e criar de novo depois"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 3 do vídeo, logo depois do cadastro da conta.",
+      "explicacao_erro": "A aula orienta fechar essa janela primeiro (clicar no X) e ir pra página principal — só depois de conhecer a plataforma (caixa de entrada, base de conhecimento, artefatos) é que o agente é criado.",
+      "feedback_acerto": "Isso — fecha a janela e conhece a plataforma antes de criar o agente."
     },
     {
       "id": "b3",
       "tipo": "cenario",
-      "enunciado": "Você recebe uma reclamação de cliente sobre atraso na entrega. O que fazer?",
+      "enunciado": "Dentro do Chatvolt, qual seção funciona como um catálogo com todos os preços dos seus produtos, pra deixar a resposta mais rápida em vez do agente vasculhar tudo junto?",
       "opcoes": [
-        "Deixar a IA responder sozinha, é mais rápido",
-        "Pode usar a IA pra rascunhar, mas sempre revisar e ajustar antes de mandar",
-        "Nunca usar IA nem pra rascunhar, escrever tudo do zero"
+        "Gestão de clientes",
+        "Artefatos",
+        "Volt API"
       ],
       "correta": 1,
-      "dica_erro": "Reveja o trecho dos 2:20 do vídeo.",
-      "explicacao_erro": "Situação delicada permite rascunho de IA, mas a revisão manual antes de mandar é sempre obrigatória.",
-      "feedback_acerto": "Isso. Pode ajudar a rascunhar, mas quem decide e revisa é você. Na Aula 1 essa reclamação não passou no teste de automatizar o envio da resposta — aqui é diferente: rascunhar com a IA e revisar antes de mandar não é a IA decidindo sozinha, é você usando ela como ponto de partida."
+      "dica_erro": "Reveja a Parte 3 do vídeo, no tour pela plataforma.",
+      "explicacao_erro": "Artefatos é o catálogo de preços. A aula cita como exemplo outro negócio do próprio Gregory (fora do Toca o Negócio — um polo de ensino a distância com cerca de 800 cursos de pós-graduação): sem os artefatos, o agente se confundiria buscando tanto preço diferente junto.",
+      "feedback_acerto": "Isso — artefatos é o catálogo de preços, útil quando o negócio tem muitas opções."
     },
     {
       "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "No seu negócio, em qual tipo de mensagem você mais precisa desse cuidado de revisar antes de mandar?",
+      "tipo": "cenario",
+      "enunciado": "Você quer vincular o WhatsApp oficial do seu negócio ao Chatvolt, sem cair no bloqueio que o WhatsApp aplica quando desconfia de robô mandando muita mensagem. Segundo a aula, o que é necessário?",
       "opcoes": [
-        "Resposta de preço ou prazo",
-        "Reclamação",
-        "Cobrança",
-        "Pergunta geral sobre o produto"
+        "Nada especial, o plano gratuito já vincula",
+        "Pelo menos o plano básico do Chatvolt, com o template da mensagem aprovado pela Meta",
+        "Usar um número de WhatsApp pessoal em vez do comercial"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 3 do vídeo, na explicação dos planos.",
+      "explicacao_erro": "O plano gratuito não vincula WhatsApp oficial — é preciso pelo menos o plano básico (a aula cita R$ 237/mês), e ainda assim o template da mensagem precisa ser aprovado pela Meta.",
+      "feedback_acerto": "Isso — plano básico do Chatvolt e template aprovado pela Meta."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "Na hora de criar o agente (opção \"Personalizado\", setor \"Vendas\", categoria \"Varejo\"), qual é a \"chave de ouro\" que a aula recomenda ter aberta do lado o tempo todo, pra sugerir nome, preencher palavras-chave e escrever o prompt do agente?",
+      "opcoes": [
+        "O Claude, numa janela ao lado",
+        "Nenhuma ferramenta — tudo deve ser preenchido manualmente",
+        "Um funcionário humano digitando por você"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja a Parte 4 do vídeo, logo no início da criação do agente.",
+      "explicacao_erro": "A aula chama isso de \"chave de ouro\": Claude aberto do lado o tempo todo, inclusive colando print da tela do Chatvolt pra ele ajudar a preencher os campos.",
+      "feedback_acerto": "Isso — Claude do lado, o tempo todo, é a chave de ouro da configuração."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "No teste dentro do próprio Chatvolt, o agente da pizzaria não soube responder \"Qual sabor tem?\", porque a base de conhecimento ainda não tinha essa informação. O que a demonstração da aula faz pra resolver?",
+      "opcoes": [
+        "Desiste do agente, ele não é confiável",
+        "Pede pro Claude reescrever o .txt da base de conhecimento incluindo essa informação, baixa o arquivo novo e sobe de novo em \"Adicionar fonte de dados\"",
+        "Edita a pergunta do cliente pra ele não perguntar mais isso"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 4 do vídeo, no momento do primeiro teste.",
+      "explicacao_erro": "A base de conhecimento é um arquivo vivo: sempre que o agente erra ou não sabe algo, a correção é pedir pro Claude reescrever o .txt com a informação faltando, baixar e subir de novo em Implantar → Configurações → Base de conhecimentos → Adicionar fonte de dados — e esperar processar até sair \"resolvido\".",
+      "feedback_acerto": "Isso — corrige na base de conhecimento e sobe o arquivo de novo, não no agente na marra."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Na configuração de \"tempo de resposta\" do agente, por que a aula recomenda uns 20 a 25 segundos de atraso proposital, em vez de responder em 5 segundos?",
+      "opcoes": [
+        "Pra economizar crédito da conta",
+        "Pra parecer mais humano — ninguém responde uma mensagem instantaneamente",
+        "É uma limitação técnica do Chatvolt, não dá pra ser mais rápido"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja a Parte 4 do vídeo, nas configurações do agente.",
+      "explicacao_erro": "A aula é direta: responder em 5 segundos \"parece um robô mesmo\". O atraso de 20 a 25 segundos é proposital, pra imitar o tempo real de alguém respondendo.",
+      "feedback_acerto": "Isso — atraso proposital pra parecer humano, não uma limitação técnica."
+    },
+    {
+      "id": "b8",
+      "tipo": "cenario",
+      "enunciado": "No painel de conversas, o agente avisa que precisa de ajuda humana numa reclamação de cliente. Você clica em \"intervir\" e responde pessoalmente. Depois de resolver, o que fazer pra devolver a conversa pro agente continuar sozinho?",
+      "opcoes": [
+        "Apagar a conversa e começar outra do zero",
+        "Clicar em \"intervir\" de novo",
+        "Clicar em \"habilitar IA\""
+      ],
+      "correta": 2,
+      "dica_erro": "Reveja a Parte 4 do vídeo, no painel de conversas, perto do final.",
+      "explicacao_erro": "Depois de responder pessoalmente, \"habilitar IA\" devolve o controle da conversa pro agente. É o mesmo princípio da Aula 2: crise nunca fica só com a IA, mas depois de resolvida, o agente pode voltar a cuidar do resto sozinho.",
+      "feedback_acerto": "Isso — \"habilitar IA\" devolve a conversa pro agente depois que você resolveu pessoalmente."
+    },
+    {
+      "id": "b9",
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que seu agente está pronto: liste os 5 itens abaixo que você já deixou feitos no Chatvolt.",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 5,
+      "placeholders": [
+        "Conta criada no Chatvolt (plano básico, se for vincular WhatsApp)",
+        "Agente criado em \"Personalizado\", com nome e função definidos",
+        "Base de conhecimento em .txt gerada com o Claude e enviada em \"Adicionar fonte de dados\"",
+        "Tempo de resposta (uns 20-25s) e mensagem de follow-up configurados",
+        "Testado na aba \"chat\" com perguntas reais de cliente, e ajustado onde errou"
+      ]
+    },
+    {
+      "id": "b10",
+      "tipo": "escolha_simples",
+      "enunciado": "No seu negócio, qual situação você mais quer que esse agente resolva sozinho primeiro?",
+      "opcoes": [
+        "Dúvida sobre preço ou catálogo",
+        "Horário ou regra de atendimento",
+        "Fazer pedido ou agendar",
+        "Ainda não decidi"
       ]
     }
   ]
