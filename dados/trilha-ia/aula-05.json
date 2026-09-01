@@ -2,58 +2,158 @@
   "schema_version": 1,
   "trilha": "trilha-ia",
   "aula": "aula-05",
-  "titulo": "Organização da rotina",
-  "habilidade": "Usar IA em tarefas de fundo (agenda, cobrança, rascunho) que sustentam o negócio sem aparecer pro cliente.",
+  "titulo": "Automatize o que acontece por trás do agente",
+  "habilidade": "Usar a criação por IA do n8n pra montar, sem programar, uma automação que gera sozinha o post do dia (legenda, imagem e narração) e entrega pronto pro seu e-mail, pra você aprovar antes de publicar.",
   "blocos": [
     {
       "id": "b1",
       "tipo": "lista_aberta",
-      "enunciado": "Liste de 3 a 5 tarefas de fundo que você faz toda semana e nunca tem tempo (cobrança, agenda, organização).",
-      "quantidade_campos": 5,
-      "minimo_preenchido": 1,
+      "enunciado": "Essa aula ensina a montar, no n8n, uma automação que cria sozinha o post do dia e entrega pronto pra você aprovar — igual ao exemplo mostrado nos vídeos. Antes de montar a sua, escreva 4 fatos reais do seu negócio que vão entrar nesse fluxo.",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
       "placeholders": [
-        "organizar a agenda da semana",
-        "mandar mensagem de cobrança",
-        "rascunhar o post de segunda"
+        "o horário do dia em que faria sentido o post sair pronto (ex: 18h)",
+        "algo que muda com frequência no seu negócio (sabor do dia, produto em destaque, promoção da semana)",
+        "o tom de voz que representa sua marca (ex: caloroso, direto, divertido)",
+        "o e-mail onde você quer receber o conteúdo pronto pra aprovar antes de postar"
       ]
     },
     {
       "id": "b2",
       "tipo": "cenario",
-      "enunciado": "Você tem 8 compromissos anotados sem ordem nenhuma no papel. Pedir pra uma IA organizar por dia da semana é:",
+      "enunciado": "Segundo o Vídeo 1, o que é uma automação, na definição usada pra apresentar o n8n?",
       "opcoes": [
-        "Arriscado, porque agenda é coisa séria demais pra IA",
-        "Uma boa tarefa de fundo pra treinar, o risco de errar é baixo",
-        "Inútil, é mais rápido fazer na mão"
+        "Um fluxo que trabalha por você, montado nó por nó, e roda sozinho",
+        "Um lembrete que aparece no seu celular todo dia",
+        "Uma pessoa contratada só pra responder mensagem"
       ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 2:00 do vídeo.",
-      "explicacao_erro": "Tarefa de fundo não aparece pro cliente — é um bom lugar pra treinar com IA sem medo.",
-      "feedback_acerto": "Isso. Baixo risco, alto ganho de tempo."
+      "correta": 0,
+      "dica_erro": "Reveja o começo do Vídeo 1, nos primeiros segundos.",
+      "explicacao_erro": "O vídeo define automação assim: um fluxo que trabalha por você, e ela nasce no n8n — o \"editor de automações\" — montado nó por nó.",
+      "feedback_acerto": "Isso — um fluxo que trabalha por você, nó por nó, disparado sozinho."
     },
     {
       "id": "b3",
-      "tipo": "calculo",
-      "enunciado": "Agora escolha UMA dessas tarefas de fundo e responda.",
-      "campos": [
-        { "id": "tarefa", "tipo": "selecao", "rotulo": "Qual das que você listou?", "depende_de": { "trilha": "trilha-ia", "aula": "aula-05", "bloco": "b1" } },
-        { "id": "vezes_semana", "tipo": "numero", "rotulo": "Quantas vezes por semana você faz", "unidade": "vezes", "minimo": 0, "maximo": 999 },
-        { "id": "minutos_vez", "tipo": "numero", "rotulo": "Quanto tempo leva cada vez, em minutos", "unidade": "minutos", "minimo": 0, "maximo": 999 }
+      "tipo": "cenario",
+      "enunciado": "No exemplo da automação da Nona (Vídeo 1), o primeiro nó — o gatilho — está configurado pra disparar quando?",
+      "opcoes": [
+        "Só quando alguém clica manualmente no botão",
+        "Todo dia, às 18h, no horário de Brasília",
+        "Uma vez por semana, aos domingos de manhã"
       ],
-      "calculos": {
-        "total": "vezes_semana * minutos_vez",
-        "horas": "total * 4.345 / 60"
-      },
-      "resultado_texto": "Essa tarefa de fundo consome cerca de {total} minutos por semana, ou {horas} horas por mês."
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1, por volta dos 0:25.",
+      "explicacao_erro": "O gatilho do exemplo está configurado pra disparar todo dia, às 18h, no horário de Brasília — é isso que faz a automação rodar sozinha sem precisar clicar em nada.",
+      "feedback_acerto": "Isso — todo dia, às 18h, sem precisar clicar em nada."
     },
     {
       "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "Depois de ver o tempo que isso consome, você organiza essa tarefa com ajuda de IA essa semana?",
+      "tipo": "cenario",
+      "enunciado": "Segundo o Vídeo 1, antes de QUALQUER conteúdo gerado pela automação ir ao ar, pra onde ele segue primeiro?",
       "opcoes": [
-        "Sim, começo hoje",
-        "Sim, mas só na próxima semana",
-        "Ainda não tenho certeza"
+        "Direto pro Instagram, publicado sozinho, sem checar nada",
+        "Por e-mail, pra sua aprovação",
+        "Pro grupo de WhatsApp da equipe"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1, por volta dos 0:48.",
+      "explicacao_erro": "Os dados se organizam num só lugar e seguem por e-mail, pra aprovação, antes de qualquer coisa ir ao ar. Só depois de testar o fluxo inteiro uma vez é que ele é ativado pra rodar sozinho.",
+      "feedback_acerto": "Isso — e-mail primeiro, pra você aprovar antes de qualquer coisa ir ao ar."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "No Vídeo 2, pra criar o prompt que descreve a automação (o texto colado no recurso de criação por IA do n8n), qual ferramenta foi usada?",
+      "opcoes": [
+        "O Claude (citado na fala como \"Cloud Chat\")",
+        "Nenhuma — o prompt foi escrito direto na mão, sem ajuda de IA",
+        "O próprio ChatGPT"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Vídeo 2, por volta de 1:10.",
+      "explicacao_erro": "O prompt que descreve a automação foi escrito com ajuda do Claude (chamado de \"Cloud Chat\" na fala, o mesmo apelido usado na Aula 4) — depois colado no recurso de criação por IA do n8n, que sugeriu o fluxo completo a partir dali.",
+      "feedback_acerto": "Isso — o Claude escreveu o prompt, colado depois no n8n."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "Dentro do fluxo já montado no n8n, quando ele pergunta com qual IA gerar o conteúdo do post, qual foi a IA usada — já vinculada de graça na própria plataforma?",
+      "opcoes": [
+        "O Claude, a mesma IA usada pra escrever o prompt",
+        "O ChatGPT, na indicação do próprio n8n",
+        "Nenhuma — o conteúdo foi digitado à mão dentro do n8n"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 2, por volta de 2:30.",
+      "explicacao_erro": "É uma IA diferente da que escreveu o prompt: o Claude ajudou a montar a automação por fora, mas dentro do fluxo, pra gerar o conteúdo em si, a IA usada foi o ChatGPT — indicação do próprio n8n, já vinculado de graça.",
+      "feedback_acerto": "Isso — ChatGPT, já vinculado de graça, indicação do próprio n8n."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Pra adicionar a narração ao post, o Vídeo 2 usa outra ferramenta pra escolher a voz (idioma português, sotaque brasileiro). Qual?",
+      "opcoes": [
+        "O ElevenLabs (citado na fala como \"ElevenUp\")",
+        "O Google Tradutor",
+        "Nenhuma — o próprio n8n grava a narração sozinho"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Vídeo 2, por volta de 4:50.",
+      "explicacao_erro": "A voz foi escolhida no ElevenLabs (citado na fala como \"ElevenUp\"): conta gratuita com e-mail do Google, filtro de idioma português e sotaque brasileiro, escolha da voz (\"Roberta\") e o ID dessa voz colado no n8n pra vincular ao conteúdo.",
+      "feedback_acerto": "Isso — ElevenLabs, escolhendo idioma português e sotaque brasileiro."
+    },
+    {
+      "id": "b8",
+      "tipo": "cenario",
+      "enunciado": "Depois que a automação gera legenda, imagem e narração e manda tudo pro e-mail, o que acontece com a publicação no Instagram, segundo a demonstração?",
+      "opcoes": [
+        "O n8n publica sozinho, sem precisar de ninguém",
+        "Você copia o conteúdo do e-mail e posta no Instagram manualmente",
+        "O conteúdo fica salvo só dentro do n8n, sem chegar a lugar nenhum"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 2, por volta de 6:35, quando o e-mail é aberto pela segunda vez.",
+      "explicacao_erro": "A automação entrega tudo pronto no e-mail — imagem, título e narração — mas a publicação em si continua manual: você copia e anexa no seu Instagram.",
+      "feedback_acerto": "Isso — a automação entrega pronto, mas quem publica ainda é você."
+    },
+    {
+      "id": "b9",
+      "tipo": "cenario",
+      "enunciado": "O Vídeo 2 fecha não só a aula, mas a Trilha IA no Negócio inteira. Segundo a fala de encerramento, qual é o assunto da PRÓXIMA trilha?",
+      "opcoes": [
+        "Formalizar a empresa e abrir o CNPJ certo",
+        "Marketing — Instagram, Facebook, TikTok, e vincular o WhatsApp aos agentes",
+        "Gerir o dinheiro e montar o fluxo de caixa"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o final do Vídeo 2, por volta de 7:40.",
+      "explicacao_erro": "No encerramento, o vídeo anuncia que a próxima trilha vai tratar dos caminhos do marketing — TikTok, Instagram, Facebook, entender o público — e vincular o WhatsApp aos agentes criados na Aula 4.",
+      "feedback_acerto": "Isso — marketing nas redes e vincular o WhatsApp aos agentes, na próxima trilha."
+    },
+    {
+      "id": "b10",
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que sua automação está pronta: liste os 6 itens abaixo que você já deixou feitos no n8n.",
+      "quantidade_campos": 6,
+      "minimo_preenchido": 6,
+      "placeholders": [
+        "Conta criada no n8n",
+        "Workflow criado com a criação por IA do n8n, a partir de um prompt escrito com ajuda do Claude",
+        "IA de geração de conteúdo configurada dentro do fluxo (ex: ChatGPT)",
+        "Voz escolhida no ElevenLabs (idioma português, sotaque brasileiro) e ID colado no n8n, se for usar narração",
+        "Entrega configurada pro seu e-mail, pra aprovar antes de postar",
+        "Fluxo testado de verdade (executado) e ativado pra rodar sozinho no horário definido"
+      ]
+    },
+    {
+      "id": "b11",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de ver o n8n criar o post do dia sozinho, qual parte da rotina do seu negócio você mais quer automatizar primeiro?",
+      "opcoes": [
+        "Criar o post do dia (legenda + imagem) pras redes sociais",
+        "Gerar relatório ou atualizar planilha",
+        "Mandar lembrete ou aviso automático pra mim ou pro cliente",
+        "Ainda não decidi"
       ]
     }
   ]
