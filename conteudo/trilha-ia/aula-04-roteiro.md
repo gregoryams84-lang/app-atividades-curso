@@ -1,4 +1,4 @@
-# Aula 4 — Monte seu agente de atendimento no WhatsApp
+# Aula 4 — Crie Funcionários
 
 **Habilidade:** criar do zero, dentro do Chatvolt, um agente de IA treinado
 com informação real do próprio negócio, publicado e testado — pronto pra

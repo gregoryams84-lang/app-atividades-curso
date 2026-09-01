@@ -1,4 +1,4 @@
-# Material de apoio — Aula 4: Monte seu agente de atendimento no WhatsApp
+# Material de apoio — Aula 4: Crie Funcionários
 
 ## O problema que essa aula resolve
 
