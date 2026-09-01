@@ -42,8 +42,8 @@ atendimento. O caminho básico:
 ## Qual plano escolher
 
 Pra vincular o **WhatsApp oficial** — o objetivo desta aula — é preciso
-pelo menos o **plano básico** (o gratuito não vincula). É o plano que o
-próprio Gregory usa:
+pelo menos o **plano básico** do Chatvolt. É o plano que o próprio
+Gregory usa:
 
 - **R$ 237/mês**
 - 2 agentes
