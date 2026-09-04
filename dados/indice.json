@@ -42,19 +42,19 @@
       "aulas": [
         {
           "id": "aula-01",
-          "titulo": "Deixe seu Instagram e Facebook prontos pra aprovação da Meta",
+          "titulo": "A página do Facebook do seu negócio, pronta pra Meta",
           "ordem": 1,
           "arquivo": "dados/trilha-vendas/aula-01.json"
         },
         {
           "id": "aula-02",
-          "titulo": "Cadastre o WhatsApp na Meta e conecte o agente",
+          "titulo": "Portfólio de Negócios no Facebook",
           "ordem": 2,
           "arquivo": "dados/trilha-vendas/aula-02.json"
         },
         {
           "id": "aula-03",
-          "titulo": "Automação de conteúdo pras redes sociais",
+          "titulo": "Crie seu agente e conecte ao WhatsApp",
           "ordem": 3,
           "arquivo": "dados/trilha-vendas/aula-03.json"
         },
