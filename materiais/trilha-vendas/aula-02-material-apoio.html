@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 2 — Portfólio de Negócios no Facebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #14513C;
+    --verde-escuro: #0F3A2B;
+    --verde-claro: #E4EDE8;
+    --tinta: #16191C;
+    --papel: #F5F6F3;
+    --neutro: #5B6560;
+    --neutro-claro: #E9EBE8;
+    --ambar: #8A5A12;
+    --ambar-claro: #F3E7D6;
+    --borda: #D9DCD8;
+  }
+
+  * { box-sizing: border-box; }
+
+  @page { size: A4; margin: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    color: var(--tinta);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body { font-size: 14.5px; line-height: 1.58; }
+
+  h1, h2, h3 { font-family: "Fraunces", serif; font-weight: 600; margin: 0; color: var(--verde); }
+
+  .banda-topo {
+    background: var(--verde);
+    color: var(--papel);
+    padding: 15mm 18mm 9mm;
+  }
+  .banda-topo h1 { color: #FFFFFF; }
+
+  .selo {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 10px;
+  }
+
+  .banda-topo h1 { font-size: 27px; line-height: 1.22; margin-bottom: 10px; max-width: 150mm; }
+
+  .habilidade-topo {
+    font-size: 13px;
+    color: #D8E4DD;
+    max-width: 150mm;
+    margin: 0;
+  }
+  .habilidade-topo strong { color: #FFFFFF; font-weight: 600; }
+
+  .conteudo { padding: 9mm 18mm 6mm; }
+
+  section { margin-bottom: 7mm; break-inside: avoid; }
+
+  .rotulo-secao {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--neutro);
+    margin-bottom: 4px;
+  }
+
+  h2.titulo-secao { font-size: 18px; margin-bottom: 3mm; }
+
+  p { margin: 0 0 8px; }
+
+  /* --- Bloco de história (exemplo real) --- */
+  .caixa-historia {
+    background: var(--papel);
+    border-left: 3px solid var(--verde);
+    border-radius: 4px;
+    padding: 4mm 5mm;
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+  .caixa-historia .rotulo-secao { color: var(--verde); margin-bottom: 6px; }
+  .caixa-historia p:last-child { margin-bottom: 0; }
+  .caixa-historia p { color: var(--tinta); }
+
+  /* --- Peças / kits --- */
+  .lista-perguntas { display: flex; flex-direction: column; gap: 3.5mm; }
+  .cartao-pergunta {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .numero-pergunta {
+    flex: 0 0 auto;
+    width: 8mm;
+    height: 8mm;
+    border-radius: 50%;
+    background: var(--verde);
+    color: #FFFFFF;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .texto-pergunta h3 { font-size: 15.5px; margin-bottom: 2px; }
+  .texto-pergunta .explicacao { color: var(--tinta); margin-bottom: 3px; }
+  .texto-pergunta .exemplo {
+    color: var(--neutro);
+    font-size: 12.5px;
+    font-style: italic;
+  }
+  .cartao-pergunta.destaque { border-color: var(--ambar); background: var(--ambar-claro); }
+  .cartao-pergunta.destaque .numero-pergunta { background: var(--ambar); }
+  .cartao-pergunta.destaque .exemplo { color: var(--ambar); font-style: normal; font-weight: 600; }
+  .lista-ferramentas {
+    margin: 2px 0 3px;
+    padding-left: 4.5mm;
+    font-size: 12.5px;
+    color: var(--tinta);
+  }
+  .lista-ferramentas li { margin-bottom: 1.5mm; }
+  .lista-ferramentas strong { color: var(--verde-escuro); }
+
+  /* --- Dois casos / dois modos --- */
+  .grade-casos { display: flex; gap: 4mm; }
+  .cartao-caso {
+    flex: 1;
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .cartao-caso.ok { background: var(--verde-claro); border: 1px solid var(--verde); }
+  .cartao-caso.nao { background: var(--neutro-claro); border: 1px solid var(--borda); }
+  .rotulo-caso {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2mm;
+  }
+  .cartao-caso.ok .rotulo-caso { color: var(--verde); }
+  .cartao-caso.nao .rotulo-caso { color: var(--neutro); }
+  .cartao-caso h3 { font-size: 14px; margin-bottom: 2mm; color: var(--tinta); }
+  .checagem { list-style: none; margin: 0 0 3mm; padding: 0; font-size: 12.5px; }
+  .checagem li { margin-bottom: 1.5mm; padding-left: 5mm; position: relative; }
+  .checagem li::before { position: absolute; left: 0; font-weight: 700; }
+  .checagem .sim::before { content: "✓"; color: var(--verde); }
+  .checagem .nao::before { content: "✕"; color: var(--ambar); }
+  .conclusao-caso { font-size: 12.5px; font-weight: 600; margin: 0; }
+  .cartao-caso.ok .conclusao-caso { color: var(--verde-escuro); }
+  .cartao-caso.nao .conclusao-caso { color: var(--ambar); }
+
+  /* --- Plano (cartão largo) --- */
+  .cartao-plano {
+    border: 1px solid var(--verde);
+    background: var(--verde-claro);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+  }
+  .cartao-plano .rotulo-caso { color: var(--verde); }
+  .cartao-plano h3 { font-size: 15px; margin-bottom: 2mm; }
+  .grade-specs { display: flex; flex-wrap: wrap; gap: 3mm; margin: 2mm 0 3mm; }
+  .spec-item {
+    background: #FFFFFF;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 2.5mm 3.5mm;
+    font-size: 12px;
+    color: var(--tinta);
+  }
+  .spec-item strong { color: var(--verde-escuro); display: block; font-size: 13.5px; font-family: "Fraunces", serif; }
+
+  /* --- Atividade --- */
+  .caixa-atividade {
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .instrucao-atividade { color: var(--tinta); margin-bottom: 4mm; }
+  .instrucao-atividade strong { color: var(--verde); }
+  .linha-preencher {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    border-bottom: 1px solid var(--borda);
+    padding: 3mm 0;
+  }
+  .linha-preencher:first-of-type { padding-top: 0; }
+  .num-linha {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    color: var(--verde);
+    font-size: 14px;
+    flex: 0 0 auto;
+  }
+  .rotulo-linha { font-weight: 600; flex: 0 0 auto; }
+
+  /* --- Checklist final --- */
+  .lista-checklist { list-style: none; margin: 0; padding: 0; }
+  .lista-checklist li {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    padding: 2.5mm 0;
+    border-bottom: 1px solid var(--borda);
+    font-size: 13px;
+  }
+  .lista-checklist li:last-child { border-bottom: none; }
+  .caixa-vazia {
+    flex: 0 0 auto;
+    width: 4mm;
+    height: 4mm;
+    border: 1.5px solid var(--verde);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* --- Resumo final --- */
+  .caixa-resumo {
+    background: var(--verde);
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .caixa-resumo .rotulo-secao { color: var(--verde-claro); }
+  .caixa-resumo ul { margin: 0; padding-left: 5mm; }
+  .caixa-resumo li { margin-bottom: 2mm; font-size: 13px; }
+  .caixa-resumo li:last-child { margin-bottom: 0; }
+  .caixa-resumo strong { color: #FFFFFF; }
+
+  .lista-pontos { margin: 0; padding-left: 5mm; }
+  .lista-pontos li { margin-bottom: 2.5mm; font-size: 13px; color: var(--tinta); }
+  .lista-pontos li:last-child { margin-bottom: 0; }
+  .lista-pontos strong { color: var(--verde-escuro); }
+
+  /* --- Tabela --- */
+  table.tabela-comparativa { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.tabela-comparativa th, table.tabela-comparativa td { border: 1px solid var(--borda); padding: 2.5mm 3.5mm; text-align: left; }
+  table.tabela-comparativa th { background: var(--papel); color: var(--verde-escuro); font-weight: 700; }
+
+  .rodape {
+    text-align: center;
+    font-size: 11px;
+    color: var(--neutro);
+    padding: 4mm 18mm 10mm;
+  }
+</style>
+</head>
+<body>
+
+  <div class="banda-topo">
+    <div class="selo">Toca o Negócio · Trilha Vender pela internet e pelo WhatsApp · Aula 2</div>
+    <h1>Portfólio de Negócios no Facebook</h1>
+    <p class="habilidade-topo"><strong>O que você leva desta aula:</strong> montar o Portfólio de Negócios na Meta (business.facebook.com), vinculando Página do Facebook, Instagram e conta de anúncios com os dados reais do CNPJ — a base pra conectar o agente ao WhatsApp oficial na próxima aula.</p>
+  </div>
+
+  <div class="conteudo">
+
+    <section>
+      <div class="caixa-historia">
+        <div>
+          <div class="rotulo-secao">O problema que essa aula resolve</div>
+          <p>Com a Página do Facebook já criada (Aula 1), falta o passo que regulariza tudo de verdade dentro da Meta: o <strong>Portfólio de Negócios</strong>.</p>
+          <p>É dentro dele que a Página do Facebook, o Instagram, a conta de anúncios e o WhatsApp Business ficam documentados e vinculados sob o CNPJ da sua empresa — a base pra, na próxima aula, conectar o agente de IA ao WhatsApp oficial.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Criando o portfólio</h2>
+      <div class="lista-perguntas">
+        <div class="cartao-pergunta">
+          <div class="numero-pergunta">1</div>
+          <div class="texto-pergunta">
+            <h3>business.facebook.com</h3>
+            <p class="explicacao">Acesse com a conta do Facebook vinculada à sua página, clique em "Criar um portfólio de negócios", dê nome e apelido, e preencha e-mail da empresa, gestor e e-mail profissional.</p>
+          </div>
+        </div>
+        <div class="cartao-pergunta destaque">
+          <div class="numero-pergunta">!</div>
+          <div class="texto-pergunta">
+            <h3>Regra de ouro dos dados</h3>
+            <p class="explicacao">CNPJ, endereço, CEP, razão social e nome fantasia precisam estar exatamente como no cartão do CNPJ e no contrato social.</p>
+            <p class="exemplo">Só e-mail e telefone podem ser diferentes/alterados.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Conta de anúncio</h2>
+      <table class="tabela-comparativa">
+        <thead><tr><th>Campo</th><th>O que preencher</th></tr></thead>
+        <tbody>
+          <tr><td>Nome da conta</td><td>Um nome que identifique, ex: "Anúncio [seu negócio]"</td></tr>
+          <tr><td>Fuso horário</td><td><strong>Brasil</strong></td></tr>
+          <tr><td>Moeda</td><td>Real brasileiro (definida pelo fuso horário)</td></tr>
+          <tr><td>Forma de pagamento</td><td>Cartão de crédito, ou Pix com crédito adiantado</td></tr>
+          <tr><td>Informações fiscais</td><td>CNPJ (o certo, lidando com empresa)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Instagram e WhatsApp dentro do portfólio</h2>
+      <div class="cartao-plano">
+        <div class="rotulo-caso">Ponto crítico da aula</div>
+        <h3>O mesmo número, sempre</h3>
+        <p class="explicacao">A conta do Instagram se vincula direto ali. Ao adicionar a conta de WhatsApp Business, esse número precisa ser o <strong>mesmo</strong> que, depois, vai ser vinculado ao agente lá no Chatvolt. O site do seu negócio também entra aqui, com a verificação "não sou robô".</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Centro de segurança</h2>
+      <div class="grade-casos">
+        <div class="cartao-caso ok">
+          <div class="rotulo-caso">As 4 verificações</div>
+          <h3>Pra ficar tudo regular</h3>
+          <ul class="checagem">
+            <li class="sim">Autenticação de dois fatores</li>
+            <li class="sim">Verificação do negócio via WhatsApp</li>
+            <li class="sim">Verificação de identidade (com o CNPJ)</li>
+            <li class="sim">Verificação do telemóvel</li>
+          </ul>
+          <p class="conclusao-caso">Os dados precisam bater exatamente com o contrato social.</p>
+        </div>
+        <div class="cartao-caso nao">
+          <div class="rotulo-caso">Também vale conferir</div>
+          <h3>Definições da conta</h3>
+          <ul class="checagem">
+            <li class="sim">Ativar a conta de pagamento</li>
+            <li class="sim">Idioma: português (Portugal), se estiver em inglês</li>
+            <li class="sim">Verificação da Meta (selo, custo mensal)</li>
+          </ul>
+          <p class="conclusao-caso">O Meta Business vira o lugar principal de trabalho.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="caixa-historia">
+        <div>
+          <div class="rotulo-secao">Use o Claude como assistente</div>
+          <p>Sempre que tiver dúvida de preenchimento, converse com o Claude — peça pra ele agir como especialista em Facebook/Instagram, explique sua empresa e deixe ele ajudar a preencher e estruturar.</p>
+          <p><strong>Dica importante:</strong> use chats separados por rede social — um especialista em Facebook, outro em Instagram — pra não misturar informação. Cada um vai virando cada vez mais especialista no seu próprio contexto.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Sua vez</h2>
+      <div class="caixa-atividade">
+        <p class="instrucao-atividade">Separe os 4 dados reais que vão entrar no seu Portfólio de Negócios:</p>
+
+        <div class="linha-preencher"><span class="num-linha">1</span><span class="rotulo-linha">CNPJ da empresa</span></div>
+        <div class="linha-preencher"><span class="num-linha">2</span><span class="rotulo-linha">Razão social exata</span></div>
+        <div class="linha-preencher"><span class="num-linha">3</span><span class="rotulo-linha">Nome fantasia</span></div>
+        <div class="linha-preencher"><span class="num-linha">4</span><span class="rotulo-linha">E-mail empresarial</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Checklist final</h2>
+      <ul class="lista-checklist">
+        <li><span class="caixa-vazia"></span> Portfólio de Negócios criado em business.facebook.com</li>
+        <li><span class="caixa-vazia"></span> Página do Facebook e Instagram vinculados dentro do portfólio</li>
+        <li><span class="caixa-vazia"></span> Dados oficiais (CNPJ, razão social, endereço, CEP) conferidos e exatos</li>
+        <li><span class="caixa-vazia"></span> Conta de anúncio criada com fuso horário Brasil e moeda real brasileiro</li>
+        <li><span class="caixa-vazia"></span> Número de WhatsApp Business cadastrado é o mesmo que vai pro Chatvolt</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 0;">
+      <div class="caixa-resumo">
+        <div class="rotulo-secao">Resumo rápido</div>
+        <ul>
+          <li><strong>Portfólio de Negócios:</strong> documentação que regulariza a empresa e vincula Facebook + Instagram.</li>
+          <li><strong>Dados oficiais:</strong> CNPJ, razão social, endereço e CEP exatamente como no contrato social.</li>
+          <li><strong>Conta de anúncio:</strong> fuso horário Brasil, moeda real brasileiro.</li>
+          <li><strong>WhatsApp Business:</strong> o mesmo número que vai pro Chatvolt.</li>
+          <li><strong>Centro de segurança:</strong> dois fatores, verificação via WhatsApp, identidade e telemóvel.</li>
+          <li><strong>Claude:</strong> chats separados por rede social, cada um vira especialista.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="rodape">Toca o Negócio · Trilha Vender pela internet e pelo WhatsApp · Aula 2</p>
+
+</body>
+</html>

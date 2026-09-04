@@ -2,49 +2,129 @@
   "schema_version": 1,
   "trilha": "trilha-vendas",
   "aula": "aula-02",
-  "titulo": "WhatsApp Business configurado direito",
-  "habilidade": "Configurar catálogo, mensagem automática de ausência e organização de conversa no WhatsApp Business.",
+  "titulo": "Portfólio de Negócios no Facebook",
+  "habilidade": "Montar o Portfólio de Negócios na Meta (business.facebook.com), vinculando Página do Facebook, Instagram e conta de anúncios com os dados reais do CNPJ — preparando o terreno pra conectar o agente ao WhatsApp oficial na próxima aula.",
   "blocos": [
     {
       "id": "b1",
-      "tipo": "cenario",
-      "enunciado": "Um cliente manda \"vocês entregam no meu bairro?\" às 23h pro WhatsApp de uma loja sem mensagem automática configurada. A loja só vê e responde às 9h do dia seguinte. O que isso custa?",
-      "opcoes": [
-        "Nada, o cliente vai esperar a resposta",
-        "Provavelmente a venda — o cliente já comprou em outro lugar que respondeu na hora",
-        "Só custa se o cliente reclamar depois"
-      ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
-      "explicacao_erro": "Sem resposta na hora, o cliente segue pra próxima opção — a venda se perde antes de qualquer conversa.",
-      "feedback_acerto": "Isso. Resposta rápida, mesmo automática, mantém o cliente esperando você."
-    },
-    {
-      "id": "b2",
       "tipo": "lista_aberta",
-      "enunciado": "Escreva o rascunho da sua mensagem automática de ausência — o que o cliente recebe quando manda mensagem fora do seu horário.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["oi! recebi sua mensagem, respondo assim que abrir, geralmente até as 9h"]
-    },
-    {
-      "id": "b3",
-      "tipo": "escolha_simples",
-      "enunciado": "Seu WhatsApp Business já tem catálogo de produtos configurado?",
-      "opcoes": [
-        "Sim",
-        "Não, vou configurar",
-        "Não sabia que dava pra fazer isso"
+      "enunciado": "Antes de criar seu Portfólio de Negócios, separe 4 dados reais da sua empresa — exatamente como estão no cartão do CNPJ e no contrato social, porque é assim que a aula manda preencher: o CNPJ, a razão social exata, o nome fantasia, e o e-mail empresarial que você vai usar no portfólio.",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "o CNPJ da empresa",
+        "a razão social exata (igual ao contrato social)",
+        "o nome fantasia",
+        "o e-mail empresarial que você vai cadastrar"
       ]
     },
     {
-      "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "Das três configurações (catálogo, mensagem automática, etiquetas), qual você ativa primeiro essa semana?",
+      "id": "b2",
+      "tipo": "cenario",
+      "enunciado": "Segundo a aula, o que é o Portfólio de Negócios que você cria em business.facebook.com?",
       "opcoes": [
-        "Catálogo",
-        "Mensagem automática",
-        "Etiquetas"
+        "Um álbum de fotos dos produtos da empresa",
+        "A documentação que regulariza a empresa dentro da Meta, vinculando a Página do Facebook e o Instagram",
+        "Uma segunda página do Facebook, alternativa à primeira"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o começo do vídeo, logo após a criação da página.",
+      "explicacao_erro": "A aula define: o portfólio é a documentação que regulariza a empresa dentro do Facebook/Meta — e dentro dele você vincula a Página do Facebook e o Instagram.",
+      "feedback_acerto": "Isso — é a documentação que regulariza a empresa e vincula Facebook + Instagram."
+    },
+    {
+      "id": "b3",
+      "tipo": "cenario",
+      "enunciado": "Na hora de preencher os dados da empresa no portfólio, quais precisam estar EXATAMENTE como no cartão do CNPJ e no contrato social, segundo a aula?",
+      "opcoes": [
+        "Só o nome fantasia",
+        "CNPJ, endereço, CEP, razão social e nome fantasia — só e-mail e telefone podem ser diferentes",
+        "Nenhum, tudo pode ser preenchido de forma aproximada"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho em que a aula fala em \"coloque os dados exatamente como está no seu cartão de CNPJ\".",
+      "explicacao_erro": "A aula é enfática: CNPJ, endereço, CEP, razão social e nome fantasia têm que ser exatamente iguais aos documentos oficiais. O que pode ser alterado é só e-mail ou telefone.",
+      "feedback_acerto": "Isso — CNPJ, endereço, CEP, razão social e nome fantasia exatos; só e-mail e telefone podem variar."
+    },
+    {
+      "id": "b4",
+      "tipo": "cenario",
+      "enunciado": "Ao criar a conta de anúncio dentro do portfólio, a aula recomenda qual fuso horário e qual moeda?",
+      "opcoes": [
+        "Fuso horário e moeda dos Estados Unidos, é mais aceito",
+        "Fuso horário Brasil, pra vir a moeda em real brasileiro",
+        "Não importa, dá pra trocar depois sem nenhum efeito"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho da criação da conta de anúncio.",
+      "explicacao_erro": "A aula orienta fuso horário Brasil, porque é a região que define a moeda usada quando os anúncios forem pagos — real brasileiro.",
+      "feedback_acerto": "Isso — fuso horário Brasil, moeda real brasileiro."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "Ao adicionar a conta de WhatsApp Business dentro do portfólio, por que a aula insiste que esse precisa ser o MESMO número de outro lugar?",
+      "opcoes": [
+        "Não precisa ser o mesmo número em lugar nenhum",
+        "Porque esse número precisa ser o mesmo que depois vai ser vinculado ao agente lá no Chatvolt",
+        "Porque a Meta cobra taxa extra por número diferente"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho da criação da conta de WhatsApp Business.",
+      "explicacao_erro": "A aula é clara: \"esse WhatsApp é aquele que nós colocamos junto lá no Chatvolt e nós vamos conectar o nosso agente\" — por isso é essencial que o número no portfólio seja o mesmo do agente.",
+      "feedback_acerto": "Isso — o mesmo número que vai ser vinculado ao agente no Chatvolt."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "No Centro de segurança do portfólio, quais verificações a aula lista como importantes pra deixar tudo regular?",
+      "opcoes": [
+        "Só a senha, o resto é opcional",
+        "Autenticação de dois fatores, verificação do negócio via WhatsApp, verificação de identidade (com o CNPJ) e verificação do telemóvel",
+        "Apenas confirmar o e-mail cadastrado"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho do Centro de segurança.",
+      "explicacao_erro": "A aula lista quatro frentes: autenticação de dois fatores, verificação do negócio via WhatsApp, verificação de identidade com o cartão do CNPJ, e verificação do telemóvel.",
+      "feedback_acerto": "Isso — as quatro verificações do Centro de segurança."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Segundo a aula, qual é a recomendação pra usar o Claude como assistente na hora de preencher o portfólio pra Facebook e Instagram?",
+      "opcoes": [
+        "Usar o mesmo chat pra tudo, mistura mesmo, não faz diferença",
+        "Usar chats separados — um especialista em Facebook, outro em Instagram — pra cada um aprender seu próprio contexto",
+        "Não usar o Claude nessa etapa, só depois na criação do agente"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho sobre usar o Claude pra ajudar a preencher o portfólio.",
+      "explicacao_erro": "A aula recomenda fazer isso em chats diferentes, pra não misturar informação — um chat vira especialista em Facebook, outro em Instagram, cada vez dando dicas melhores e mais específicas.",
+      "feedback_acerto": "Isso — chats separados, um por rede social, pra cada um virar especialista."
+    },
+    {
+      "id": "b8",
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que seu Portfólio de Negócios está pronto: liste os itens abaixo que você já deixou feitos.",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 5,
+      "placeholders": [
+        "Portfólio de Negócios criado em business.facebook.com",
+        "Página do Facebook e Instagram vinculados dentro do portfólio",
+        "Dados oficiais (CNPJ, razão social, endereço, CEP) conferidos e exatos",
+        "Conta de anúncio criada com fuso horário Brasil e moeda real brasileiro",
+        "Número de WhatsApp Business cadastrado é o mesmo que vai pro Chatvolt"
+      ]
+    },
+    {
+      "id": "b9",
+      "tipo": "escolha_simples",
+      "enunciado": "Qual dessas etapas do portfólio você ainda precisa fazer essa semana?",
+      "opcoes": [
+        "Criar o portfólio do zero",
+        "Corrigir dados que não batem com o CNPJ/contrato social",
+        "Fazer as verificações do Centro de segurança",
+        "Já fiz tudo isso"
       ]
     }
   ]

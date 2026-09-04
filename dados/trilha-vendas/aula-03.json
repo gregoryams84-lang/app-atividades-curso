@@ -2,47 +2,171 @@
   "schema_version": 1,
   "trilha": "trilha-vendas",
   "aula": "aula-03",
-  "titulo": "Conteúdo com IA que não parece IA",
-  "habilidade": "Gerar texto, imagem e legenda com IA mantendo a voz do próprio negócio.",
+  "titulo": "Crie seu agente e conecte ao WhatsApp",
+  "habilidade": "Criar do zero, dentro do Chatvolt, o agente de atendimento do seu negócio (com ajuda do Claude), conectar esse agente ao WhatsApp oficial e criar o primeiro template de mensagem pra aprovação da Meta.",
   "blocos": [
     {
       "id": "b1",
-      "tipo": "cenario",
-      "enunciado": "Duas legendas pro mesmo post de uma padaria: A) \"Surpreenda-se com nossos deliciosos produtos artesanais feitos com amor e dedicação!\" B) \"Pão de queijo saindo do forno agora, R$ 12 a dúzia, é só chegar.\" Qual soa mais como um negócio de verdade?",
-      "opcoes": [
-        "A, porque é mais elogiosa",
-        "B, porque é específica e soa como alguém falando de verdade",
-        "As duas são iguais"
-      ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:00 do vídeo.",
-      "explicacao_erro": "A legenda A é genérica — poderia ser de qualquer padaria. A B tem informação real (produto, preço, hora).",
-      "feedback_acerto": "Isso. Informação real bate texto bonito genérico."
+      "tipo": "lista_aberta",
+      "enunciado": "Antes de criar seu agente no Chatvolt, escreva 4 fatos reais do seu negócio, exatamente do jeito que vão te ajudar a configurar o agente e o primeiro template de WhatsApp: um nome de negócio (ou apelido) que o Claude poderia usar pra sugerir um nome pessoal pro seu agente, o produto ou serviço que mais gera dúvida dos seus clientes, o número de WhatsApp Business que vai virar canal do agente, e um tema real pro seu primeiro template (ex: promoção, boas-vindas, aviso).",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "o nome/apelido do seu negócio, pra ajudar a sugerir um nome pro agente",
+        "o produto ou serviço que mais gera dúvida dos clientes",
+        "o número de WhatsApp Business que vai virar canal do agente",
+        "um tema real pro seu primeiro template de mensagem"
+      ]
     },
     {
       "id": "b2",
-      "tipo": "lista_aberta",
-      "enunciado": "Monte seu pedido (contexto + tarefa + formato + exemplo) pra gerar a legenda de um post real do seu negócio.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["contexto: ... tarefa: escreve legenda sobre ... formato: 2 linhas, direto ... exemplo: ..."]
+      "tipo": "cenario",
+      "enunciado": "Na hora de criar o agente (opção \"Personalizado\", setor \"Vendas\", categoria \"Varejo\"), qual é a \"chave de ouro\" que o Vídeo 1 recomenda ter aberta do lado o tempo todo, pra sugerir nome, preencher palavras-chave e escrever o prompt do agente?",
+      "opcoes": [
+        "O Claude, numa janela ao lado",
+        "Nenhuma ferramenta — tudo deve ser preenchido manualmente",
+        "Um funcionário humano digitando por você"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Vídeo 1 (Chatvolt: criando o agente), logo no início da criação.",
+      "explicacao_erro": "A aula chama isso de \"chave de ouro\": Claude aberto do lado o tempo todo, inclusive colando print da tela do Chatvolt pra ele ajudar a preencher os campos.",
+      "feedback_acerto": "Isso — Claude do lado, o tempo todo, é a chave de ouro da configuração."
     },
     {
       "id": "b3",
-      "tipo": "lista_aberta",
-      "enunciado": "Cole aqui a legenda que a IA gerou, já ajustada do seu jeito.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["a legenda final, pronta pra postar"]
+      "tipo": "cenario",
+      "enunciado": "A base de conhecimento do agente é feita em qual formato de arquivo, e quem ajuda a escrevê-la, segundo o Vídeo 1?",
+      "opcoes": [
+        "Uma planilha Excel, preenchida sozinho",
+        "Um arquivo .txt, escrito com ajuda do Claude, que faz perguntas sobre o negócio até ter informação suficiente",
+        "Um vídeo explicativo gravado pelo próprio dono"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1, no trecho sobre a base de conhecimento.",
+      "explicacao_erro": "A aula orienta pedir pro Claude escrever um arquivo .txt com as informações do negócio — ele faz perguntas até ter o suficiente, gera o texto, e você baixa esse arquivo pra subir no Chatvolt.",
+      "feedback_acerto": "Isso — arquivo .txt, escrito com a ajuda do Claude."
     },
     {
       "id": "b4",
-      "tipo": "escolha_simples",
-      "enunciado": "Essa legenda já está pronta pra publicar essa semana?",
+      "tipo": "cenario",
+      "enunciado": "No teste dentro do próprio Chatvolt, o agente da pizzaria não soube responder \"Qual sabor tem?\", porque a base de conhecimento ainda não tinha essa informação. O que a demonstração do Vídeo 1 faz pra resolver?",
       "opcoes": [
-        "Sim",
-        "Quase, falta um ajuste",
-        "Ainda não"
+        "Desiste do agente, ele não é confiável",
+        "Pede pro Claude reescrever o .txt da base de conhecimento incluindo essa informação, baixa o arquivo novo e sobe de novo em \"Adicionar fonte de dados\"",
+        "Edita a pergunta do cliente pra ele não perguntar mais isso"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1, no momento do primeiro teste do agente.",
+      "explicacao_erro": "A base de conhecimento é um arquivo vivo: sempre que o agente erra ou não sabe algo, a correção é pedir pro Claude reescrever o .txt com a informação faltando, baixar e subir de novo em Implantar → Configurações → Base de conhecimentos → Adicionar fonte de dados — e esperar processar até sair \"resolvido\".",
+      "feedback_acerto": "Isso — corrige na base de conhecimento e sobe o arquivo de novo."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "No painel de conversas, o agente avisa que precisa de ajuda humana. Você clica em \"intervir\" e responde pessoalmente. Depois de resolver, o que fazer pra devolver a conversa pro agente continuar sozinho?",
+      "opcoes": [
+        "Apagar a conversa e começar outra do zero",
+        "Clicar em \"intervir\" de novo",
+        "Clicar em \"habilitar IA\""
+      ],
+      "correta": 2,
+      "dica_erro": "Reveja o Vídeo 1, no painel de conversas, perto do final.",
+      "explicacao_erro": "Depois de responder pessoalmente, \"habilitar IA\" devolve o controle da conversa pro agente continuar sozinho.",
+      "feedback_acerto": "Isso — \"habilitar IA\" devolve a conversa pro agente."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "Pra começar a conectar o WhatsApp ao seu agente, o Vídeo 2 manda ir aonde, dentro do Chatvolt?",
+      "opcoes": [
+        "Aba \"Deploy\" do agente → seção WhatsApp → \"Settings\" → \"Add WhatsApp Account\"",
+        "Direto no WhatsApp Web, sem passar pelo Chatvolt",
+        "Na \"Gestão de clientes\", em \"Disparos\""
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o começo do Vídeo 2 (Conectando o WhatsApp).",
+      "explicacao_erro": "O caminho é: dentro do agente, aba \"Deploy\", seção WhatsApp, botão \"Settings\", depois \"Add WhatsApp Account\" — escolhendo \"Use an existing WhatsApp Business account\" e informando o número.",
+      "feedback_acerto": "Isso — aba Deploy → WhatsApp → Settings → Add WhatsApp Account."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Depois de informar o número no Chatvolt, o que você faz no CELULAR pra concluir a vinculação, segundo o Vídeo 2?",
+      "opcoes": [
+        "Nada, o processo é 100% automático sem o celular",
+        "Abre o WhatsApp Business → Configurações → Aparelhos conectados, escaneia o QR code, e confirma a mensagem da WhatsApp Business Platform (Connect → Confirm)",
+        "Desinstala o WhatsApp Business do celular"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 2, no meio do passo a passo.",
+      "explicacao_erro": "No celular: WhatsApp Business → Configurações → Aparelhos conectados → escanear o QR code. Depois chega uma mensagem da WhatsApp Business Platform — toca \"Connect\", depois \"Connect to WhatsApp Business Platform\" e \"Confirm\" pra autorizar.",
+      "feedback_acerto": "Isso — QR code no WhatsApp Business, depois Connect e Confirm."
+    },
+    {
+      "id": "b8",
+      "tipo": "cenario",
+      "enunciado": "Segundo o Vídeo 3, o que precisa estar pronto ANTES de vincular o WhatsApp na Meta, porque a vinculação pede uma autorização por esse caminho?",
+      "opcoes": [
+        "Nada em especial",
+        "A Página do Facebook já montada",
+        "Um site com HTTPS ativo"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o início do Vídeo 3 (Nosso agente no WhatsApp e criação de templates).",
+      "explicacao_erro": "A aula é direta: é importante ter a Página do Facebook já montada, pra fazer a vinculação do WhatsApp — a autorização passa por um pedido via Facebook.",
+      "feedback_acerto": "Isso — a Página do Facebook precisa estar pronta antes."
+    },
+    {
+      "id": "b9",
+      "tipo": "cenario",
+      "enunciado": "Pra criar um template de mensagem, o Vídeo 3 manda ir aonde, dentro do Chatvolt?",
+      "opcoes": [
+        "\"Gestão de clientes\" → \"Disparos\" → \"Gerenciar Templates\"",
+        "\"Base de conhecimento\" → \"Adicionar fonte de dados\"",
+        "\"Artefatos\" → \"Novo preço\""
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Vídeo 3, no trecho sobre templates.",
+      "explicacao_erro": "O caminho é \"Gestão de clientes\" → \"Disparos\" → \"Gerenciar Templates\", onde você cria o template com nome, categoria, cabeçalho, corpo do texto (o Claude ajuda aqui), rodapé e botões.",
+      "feedback_acerto": "Isso — Gestão de clientes → Disparos → Gerenciar Templates."
+    },
+    {
+      "id": "b10",
+      "tipo": "cenario",
+      "enunciado": "No exemplo de template do Vídeo 3, além de um botão com o telefone pra fazer o pedido, a aula sugere um segundo botão de resposta rápida, tipo \"Hoje não\". Por quê?",
+      "opcoes": [
+        "Só pra ocupar espaço no template",
+        "Porque deixa a mensagem mais íntima e evita que o cliente denuncie como propaganda",
+        "Porque a Meta exige pelo menos dois botões em todo template"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 3, no trecho sobre os botões do template.",
+      "explicacao_erro": "A aula explica: um botão de resposta rápida como \"Hoje não\" deixa a mensagem mais íntima, dá uma saída fácil pro cliente, e evita que ele fique denunciando a mensagem como propaganda.",
+      "feedback_acerto": "Isso — deixa a mensagem mais íntima e evita denúncia como propaganda."
+    },
+    {
+      "id": "b11",
+      "tipo": "lista_aberta",
+      "enunciado": "Confirma que seu agente está pronto e conectado: liste os itens abaixo que você já deixou feitos.",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 5,
+      "placeholders": [
+        "Agente criado em \"Personalizado\", com nome e base de conhecimento em .txt enviada",
+        "Testado no chat com perguntas reais de cliente, e ajustado onde errou",
+        "WhatsApp conectado via aba Deploy → Settings → Add WhatsApp Account",
+        "QR code escaneado no WhatsApp Business e conexão confirmada no celular",
+        "Primeiro template criado em Gestão de clientes → Disparos → Gerenciar Templates"
+      ]
+    },
+    {
+      "id": "b12",
+      "tipo": "escolha_simples",
+      "enunciado": "Depois de conectar o WhatsApp, qual situação você mais quer que o template de mensagem resolva primeiro?",
+      "opcoes": [
+        "Avisar sobre uma promoção",
+        "Dar boas-vindas a um cliente novo",
+        "Confirmar um pedido ou agendamento",
+        "Ainda não decidi"
       ]
     }
   ]

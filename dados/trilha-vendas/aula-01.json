@@ -2,52 +2,144 @@
   "schema_version": 1,
   "trilha": "trilha-vendas",
   "aula": "aula-01",
-  "titulo": "Perfil que vende sem gastar",
-  "habilidade": "Estruturar um perfil de Instagram/Facebook com ajuda de IA (bio, destaques, primeira grade de posts).",
+  "titulo": "A página do Facebook do seu negócio, pronta pra Meta",
+  "habilidade": "Criar (ou ajustar) a Página do Facebook do seu negócio, nunca um perfil pessoal, com os dados reais da empresa — a base pra Meta autorizar, nas próximas aulas, a vinculação do WhatsApp oficial e do agente de IA.",
   "blocos": [
     {
       "id": "b1",
-      "tipo": "cenario",
-      "enunciado": "Um cliente novo chega no perfil de uma loja de roupas e a bio diz só \"Moda feminina\". Ele quer saber se vendem no tamanho dele e como comprar. O que essa bio está faltando?",
-      "opcoes": [
-        "Nada, bio deve ser só o nicho do negócio",
-        "Informação prática: como comprar, tamanhos, forma de entrega",
-        "Mais emoji e cor no texto"
-      ],
-      "correta": 1,
-      "dica_erro": "Reveja o trecho dos 0:50 do vídeo.",
-      "explicacao_erro": "Bio sem informação prática (como comprar, o que oferece) não converte visita em venda.",
-      "feedback_acerto": "Isso. Sem essa informação, o cliente novo desiste antes de perguntar."
+      "tipo": "lista_aberta",
+      "enunciado": "Antes de criar ou ajustar sua Página do Facebook, escreva 4 dados reais do seu negócio — exatamente como vão entrar no cadastro da página, segundo a aula: o nome exato da empresa, a categoria do negócio, o telefone ou WhatsApp que vai aparecer na página, e o endereço (ou \"atende só online\", se for o caso).",
+      "quantidade_campos": 4,
+      "minimo_preenchido": 4,
+      "placeholders": [
+        "o nome exato da sua empresa",
+        "a categoria do negócio (ex: padaria, salão, prestador de serviço)",
+        "o telefone ou WhatsApp que vai aparecer na página",
+        "o endereço, ou \"atende só online\""
+      ]
     },
     {
       "id": "b2",
-      "tipo": "escolha_simples",
-      "enunciado": "Seu perfil já tem destaques (stories fixados) que respondem \"como comprar\" e \"onde fica\"?",
+      "tipo": "cenario",
+      "enunciado": "Segundo a aula, qual é a regra central pra deixar sua empresa pronta pra divulgação no Facebook?",
       "opcoes": [
-        "Sim, já tenho",
-        "Não, vou criar",
-        "Não sabia que servia pra isso"
-      ]
+        "Criar uma Página do Facebook (não um perfil pessoal)",
+        "Criar um perfil pessoal bem completo",
+        "Usar o perfil pessoal do dono como página da empresa"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o Vídeo 1 (Apresentação) desta aula.",
+      "explicacao_erro": "A aula é direta: \"crie uma página do Facebook, não um perfil\". Perfil é pra pessoa física; página é pro negócio, com métricas e anúncios que o perfil não tem.",
+      "feedback_acerto": "Isso — Página, nunca perfil pessoal."
     },
     {
       "id": "b3",
-      "tipo": "lista_aberta",
-      "enunciado": "Escreva o que seu negócio vende, pra quem, e como o cliente compra (link, WhatsApp, endereço) — cada informação em uma linha.",
-      "quantidade_campos": 3,
-      "minimo_preenchido": 1,
-      "placeholders": [
-        "vendo bolos de aniversário sob encomenda",
-        "pra famílias no meu bairro",
-        "compra pelo WhatsApp, link na bio"
-      ]
+      "tipo": "cenario",
+      "enunciado": "No cadastro da Página, a aula insiste pra você colocar o nome exato, a razão social exata, o nome fantasia, telefone e endereço reais da empresa. Por que isso importa tanto, segundo o Vídeo 1?",
+      "opcoes": [
+        "É só uma formalidade sem efeito prático",
+        "Porque é com esses dados reais que a Meta autoriza depois a vinculação do WhatsApp oficial e do agente de IA",
+        "Porque o Facebook cobra menos de quem preenche tudo"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1 (Apresentação), perto do meio.",
+      "explicacao_erro": "A aula explica: com os dados reais preenchidos, a Meta vincula a página aos dados reais da empresa e libera uma autorização — é essa autorização que permite, nas próximas aulas, vincular o WhatsApp e o agente de IA.",
+      "feedback_acerto": "Isso — dados reais e batendo é o que libera a autorização da Meta mais adiante."
     },
     {
       "id": "b4",
+      "tipo": "cenario",
+      "enunciado": "Segundo o Vídeo 1, a Página do Facebook do seu negócio precisa estar vinculada a quê?",
+      "opcoes": [
+        "A um perfil pessoal de um funcionário",
+        "Ao site com o agente virtual de IA, já montado na Trilha 1 (IA no Negócio)",
+        "A nada além dela mesma"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o Vídeo 1 (Apresentação), quando fala em \"lembra que nós criamos na trilha um\".",
+      "explicacao_erro": "A aula lembra que, na Trilha 1 (IA no Negócio), foi montada uma página/site com o agente virtual — é a ela que a Página do Facebook precisa estar vinculada.",
+      "feedback_acerto": "Isso — vinculada ao site com o agente virtual da Trilha 1."
+    },
+    {
+      "id": "b5",
+      "tipo": "cenario",
+      "enunciado": "Segundo o Vídeo 2, qual é a diferença real entre um perfil pessoal e uma página comercial no Facebook?",
+      "opcoes": [
+        "Nenhuma, os dois fazem a mesma coisa",
+        "Perfil é pra você; página é pro negócio, com métricas, anúncios e ferramentas que o perfil não tem",
+        "A página é só uma versão com mais fotos do perfil"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o começo do Vídeo 2 (Página do Facebook: passo a passo).",
+      "explicacao_erro": "A aula é clara: perfil pessoal é pra você, página comercial é pro negócio — com métricas, anúncios e ferramentas que um perfil pessoal não oferece.",
+      "feedback_acerto": "Isso — perfil é pessoal, página é do negócio, com ferramentas próprias."
+    },
+    {
+      "id": "b6",
+      "tipo": "cenario",
+      "enunciado": "Qual é o primeiro passo prático pra criar a Página, segundo o passo a passo do Vídeo 2?",
+      "opcoes": [
+        "Acessar facebook.com/pages/create ou clicar em \"Criar Página\" no menu",
+        "Ligar direto pro suporte do Facebook",
+        "Criar primeiro a conta de anúncios"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o passo a passo do Vídeo 2, logo no início.",
+      "explicacao_erro": "Passo 1 do passo a passo: acessar facebook.com/pages/create ou clicar em \"Criar Página\" no menu. Depois vêm nome, categoria, fotos, informações e publicar.",
+      "feedback_acerto": "Isso — facebook.com/pages/create ou \"Criar Página\" no menu."
+    },
+    {
+      "id": "b7",
+      "tipo": "cenario",
+      "enunciado": "Pra poder solicitar o selo Verificado da Meta (o símbolo azul do lado do nome), o que a página precisa ter antes, segundo o Vídeo 2?",
+      "opcoes": [
+        "Pelo menos 10.000 seguidores",
+        "Estar ativa, publicando conteúdo, e com a verificação em duas etapas ligada",
+        "Ter pago anúncio pago pelo menos uma vez"
+      ],
+      "correta": 1,
+      "dica_erro": "Reveja o trecho do selo Verificado, perto do final do Vídeo 2.",
+      "explicacao_erro": "Pré-requisitos citados na aula: página ativa, publicando conteúdo, e verificação em duas etapas ligada. Só depois disso é que dá pra ir em \"Configurações\" e procurar \"Meta Verified\".",
+      "feedback_acerto": "Isso — página ativa, publicando, e verificação em duas etapas ligada."
+    },
+    {
+      "id": "b8",
+      "tipo": "cenario",
+      "enunciado": "Depois de atender os pré-requisitos, onde você solicita o selo Meta Verified, e o que precisa enviar?",
+      "opcoes": [
+        "Em \"Configurações\", procurando \"Meta Verified\" — enviando um documento oficial da empresa e escolhendo o plano de assinatura mensal",
+        "Mandando um e-mail pro suporte pedindo o selo de graça",
+        "Não dá pra solicitar, só o Facebook decide sozinho quem recebe"
+      ],
+      "correta": 0,
+      "dica_erro": "Reveja o trecho do selo Verificado, perto do final do Vídeo 2.",
+      "explicacao_erro": "O caminho é: \"Configurações\" → procurar \"Meta Verified\" → enviar documento oficial da empresa → escolher o plano de assinatura mensal → confirmar e aguardar a análise.",
+      "feedback_acerto": "Isso — Configurações, Meta Verified, documento oficial e plano de assinatura mensal."
+    },
+    {
+      "id": "b9",
       "tipo": "lista_aberta",
-      "enunciado": "Peça pra uma ferramenta de IA escrever 3 opções de bio usando essas informações. Cole aqui a que você mais gostou.",
-      "quantidade_campos": 1,
-      "minimo_preenchido": 1,
-      "placeholders": ["a bio escolhida, já do seu jeito"]
+      "enunciado": "Confirma que sua Página do Facebook está pronta: liste os itens abaixo que você já deixou feitos.",
+      "quantidade_campos": 5,
+      "minimo_preenchido": 5,
+      "placeholders": [
+        "Página do Facebook criada (não perfil pessoal)",
+        "Nome, categoria e informações preenchidos com dados reais da empresa",
+        "Foto de perfil (logo) e foto de capa adicionadas",
+        "Página vinculada ao site com o agente virtual da Trilha 1",
+        "Verificação em duas etapas ligada (pré-requisito pro selo Meta Verified)"
+      ]
+    },
+    {
+      "id": "b10",
+      "tipo": "escolha_simples",
+      "enunciado": "Qual desses passos você ainda precisa fazer essa semana?",
+      "opcoes": [
+        "Criar a página do zero",
+        "Corrigir os dados da página que já existe",
+        "Ligar a verificação em duas etapas e solicitar o selo Verificado",
+        "Já fiz tudo isso"
+      ]
     }
   ]
 }

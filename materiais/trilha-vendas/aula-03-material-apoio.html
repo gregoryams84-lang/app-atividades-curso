@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Aula 3 — Crie seu agente e conecte ao WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #14513C;
+    --verde-escuro: #0F3A2B;
+    --verde-claro: #E4EDE8;
+    --tinta: #16191C;
+    --papel: #F5F6F3;
+    --neutro: #5B6560;
+    --neutro-claro: #E9EBE8;
+    --ambar: #8A5A12;
+    --ambar-claro: #F3E7D6;
+    --borda: #D9DCD8;
+  }
+
+  * { box-sizing: border-box; }
+
+  @page { size: A4; margin: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    color: var(--tinta);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body { font-size: 14.5px; line-height: 1.58; }
+
+  h1, h2, h3 { font-family: "Fraunces", serif; font-weight: 600; margin: 0; color: var(--verde); }
+
+  .banda-topo {
+    background: var(--verde);
+    color: var(--papel);
+    padding: 15mm 18mm 9mm;
+  }
+  .banda-topo h1 { color: #FFFFFF; }
+
+  .selo {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 10px;
+  }
+
+  .banda-topo h1 { font-size: 26px; line-height: 1.22; margin-bottom: 10px; max-width: 150mm; }
+
+  .habilidade-topo {
+    font-size: 13px;
+    color: #D8E4DD;
+    max-width: 150mm;
+    margin: 0;
+  }
+  .habilidade-topo strong { color: #FFFFFF; font-weight: 600; }
+
+  .conteudo { padding: 9mm 18mm 6mm; }
+
+  section { margin-bottom: 7mm; break-inside: avoid; }
+
+  .rotulo-secao {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--neutro);
+    margin-bottom: 4px;
+  }
+
+  h2.titulo-secao { font-size: 18px; margin-bottom: 3mm; }
+
+  p { margin: 0 0 8px; }
+
+  /* --- Bloco de história (exemplo real) --- */
+  .caixa-historia {
+    background: var(--papel);
+    border-left: 3px solid var(--verde);
+    border-radius: 4px;
+    padding: 4mm 5mm;
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+  .caixa-historia .rotulo-secao { color: var(--verde); margin-bottom: 6px; }
+  .caixa-historia p:last-child { margin-bottom: 0; }
+  .caixa-historia p { color: var(--tinta); }
+
+  /* --- Peças / kits --- */
+  .lista-perguntas { display: flex; flex-direction: column; gap: 3.5mm; }
+  .cartao-pergunta {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .numero-pergunta {
+    flex: 0 0 auto;
+    width: 8mm;
+    height: 8mm;
+    border-radius: 50%;
+    background: var(--verde);
+    color: #FFFFFF;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .texto-pergunta h3 { font-size: 15.5px; margin-bottom: 2px; }
+  .texto-pergunta .explicacao { color: var(--tinta); margin-bottom: 3px; }
+  .texto-pergunta .exemplo {
+    color: var(--neutro);
+    font-size: 12.5px;
+    font-style: italic;
+  }
+  .cartao-pergunta.destaque { border-color: var(--ambar); background: var(--ambar-claro); }
+  .cartao-pergunta.destaque .numero-pergunta { background: var(--ambar); }
+  .cartao-pergunta.destaque .exemplo { color: var(--ambar); font-style: normal; font-weight: 600; }
+  .lista-ferramentas {
+    margin: 2px 0 3px;
+    padding-left: 4.5mm;
+    font-size: 12.5px;
+    color: var(--tinta);
+  }
+  .lista-ferramentas li { margin-bottom: 1.5mm; }
+  .lista-ferramentas strong { color: var(--verde-escuro); }
+
+  /* --- Fluxograma --- */
+  .caixa-fluxograma {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 5mm;
+    text-align: center;
+    background: var(--papel);
+  }
+  .caixa-fluxograma svg { width: 100%; height: auto; max-width: 168mm; }
+
+  /* --- Dois casos / dois modos --- */
+  .grade-casos { display: flex; gap: 4mm; }
+  .cartao-caso {
+    flex: 1;
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    break-inside: avoid;
+  }
+  .cartao-caso.ok { background: var(--verde-claro); border: 1px solid var(--verde); }
+  .cartao-caso.nao { background: var(--neutro-claro); border: 1px solid var(--borda); }
+  .rotulo-caso {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2mm;
+  }
+  .cartao-caso.ok .rotulo-caso { color: var(--verde); }
+  .cartao-caso.nao .rotulo-caso { color: var(--neutro); }
+  .cartao-caso h3 { font-size: 14px; margin-bottom: 2mm; color: var(--tinta); }
+  .checagem { list-style: none; margin: 0 0 3mm; padding: 0; font-size: 12.5px; }
+  .checagem li { margin-bottom: 1.5mm; padding-left: 5mm; position: relative; }
+  .checagem li::before { position: absolute; left: 0; font-weight: 700; }
+  .checagem .sim::before { content: "✓"; color: var(--verde); }
+  .checagem .nao::before { content: "✕"; color: var(--ambar); }
+  .conclusao-caso { font-size: 12.5px; font-weight: 600; margin: 0; }
+  .cartao-caso.ok .conclusao-caso { color: var(--verde-escuro); }
+  .cartao-caso.nao .conclusao-caso { color: var(--ambar); }
+
+  /* --- Plano (cartão largo) --- */
+  .cartao-plano {
+    border: 1px solid var(--verde);
+    background: var(--verde-claro);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+  }
+  .cartao-plano .rotulo-caso { color: var(--verde); }
+  .cartao-plano h3 { font-size: 15px; margin-bottom: 2mm; }
+
+  /* --- Atividade --- */
+  .caixa-atividade {
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .instrucao-atividade { color: var(--tinta); margin-bottom: 4mm; }
+  .instrucao-atividade strong { color: var(--verde); }
+  .linha-preencher {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    border-bottom: 1px solid var(--borda);
+    padding: 3mm 0;
+  }
+  .linha-preencher:first-of-type { padding-top: 0; }
+  .num-linha {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    color: var(--verde);
+    font-size: 14px;
+    flex: 0 0 auto;
+  }
+  .rotulo-linha { font-weight: 600; flex: 0 0 auto; }
+
+  /* --- Checklist final --- */
+  .lista-checklist { list-style: none; margin: 0; padding: 0; }
+  .lista-checklist li {
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    padding: 2.5mm 0;
+    border-bottom: 1px solid var(--borda);
+    font-size: 13px;
+  }
+  .lista-checklist li:last-child { border-bottom: none; }
+  .caixa-vazia {
+    flex: 0 0 auto;
+    width: 4mm;
+    height: 4mm;
+    border: 1.5px solid var(--verde);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* --- Resumo final --- */
+  .caixa-resumo {
+    background: var(--verde);
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5mm 6mm;
+  }
+  .caixa-resumo .rotulo-secao { color: var(--verde-claro); }
+  .caixa-resumo ul { margin: 0; padding-left: 5mm; }
+  .caixa-resumo li { margin-bottom: 2mm; font-size: 13px; }
+  .caixa-resumo li:last-child { margin-bottom: 0; }
+  .caixa-resumo strong { color: #FFFFFF; }
+
+  .lista-pontos { margin: 0; padding-left: 5mm; }
+  .lista-pontos li { margin-bottom: 2.5mm; font-size: 13px; color: var(--tinta); }
+  .lista-pontos li:last-child { margin-bottom: 0; }
+  .lista-pontos strong { color: var(--verde-escuro); }
+
+  .rodape {
+    text-align: center;
+    font-size: 11px;
+    color: var(--neutro);
+    padding: 4mm 18mm 10mm;
+  }
+</style>
+</head>
+<body>
+
+  <div class="banda-topo">
+    <div class="selo">Toca o Negócio · Trilha Vender pela internet e pelo WhatsApp · Aula 3</div>
+    <h1>Crie seu agente e conecte ao WhatsApp</h1>
+    <p class="habilidade-topo"><strong>O que você leva desta aula:</strong> criar do zero, dentro do Chatvolt, o agente de atendimento do seu negócio (com ajuda do Claude), conectar esse agente ao WhatsApp oficial e criar o primeiro template de mensagem pra aprovação da Meta.</p>
+  </div>
+
+  <div class="conteudo">
+
+    <section>
+      <div class="caixa-historia">
+        <div>
+          <div class="rotulo-secao">O problema que essa aula resolve</div>
+          <p>Com a Página do Facebook criada (Aula 1) e o Portfólio de Negócios montado (Aula 2), falta a parte que coloca tudo pra funcionar de verdade: criar o agente de IA no Chatvolt, conectar ele ao WhatsApp oficial, e criar o primeiro template de mensagem pra aprovação da Meta.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Criando o agente</h2>
+      <div class="lista-perguntas">
+        <div class="cartao-pergunta">
+          <div class="numero-pergunta">1</div>
+          <div class="texto-pergunta">
+            <h3>Personalizado</h3>
+            <p class="explicacao">Escolha "Personalizado", preencha o setor (ex: Vendas), a categoria do negócio (ex: Varejo) e o que o agente vai fazer (ex: Atendimento Geral).</p>
+          </div>
+        </div>
+
+        <div class="cartao-pergunta destaque">
+          <div class="numero-pergunta">2</div>
+          <div class="texto-pergunta">
+            <h3>A chave de ouro: Claude do lado, o tempo todo</h3>
+            <p class="explicacao">Use pra sugerir nome pro agente (peça um nome pessoal, não genérico), preencher palavras-chave e público-alvo — pode colar o print da tela do Chatvolt direto no Claude — e escrever ou melhorar o prompt de comportamento.</p>
+          </div>
+        </div>
+
+        <div class="cartao-pergunta">
+          <div class="numero-pergunta">3</div>
+          <div class="texto-pergunta">
+            <h3>Foto do agente</h3>
+            <p class="explicacao">Gere um avatar realista no Google Flow (gratuito), com um prompt em inglês (peça pro Claude escrever), baixe a imagem e suba no Chatvolt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="caixa-historia">
+        <div>
+          <div class="rotulo-secao">Base de conhecimento</div>
+          <p>Peça pro Claude escrever um arquivo <strong>.txt</strong> com todas as informações do seu negócio — ele faz perguntas até ter o suficiente, e só então gera o texto. Baixe esse arquivo: é a base de conhecimento do seu agente.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Implantar, configurar e testar</h2>
+      <ul class="lista-pontos">
+        <li><strong>Implantar:</strong> vincule o agente a Telegram, WhatsApp, Instagram, Website, YouTube ou Mercado Livre, conforme fizer sentido pro seu negócio.</li>
+        <li><strong>Prompt e tempo de resposta:</strong> nível light, médio ou regular; uns 20 a 25 segundos de atraso de propósito, pra não parecer robô.</li>
+        <li><strong>Mensagem de follow-up:</strong> retorno automático se o cliente não respondeu (varia de ~1h até 24h, depende do negócio).</li>
+        <li><strong>Teste sempre:</strong> na aba "chat", com perguntas reais de cliente. Se errar, a correção é na base de conhecimento — não no agente.</li>
+        <li><strong>Painel de conversas:</strong> "intervir" quando o agente pedir ajuda, "habilitar IA" pra devolver o controle depois de resolver.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Conectando o WhatsApp</h2>
+      <div class="caixa-fluxograma">
+        <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#5B6560" />
+            </marker>
+          </defs>
+
+          <rect x="140" y="20" width="420" height="60" rx="10" fill="#E4EDE8" stroke="#14513C" stroke-width="1.5"/>
+          <text x="350" y="55" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#16191C">1. Aba "Deploy" → WhatsApp → "Settings" → "Add WhatsApp Account"</text>
+
+          <line x1="350" y1="80" x2="350" y2="114" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+
+          <rect x="140" y="116" width="420" height="60" rx="10" fill="#FFFFFF" stroke="#D9DCD8" stroke-width="1.5"/>
+          <text x="350" y="151" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#16191C">2. "Use an existing WhatsApp Business account" + número</text>
+
+          <line x1="350" y1="176" x2="350" y2="210" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+
+          <rect x="140" y="212" width="420" height="60" rx="10" fill="#FFFFFF" stroke="#D9DCD8" stroke-width="1.5"/>
+          <text x="350" y="247" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#16191C">3. No celular: WhatsApp Business → Aparelhos conectados → QR code</text>
+
+          <line x1="350" y1="272" x2="350" y2="306" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+
+          <rect x="140" y="308" width="420" height="60" rx="10" fill="#FFFFFF" stroke="#D9DCD8" stroke-width="1.5"/>
+          <text x="350" y="343" text-anchor="middle" font-family="Inter" font-size="14" font-weight="600" fill="#16191C">4. Connect → Connect to WhatsApp Business Platform → Confirm</text>
+
+          <line x1="350" y1="368" x2="350" y2="402" stroke="#5B6560" stroke-width="1.5" marker-end="url(#seta)"/>
+
+          <rect x="140" y="404" width="420" height="64" rx="10" fill="#14513C"/>
+          <text x="350" y="442" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#FFFFFF">5. Pronto — o WhatsApp virou um canal do Chatvolt</text>
+        </svg>
+      </div>
+      <p class="exemplo" style="color: var(--neutro); font-size: 12.5px; font-style: italic; margin-top: 3mm;">Antes de tudo isso: é preciso ter a Página do Facebook já montada (Aula 1) — a vinculação do WhatsApp pede uma autorização via Facebook.</p>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Criando templates de mensagem</h2>
+      <div class="grade-casos">
+        <div class="cartao-caso ok">
+          <div class="rotulo-caso">Caminho no Chatvolt</div>
+          <h3>Gerenciar Templates</h3>
+          <ul class="checagem">
+            <li class="sim">"Gestão de clientes" → "Disparos" → "Gerenciar Templates"</li>
+            <li class="sim">Nome, categoria (ex: Marketing), cabeçalho, corpo (peça ajuda ao Claude) e rodapé</li>
+            <li class="sim">Fica "em análise" até a Meta aprovar</li>
+          </ul>
+        </div>
+        <div class="cartao-caso nao">
+          <div class="rotulo-caso">Botões do template</div>
+          <h3>Telefone + "Hoje não"</h3>
+          <ul class="checagem">
+            <li class="sim">Botão com o telefone, liga direto pro número</li>
+            <li class="sim">Botão de resposta rápida "Hoje não"</li>
+          </ul>
+          <p class="conclusao-caso">Deixa a mensagem mais íntima e evita denúncia como propaganda.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Sua vez</h2>
+      <div class="caixa-atividade">
+        <p class="instrucao-atividade">Separe os 4 fatos que vão te ajudar a montar o agente e o primeiro template:</p>
+
+        <div class="linha-preencher"><span class="num-linha">1</span><span class="rotulo-linha">Nome/apelido do negócio (pra sugerir nome do agente)</span></div>
+        <div class="linha-preencher"><span class="num-linha">2</span><span class="rotulo-linha">Produto/serviço que mais gera dúvida</span></div>
+        <div class="linha-preencher"><span class="num-linha">3</span><span class="rotulo-linha">Número de WhatsApp Business (canal do agente)</span></div>
+        <div class="linha-preencher"><span class="num-linha">4</span><span class="rotulo-linha">Tema real pro primeiro template</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Checklist final</h2>
+      <ul class="lista-checklist">
+        <li><span class="caixa-vazia"></span> Agente criado em "Personalizado", com nome e base de conhecimento em .txt enviada</li>
+        <li><span class="caixa-vazia"></span> Testado no chat com perguntas reais de cliente, e ajustado onde errou</li>
+        <li><span class="caixa-vazia"></span> WhatsApp conectado via aba Deploy → Settings → Add WhatsApp Account</li>
+        <li><span class="caixa-vazia"></span> QR code escaneado no WhatsApp Business e conexão confirmada no celular</li>
+        <li><span class="caixa-vazia"></span> Primeiro template criado em Gestão de clientes → Disparos → Gerenciar Templates</li>
+      </ul>
+    </section>
+
+    <section style="margin-bottom: 0;">
+      <div class="caixa-resumo">
+        <div class="rotulo-secao">Resumo rápido</div>
+        <ul>
+          <li><strong>Chave de ouro:</strong> Claude aberto do lado o tempo todo, ajudando a preencher, gerar imagem e escrever a base de conhecimento.</li>
+          <li><strong>Base de conhecimento:</strong> arquivo .txt gerado com o Claude — corrija ali sempre que o agente errar.</li>
+          <li><strong>Conectar WhatsApp:</strong> Deploy → Settings → Add WhatsApp Account → QR code no celular → Connect/Confirm.</li>
+          <li><strong>Pré-requisito:</strong> Página do Facebook já montada (Aula 1).</li>
+          <li><strong>Templates:</strong> Gestão de clientes → Disparos → Gerenciar Templates — ficam em análise até a Meta aprovar.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <p class="rodape">Toca o Negócio · Trilha Vender pela internet e pelo WhatsApp · Aula 3</p>
+
+</body>
+</html>
